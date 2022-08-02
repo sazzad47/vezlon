@@ -92,12 +92,12 @@
     "styled-components": "^5.3.5",
     "swiper": "^8.0.6",
     "web-vitals": "^2.1.4",
+    "yarn": "^1.22.19",
     "yup": "^0.32.11"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build --max_old_space_size=8000 build",
-    "heroku-postbuild": "yarn run build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "eslint .",
@@ -165,7 +165,7 @@
   },
   "engines": {
     "yarn": "1.22.19",
-    "node": "16.14.2",
-    "npm": "8.5.0"
+    "node": "16.16.0",
+    "npm": "8.11.0"
   }
 }
