@@ -8,9 +8,11 @@ import {
 } from "./dashboardcrm";
 import {
   ecomWidgets,
+  ecomWidgetsTest,
   bestSellingProducts,
   topSellers,
   recentOrders,
+  recentOrdersTest,
   topCategories,
 } from "./dashboardEcommerce";
 import {
@@ -85,9 +87,11 @@ export {
   activities,
   closingDeals,
   ecomWidgets,
+  ecomWidgetsTest,
   bestSellingProducts,
   topSellers,
   recentOrders,
+  recentOrdersTest,
   topCategories,
   cyptoWidgets,
   currencies,

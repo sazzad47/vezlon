@@ -407,6 +407,12 @@ const Navdata = () => {
             isHeader: true,
         },
         {
+            id: "test",
+            label: "Test",
+            icon: "bx bx-notepad",
+            link: "/test",
+        },
+        {
             id: "authentication",
             label: "Authentication",
             icon: "bx bx-user-circle",

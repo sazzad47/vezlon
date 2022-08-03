@@ -10,6 +10,7 @@ import DashboardCrypto from "../pages/DashboardCrypto";
 import DashboardProject from "../pages/DashboardProject";
 import DashboardNFT from "../pages/DashboardNFT";
 
+
 //Calendar
 // Email box
 import MailInbox from "../pages/EmailInbox";
@@ -153,6 +154,8 @@ import CoverSignIn from '../pages/AuthenticationInner/Login/CoverSignIn';
 import BasicSignUp from '../pages/AuthenticationInner/Register/BasicSignUp';
 import CoverSignUp from "../pages/AuthenticationInner/Register/CoverSignUp";
 import BasicPasswReset from '../pages/AuthenticationInner/PasswordReset/BasicPasswReset';
+//test
+import Test from "../pages/Test";
 //pages
 import Starter from '../pages/Pages/Starter/Starter';
 import SimplePage from '../pages/Pages/Profile/SimplePage/SimplePage';
@@ -382,6 +385,8 @@ const authProtectedRoutes = [
   { path: "/maps-vector", component: VectorMaps },
   { path: "/maps-leaflet", component: LeafletMaps },
 
+  //Test
+  { path: "/test", component: Test },
   //Pages
   { path: "/pages-starter", component: Starter },
   { path: "/pages-profile", component: SimplePage },

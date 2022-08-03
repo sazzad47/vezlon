@@ -74,6 +74,93 @@ const ecomWidgets = [
         prefix: "$",
         suffix: "k"
     },
+    
+];
+const ecomWidgetsTest = [
+    {
+        id: 1,
+        label: "Total Earnings",
+        badge: "ri-arrow-right-up-line",
+        badgeClass: "success",
+        percentage: "+16.24",
+        counter: "559.25",
+        link: "View net earnings",
+        bgcolor: "success",
+        icon: "bx bx-dollar-circle",
+        decimals: 2,
+        prefix: "$",
+        suffix: "k"
+    },
+    {
+        id: 2,
+        label: "Orders",
+        badge: "ri-arrow-right-down-line",
+        badgeClass: "danger",
+        percentage: "-3.57",
+        counter: "36894",
+        link: "View all orders",
+        bgcolor: "info",
+        icon: "bx bx-shopping-bag",
+        decimals: 0,
+        prefix: "",
+        separator: ",",
+        suffix: ""
+    },
+    {
+        id: 3,
+        label: "Customers",
+        badge: "ri-arrow-right-up-line",
+        badgeClass: "success",
+        percentage: "+29.08",
+        counter: "183.35",
+        link: "See details",
+        bgcolor: "warning",
+        icon: "bx bx-user-circle",
+        decimals: 2,
+        prefix: "",
+        suffix: "M"
+    },
+    {
+        id: 4,
+        label: "My Balance",
+        badgeClass: "muted",
+        percentage: "+0.00",
+        counter: "165.89",
+        link: "Withdraw money",
+        bgcolor: "primary",
+        icon: "bx bx-wallet",
+        decimals: 2,
+        prefix: "$",
+        suffix: "k"
+    },
+    {
+        id: 5,
+        label: "Total Costs",
+        badge: "ri-arrow-right-down-line",
+        badgeClass: "success",
+        percentage: "+13.24",
+        counter: "245.25",
+        link: "View all costs",
+        bgcolor: "success",
+        icon: "bx bx-dollar-circle",
+        decimals: 2,
+        prefix: "$",
+        suffix: "k"
+    },
+    {
+        id: 6,
+        label: "Number of Users",
+        badge: "ri-arrow-right-up-line",
+        badgeClass: "success",
+        percentage: "+45.03",
+        counter: "278.06",
+        link: "View all users",
+        bgcolor: "warning",
+        icon: "bx bx-user-circle",
+        decimals: 2,
+        prefix: "",
+        suffix: "M"
+    },
 ];
 
 const bestSellingProducts = [
@@ -247,6 +334,63 @@ const recentOrders = [
         votes: "161",
     },
 ];
+const recentOrdersTest = [
+    {
+        id: 1,
+        orderId: "#VZ2112",
+        date: "10 Oct, 14:47",
+        status: "Paid",
+        statusClass: "success",
+        img: avatar1,
+        name: "Alex Smith",
+        purchased: "Credits",
+        revenue: "$9.98",
+    },
+    {
+        id: 2,
+        orderId: "#VZ2111",
+        date: "17 Oct, 02:10",
+        status: "Pending",
+        statusClass: "warning",
+        img: avatar2,
+        name: "Jansh Brown",
+        purchased: "Credits",
+        revenue: "$270.60",
+    },
+    {
+        id: 3,
+        orderId: "#VZ2109",
+        date: "26 Oct, 08:20",
+        status: "Paid",
+        statusClass: "success",
+        img: avatar3,
+        name: "Ayaan Bowen",
+        purchased: "Credits",
+        revenue: "$145.42",
+    },
+    {
+        id: 4,
+        orderId: "#VZ2108",
+        date: "02 Nov, 04:52",
+        status: "Unpaid",
+        statusClass: "danger",
+        img: avatar4,
+        name: "Prezy Mark",
+        purchased: "Credits",
+        revenue: "$170.68",
+    },
+    {
+        id: 5,
+        orderId: "#VZ2107",
+        date: "10 Nov, 07:20",
+        status: "Paid",
+        statusClass: "success",
+        img: avatar6,
+        name: "Vihan Hudda",
+        purchased: "Credits",
+        revenue: "$350.87",
+    },
+];
 
 const topCategories = [
     {
@@ -301,4 +445,4 @@ const topCategories = [
     },
 ];
 
-export { ecomWidgets, bestSellingProducts, topSellers, recentOrders, topCategories };
+export { ecomWidgets, ecomWidgetsTest, bestSellingProducts, topSellers, recentOrders, recentOrdersTest, topCategories };
