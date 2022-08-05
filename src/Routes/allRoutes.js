@@ -155,7 +155,7 @@ import BasicSignUp from '../pages/AuthenticationInner/Register/BasicSignUp';
 import CoverSignUp from "../pages/AuthenticationInner/Register/CoverSignUp";
 import BasicPasswReset from '../pages/AuthenticationInner/PasswordReset/BasicPasswReset';
 //test
-import Test from "../pages/Test";
+import FinanceManagement from "../pages/Test";
 //pages
 import Starter from '../pages/Pages/Starter/Starter';
 import SimplePage from '../pages/Pages/Profile/SimplePage/SimplePage';
@@ -386,7 +386,7 @@ const authProtectedRoutes = [
   { path: "/maps-leaflet", component: LeafletMaps },
 
   //Test
-  { path: "/test", component: Test },
+  { path: "/finance-mngt", component: FinanceManagement },
   //Pages
   { path: "/pages-starter", component: Starter },
   { path: "/pages-profile", component: SimplePage },
