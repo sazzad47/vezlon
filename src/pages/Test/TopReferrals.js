@@ -1,11 +1,17 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { Link } from 'react-router-dom';
+import {savePDF} from '@progress/kendo-react-pdf';
 import { Card, CardBody, CardHeader, Col, Row } from 'reactstrap';
 
 //import Images
 import illustrator from "../../assets/images/illustrator-1.png";
 
+
 const TopReferrals = () => {
+    const PDFComponent = useRef(null);
+    const handlePDF = (event) => {
+        savePDF(PDFComponent.current, {paperSize:'A4'})
+    }
     return (
         <React.Fragment>
             <Col xl={6} md={6}>
@@ -13,14 +19,14 @@ const TopReferrals = () => {
                     <CardHeader className="align-items-center d-flex">
                         <h4 className="card-title mb-0 flex-grow-1">Top Referrals Pages</h4>
                         <div className="flex-shrink-0">
-                            <button type="button" className="btn btn-soft-primary btn-sm">
+                            <button type="button" className="btn btn-soft-primary btn-sm" onClick={handlePDF}>
                                 Export Report
                             </button>
                         </div>
                     </CardHeader>
-
+                    <div ref={PDFComponent}> 
                     <CardBody>
-
+                   
                         <Row className="align-items-center">
                             <Col xs={6}>
                                 <h6 className="text-muted text-uppercase fw-semibold text-truncate fs-12 mb-3">Total Referrals Page</h6>
@@ -93,6 +99,7 @@ const TopReferrals = () => {
                         </div>
 
                     </CardBody>
+                    </div>
                 </Card>
             </Col>
         </React.Fragment>

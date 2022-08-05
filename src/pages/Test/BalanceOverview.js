@@ -1,8 +1,39 @@
-import React from 'react';
-import { Card, CardBody, CardHeader, Col, DropdownItem, DropdownMenu, DropdownToggle, UncontrolledDropdown } from 'reactstrap';
+import React, { useState } from 'react';
+import { Card, CardBody, CardHeader, Col, DropdownItem, DropdownMenu, DropdownToggle, Dropdown } from 'reactstrap';
 import { BalanceOverviewCharts } from "./DashboardCrmCharts";
 
 const BalanceOverview = () => {
+    
+    const [dropdownOpen, setDropdownOpen ] = useState(false);
+    const toggle = () => setDropdownOpen(preState => !preState)
+    const [timePeriod, setTimePeriod]= useState('Current Year');
+   
+    const timePeriods = ['Today', 'Last Week', 'Last Month', 'Current Year'];
+
+    function getSeries (timePeriod) {
+        switch(timePeriod) {
+            case 'Today': 
+                return [
+                    5, 6
+                ];
+            case 'Last Week': 
+                return [
+                    15, 13
+                ];
+            case 'Last Month': 
+                return [
+                    53, 69
+                ];
+            case 'Current Year' :
+                return [
+                    584, 497
+                ];
+            default:
+                return "";
+            
+        }
+    }
+
     return (
         <React.Fragment>
             <Col xxl={6}>
@@ -10,32 +41,31 @@ const BalanceOverview = () => {
                     <CardHeader className="align-items-center d-flex">
                         <h4 className="card-title mb-0 flex-grow-1">Cost Overview</h4>
                         <div className="flex-shrink-0">
-                            <UncontrolledDropdown className="card-header-dropdown">
+                            <Dropdown className="card-header-dropdown" isOpen = {dropdownOpen} toggle = {toggle} >
                                 <DropdownToggle className="text-reset dropdown-btn" tag="a" role="button">
-                                    <span className="fw-semibold text-uppercase fs-12">Sort by: </span><span className="text-muted">Current Year<i className="mdi mdi-chevron-down ms-1"></i></span>
+                                    <span className="fw-semibold text-uppercase fs-12">Sort by: </span><span className="text-muted">{timePeriod}<i className="mdi mdi-chevron-down ms-1"></i></span>
                                 </DropdownToggle>
                                 <DropdownMenu className="dropdown-menu-end">
-                                    <DropdownItem>Today</DropdownItem>
-                                    <DropdownItem>Last Week</DropdownItem>
-                                    <DropdownItem>Last Month</DropdownItem>
-                                    <DropdownItem>Current Year</DropdownItem>
+                                    {timePeriods.map((value) => {
+                                        return <DropdownItem key={value} onClick = {() => setTimePeriod(value)} >{value}</DropdownItem>
+                                    })}
                                 </DropdownMenu>
-                            </UncontrolledDropdown>
+                            </Dropdown>
                         </div>
                     </CardHeader>
                     <CardBody className="px-0">
                         <ul className="list-inline main-chart text-center mb-0">
                             <li className="list-inline-item chart-border-left me-0 border-0">
-                                <h4 className="text-primary">$584k <span className="text-muted d-inline-block fs-13 align-middle ms-2">Revenue</span></h4>
+                                <h4 className="text-primary">${getSeries(timePeriod)[0]}k <span className="text-muted d-inline-block fs-13 align-middle ms-2">Revenue</span></h4>
                             </li>
                             <li className="list-inline-item chart-border-left me-0">
-                                <h4>$497k<span className="text-muted d-inline-block fs-13 align-middle ms-2">Costs</span>
+                                <h4>${getSeries(timePeriod)[1]}k<span className="text-muted d-inline-block fs-13 align-middle ms-2">Costs</span>
                                 </h4>
                             </li>
                         </ul>
 
                         <div id="revenue-expenses-charts" dir="ltr">
-                            <BalanceOverviewCharts dataColors='["--vz-success", "--vz-danger"]' />
+                            <BalanceOverviewCharts timePeriod= {timePeriod} dataColors='["--vz-success", "--vz-danger"]' />
                         </div>
                     </CardBody>
                 </Card>

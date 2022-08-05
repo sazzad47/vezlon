@@ -1,27 +1,48 @@
-import React from "react";
+import React, { useState } from "react";
 import { Card, CardBody, CardHeader, Col, Row } from "reactstrap";
 import { RevenueCharts } from "./DashboardEcommerceCharts";
 import CountUp from "react-countup";
 
 const Revenue = () => {
+  
+  const [timePeriod, setTimePeriod]= useState('ALL');
+   
+  const timePeriods = ['ALL', '1M', '6M', '1Y'];
+  function getSeries (timePeriod) {
+    switch(timePeriod) {
+        case 'ALL': 
+            return [
+              758545, 2243.89, 3674,  11.32
+            ];
+        case '1M': 
+            return [
+              554, 22.89, 36, 17.22
+            ];
+        case '6M': 
+            return [
+              2585, 72.89, 234, 13.53
+            ];
+        case '1Y' :
+            return [
+              23585, 222.89, 967,  21.24
+            ];
+        default:
+            return "";
+        
+    }
+}
+
   return (
     <React.Fragment>
       <Card>
         <CardHeader className="border-0 align-items-center d-flex">
-          <h4 className="card-title mb-0 flex-grow-1">Revenue</h4>
+          <h4 className="card-title mb-0 flex-grow-1">Revenue </h4>
           <div className="d-flex gap-1">
-            <button type="button" className="btn btn-soft-dark btn-sm">
-              ALL
+            {timePeriods.map((value) => {
+              return <button key={value} onClick= {() => setTimePeriod(value)} type="button" className="btn btn-soft-dark btn-sm">
+              {value}
             </button>
-            <button type="button" className="btn btn-soft-dark btn-sm">
-              1M
-            </button>
-            <button type="button" className="btn btn-soft-dark btn-sm">
-              6M
-            </button>
-            <button type="button" className="btn btn-soft-primary btn-sm">
-              1Y
-            </button>
+            })}
           </div>
         </CardHeader>
 
@@ -30,7 +51,7 @@ const Revenue = () => {
             <Col xs={6} sm={3}>
               <div className="p-3 border border-dashed border-start-0">
                 <h5 className="mb-1">
-                  <CountUp start={0} end={7585} duration={3} separator="," />
+                  <CountUp start={0} end={getSeries(timePeriod)[0]} duration={3} separator="," />
                 </h5>
                 <p className="text-muted mb-0">Orders</p>
               </div>
@@ -43,7 +64,7 @@ const Revenue = () => {
                     prefix="$"
                     start={0}
                     decimals={2}
-                    end={22.89}
+                    end={getSeries(timePeriod)[1]}
                     duration={3}
                   />
                 </h5>
@@ -53,7 +74,7 @@ const Revenue = () => {
             <Col xs={6} sm={3}>
               <div className="p-3 border border-dashed border-start-0">
                 <h5 className="mb-1">
-                  <CountUp start={0} end={367} duration={3} />
+                  <CountUp start={0} end={getSeries(timePeriod)[2]} duration={3} />
                 </h5>
                 <p className="text-muted mb-0">Refunds</p>
               </div>
@@ -63,7 +84,7 @@ const Revenue = () => {
                 <h5 className="mb-1 text-success">
                   <CountUp
                     start={0}
-                    end={18.92}
+                    end={getSeries(timePeriod)[3]}
                     decimals={2}
                     duration={3}
                     suffix="%"
@@ -78,7 +99,7 @@ const Revenue = () => {
         <CardBody className="p-0 pb-2">
           <div className="w-100">
             <div dir="ltr">
-              <RevenueCharts dataColors='["--vz-success", "--vz-info", "--vz-danger"]' />
+              <RevenueCharts timePeriod= {timePeriod} dataColors='["--vz-success", "--vz-info", "--vz-danger"]' />
             </div>
           </div>
         </CardBody>

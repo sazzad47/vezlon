@@ -1,8 +1,13 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { Card, CardBody, CardHeader, Col } from 'reactstrap';
+import {savePDF} from '@progress/kendo-react-pdf';
 import Vector from './VectorMap';
 
 const SalesByLocations = () => {
+    const PDFComponent = useRef(null);
+    const handlePDF = (event) => {
+        savePDF(PDFComponent.current, {paperSize:'A4'})
+    }
     return (
         <React.Fragment>
             <Col xl={4}>
@@ -10,12 +15,13 @@ const SalesByLocations = () => {
                     <CardHeader className="align-items-center d-flex">
                         <h4 className="card-title mb-0 flex-grow-1">Sales by Locations</h4>
                         <div className="flex-shrink-0">
-                            <button type="button" className="btn btn-soft-primary btn-sm">
+                            <button type="button" className="btn btn-soft-primary btn-sm" onClick={handlePDF}>
                                 Export Report
                             </button>
                         </div>
                     </CardHeader>
-
+                  
+                   <div ref={PDFComponent}> 
                     <CardBody>
 
                         <div
@@ -49,6 +55,8 @@ const SalesByLocations = () => {
                             </div>
                         </div>
                     </CardBody>
+                    </div>
+                  
                 </Card>
             </Col>
         </React.Fragment>

@@ -192,15 +192,87 @@ const DealTypeCharts = ({dataColors}) => {
     );
 };
 
-const BalanceOverviewCharts = ({dataColors}) => {
+const BalanceOverviewCharts = ({timePeriod, dataColors}) => {
     const revenueExpensesChartsColors = getChartColorsArray(dataColors)
     // const revenueExpensesChartsColors = ["#13c56b", "#ed5e5e"];
+
+    function getCostData (timePeriod) {
+        switch(timePeriod) {
+            case 'Today': 
+                return [
+                    15, 9, 4, 7, 7, 19, 15, 18, 8, 6,
+                ];
+            case 'Last Week': 
+                return [
+                    -90, -40, -20, 70, 110, 150, 180
+                ];
+            case 'Last Month': 
+                return [
+                    20, 25, -150, -90, -40, -20, 70, 110, 150, 180, 300, 360,
+                    21, 22, -153
+                ];
+            case 'Current Year' :
+                return [
+                    20, 25, -150, -90, -40, -20, 70, 110, 150, 180, 300, 360,
+                ];
+            default:
+                return "";
+            
+        }
+    }
+    function getRevenueData (timePeriod) {
+        switch(timePeriod) {
+            case 'Today': 
+                return [
+                    4, 3, 3, 6, 7, 8, 3, 6, 7, 8
+                ];
+            case 'Last Week': 
+                return [
+                    42, 52, 62, 72, 82, 92, 95
+                ];
+            case 'Last Month': 
+                return [
+                    12, 22, 32, 42, 52, 62, 72, 82, 92, 95, 96, 97,
+                    13, 23, 33
+                ];
+            case 'Current Year' :
+                return [
+                    13, 23, 33, 43, 53, 63, 73, 83, 93, 96, 97, 98,
+                ]
+            default:
+                return "";
+            
+        }
+    }
+    function getCategories (timePeriod) {
+        switch(timePeriod) {
+            case 'Today': 
+                return [
+                    '12 am', '2 am', '4 am', '6 am', '8 am', '10 am', '12 pm', '2 pm', '4 pm', '6 pm', '8 pm', '10 pm'
+                ];
+            case 'Last Week': 
+                return [
+                    'Sat', 'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri'
+                ];
+            case 'Last Month': 
+                return [
+                    'Jul 02', 'Jul 04', 'Jul 06', 'Jul 08', 'Jul 10', 'Jul 12', 'Jul 14', 'Jul 16', 'Jul 18', 'Jul 20', 'Jul 22', 'Jul 24', 'Jul 26', 'Jul 28', 'Jul 30'
+                ];
+            case 'Current Year' :
+                return [
+                    'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
+                ]
+            default:
+                return "";
+            
+        }
+    }
     const series = [{
         name: 'Revenue',
-        data: [20, 25, -150, -90, -40, -20, 70, 110, 150, 180, 300, 360]
+        data: getRevenueData(timePeriod)
     }, {
         name: 'Costs',
-        data: [12, 17, 45, 42, 24, 35, 42, 75, 102, 108, 156, 199]
+        data: getCostData(timePeriod)
     }];
     var options = {
         chart: {
@@ -216,7 +288,7 @@ const BalanceOverviewCharts = ({dataColors}) => {
             width: 2,
         },
         xaxis: {
-            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+            categories: getCategories(timePeriod)
         },
         yaxis: {
             labels: {

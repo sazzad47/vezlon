@@ -6,6 +6,9 @@ import { topPages } from "../../common/data";
 const TopPages = () => {
     const [isTopPageDropdown, setTopPageDropdown] = useState(false);
     const toggleDropdown = () => { setTopPageDropdown(!isTopPageDropdown); };
+    const [timePeriod, setTimePeriod]= useState('Today');
+   
+    const timePeriods = ['Today', 'Last Week', 'Last Month', 'Current Year'];
     return (
         <React.Fragment>
             <Col xl={6} md={6}>
@@ -18,10 +21,9 @@ const TopPages = () => {
                                     <span className="text-muted fs-16"><i className="mdi mdi-dots-vertical align-middle"></i></span>
                                 </DropdownToggle>
                                 <DropdownMenu className="dropdown-menu-end">
-                                    <DropdownItem>Today</DropdownItem>
-                                    <DropdownItem>Last Week</DropdownItem>
-                                    <DropdownItem>Last Month</DropdownItem>
-                                    <DropdownItem>Current Year</DropdownItem>
+                                {timePeriods.map((value) => {
+                                        return <DropdownItem key={value} onClick = {() => setTimePeriod(value)} >{value}</DropdownItem>
+                                    })}
                                 </DropdownMenu>
                             </Dropdown>
                         </div>
@@ -37,7 +39,7 @@ const TopPages = () => {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {(topPages || []).map((item, index) => (
+                                    {(topPages || []).find((item) => item.timePeriod === timePeriod)?.data.map((item, index) => (
                                         <tr key={index}>
                                             <td>
                                                 <Link to="#">{item.page}</Link>

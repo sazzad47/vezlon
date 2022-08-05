@@ -24,10 +24,34 @@ function getChartColorsArray(colors) {
     });
 }
 
-const PortfolioCharts = ({dataColors}) => {
+const PortfolioCharts = ({timePeriod, dataColors}) => {
     const donutchartportfolioColors = getChartColorsArray(dataColors)
+
+    function getSeries (timePeriod) {
+        switch(timePeriod) {
+            case '1 Month': 
+                return [
+                    50, 11.50, 50, 57
+                ];
+            case '3 Months': 
+                return [
+                    150, 34.5, 150, 171
+                ];
+            case '6 Months': 
+                return [
+                    300, 69, 300, 342
+                ];
+            case '1 Year' :
+                return [
+                    600, 183, 600, 684
+                ];
+            default:
+                return "";
+            
+        }
+    }
     
-    const series = [50, 11.50, 50, 57];
+    const series = getSeries(timePeriod);
     var options = {
         labels: ["Maintenance", "Hosting", "Firebase", "Mongo"],
         chart: {

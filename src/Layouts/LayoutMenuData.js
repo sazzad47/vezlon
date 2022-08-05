@@ -407,10 +407,10 @@ const Navdata = () => {
             isHeader: true,
         },
         {
-            id: "test",
-            label: "Test",
+            id: "finance",
+            label: "Finance Management",
             icon: "bx bx-notepad",
-            link: "/test",
+            link: "/finance-mngt",
         },
         {
             id: "authentication",
