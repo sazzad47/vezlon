@@ -5,10 +5,10 @@ import { Redirect } from "react-router-dom";
 import DashboardAnalytics from "../pages/DashboardAnalytics";
 import DashboardCrm from "../pages/DashboardCrm";
 import DashboardEcommerce from "../pages/DashboardEcommerce";
-
 import DashboardCrypto from "../pages/DashboardCrypto";
 import DashboardProject from "../pages/DashboardProject";
 import DashboardNFT from "../pages/DashboardNFT";
+
 
 
 //Calendar
@@ -66,6 +66,9 @@ import EcommerceCart from "../pages/Ecommerce/EcommerceCart";
 import EcommerceCheckout from "../pages/Ecommerce/EcommerceCheckout";
 import EcommerceSellers from "../pages/Ecommerce/EcommerceSellers/index";
 import EcommerceSellerDetail from "../pages/Ecommerce/EcommerceSellers/EcommerceSellerDetail";
+
+//MarketplaceSoon 
+import MarketplaceSoon from "../pages/NFTMarketplace/Market";
 
 // NFT Marketplace Pages
 import Marketplace from "../pages/NFTMarketplace/Marketplace";
@@ -154,8 +157,10 @@ import CoverSignIn from '../pages/AuthenticationInner/Login/CoverSignIn';
 import BasicSignUp from '../pages/AuthenticationInner/Register/BasicSignUp';
 import CoverSignUp from "../pages/AuthenticationInner/Register/CoverSignUp";
 import BasicPasswReset from '../pages/AuthenticationInner/PasswordReset/BasicPasswReset';
-//test
-import FinanceManagement from "../pages/Test";
+
+//financeManagement
+import FinanceManagement from "../pages/FinanceManagement";
+
 //pages
 import Starter from '../pages/Pages/Starter/Starter';
 import SimplePage from '../pages/Pages/Profile/SimplePage/SimplePage';
@@ -281,6 +286,10 @@ const authProtectedRoutes = [
   { path: "/apps-crypto-wallet", component: MyWallet },
   { path: "/apps-crypto-ico", component: ICOList },
   { path: "/apps-crypto-kyc", component: KYCVerification },
+  
+   //Marketplace Soon
+
+  {path: "/marketplace", component: MarketplaceSoon},
 
   // NFT Marketplace
   { path: "/apps-nft-marketplace", component: Marketplace },
@@ -385,7 +394,7 @@ const authProtectedRoutes = [
   { path: "/maps-vector", component: VectorMaps },
   { path: "/maps-leaflet", component: LeafletMaps },
 
-  //Test
+  //FinanceManagement
   { path: "/finance-mngt", component: FinanceManagement },
   //Pages
   { path: "/pages-starter", component: Starter },

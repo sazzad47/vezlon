@@ -76,7 +76,7 @@ const ecomWidgets = [
     },
     
 ];
-const ecomWidgetsTest = [
+const financeWidgets = [
     {
         id: 1,
         label: "Total Earnings",
@@ -334,63 +334,7 @@ const recentOrders = [
         votes: "161",
     },
 ];
-const recentOrdersTest = [
-    {
-        id: 1,
-        orderId: "#VZ2112",
-        date: "10 Oct, 14:47",
-        status: "Paid",
-        statusClass: "success",
-        img: avatar1,
-        name: "Alex Smith",
-        purchased: "Credits",
-        revenue: "$9.98",
-    },
-    {
-        id: 2,
-        orderId: "#VZ2111",
-        date: "17 Oct, 02:10",
-        status: "Pending",
-        statusClass: "warning",
-        img: avatar2,
-        name: "Jansh Brown",
-        purchased: "Credits",
-        revenue: "$270.60",
-    },
-    {
-        id: 3,
-        orderId: "#VZ2109",
-        date: "26 Oct, 08:20",
-        status: "Paid",
-        statusClass: "success",
-        img: avatar3,
-        name: "Ayaan Bowen",
-        purchased: "Credits",
-        revenue: "$145.42",
-    },
-    {
-        id: 4,
-        orderId: "#VZ2108",
-        date: "02 Nov, 04:52",
-        status: "Unpaid",
-        statusClass: "danger",
-        img: avatar4,
-        name: "Prezy Mark",
-        purchased: "Credits",
-        revenue: "$170.68",
-    },
-    {
-        id: 5,
-        orderId: "#VZ2107",
-        date: "10 Nov, 07:20",
-        status: "Paid",
-        statusClass: "success",
-        img: avatar6,
-        name: "Vihan Hudda",
-        purchased: "Credits",
-        revenue: "$350.87",
-    },
-];
+
 
 const topCategories = [
     {
@@ -445,4 +389,4 @@ const topCategories = [
     },
 ];
 
-export { ecomWidgets, ecomWidgetsTest, bestSellingProducts, topSellers, recentOrders, recentOrdersTest, topCategories };
+export { ecomWidgets, financeWidgets, bestSellingProducts, topSellers, recentOrders, topCategories };

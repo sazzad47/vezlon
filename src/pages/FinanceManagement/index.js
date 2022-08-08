@@ -1,39 +1,26 @@
 import React from "react";
 import { Col, Container, Row } from "reactstrap";
+import Section from "./Section";
 import Widget from "./Widgets";
-import BestSellingProducts from "./BestSellingProducts";
-import RecentActivity from "./RecentActivity";
 import RecentOrders from "./RecentOrders";
 import Revenue from "./Revenue";
 import SalesByLocations from "./SalesByLocations";
-import StoreVisits from "./StoreVisits";
-import TopSellers from "./TopSellers";
-import BreadCrumb from "../../Components/Common/BreadCrumb";
 import BalanceOverview from "./BalanceOverview";
 import TopReferrals from "./TopReferrals";
 import TopPages from "./TopPages";
-import MyPortfolio from "./MyPortfolio";
+import MyPortfolio from "./Costs";
 
 const DashboardEcommerce = () => {
-  document.title="Dashboard | Velzon - React Admin & Dashboard Template";
+  document.title = "Dashboard | Velzon - React Admin & Dashboard Template";
   return (
     <React.Fragment>
       <div className="page-content">
         <Container fluid>
+          <Row>
+            <Col>
+              <div className="h-100">
                 <Row>
-                  <Col>
-                    <div className="h-100">
-                    <Row>
-                      <Col xs={12}>
-                      <div className="page-title-box d-sm-flex align-items-center justify-content-between">
-                        <h4 className="mb-sm-0">Finance Management</h4>
-                        <div className="page-title-right">
-                          <ol className="breadcrumb m-0">
-                            <li className="breadcrumb-item active">Finance Management</li>
-                          </ol>
-                        </div>
-                      </div>
-                  </Col>
+                  <Section />
                 </Row>
                 <Row>
                   <Widget />
@@ -54,8 +41,8 @@ const DashboardEcommerce = () => {
                   <BalanceOverview />
                 </Row>
                 <Row>
-                <TopReferrals />
-                <TopPages />
+                  <TopReferrals />
+                  <TopPages />
                 </Row>
               </div>
             </Col>

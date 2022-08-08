@@ -185,7 +185,16 @@ const Navdata = () => {
                     badgeName:"New",
                     badgeColor:"danger"
                 },
+                
             ],
+        },
+        {
+            id: "marketplace",
+            label: "Marketplace",
+            icon: "bx bx-store",
+            link: "/marketplace",
+            badgeName:"Soon",
+            badgeColor:"danger"
         },
         {
             id: "apps",

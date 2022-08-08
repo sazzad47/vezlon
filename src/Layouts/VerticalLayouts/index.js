@@ -81,7 +81,7 @@ const VerticalLayout = (props) => {
                     <React.Fragment key={key}>
                         {/* Main Header */}
                         {item['isHeader'] ?
-                            <li className="menu-title"><span data-key="t-menu">{props.t(item.label)}</span></li>
+                            <li className="menu-title"><span data-key="t-menu">{props.t(item.label)}</span></li> 
                             : (
                                 (item.subItems ? (
                                     <li className="nav-item">
@@ -170,7 +170,7 @@ const VerticalLayout = (props) => {
                                         <Link
                                             className="nav-link menu-link"
                                             to={item.link ? item.link : "/#"}>
-                                            <i className={item.icon}></i> <span>{props.t(item.label)}</span>
+                                            <i className={item.icon}></i> <span>{props.t(item.label)}</span>{item.badgeName? <span className="badge badge-pill bg-success" data-key="t-new">{item.badgeName}</span> : null}
                                         </Link>
                                     </li>
                                 ))
