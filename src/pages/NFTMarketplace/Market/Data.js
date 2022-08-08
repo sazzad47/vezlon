@@ -30,6 +30,8 @@ const cardData = [
             memoryUsageRel: '11',
             systemThroughput: '106',
         },
+        deviceName:'NVIDIA Jetson Nano',
+        deviceDescription: 'Jetson Nano is a small, powerful computer for embedded applications and AI IoT that delivers the power of modern AI in a $99 (1KU+) module. Get started fast with the comprehensive JetPack SDK with accelerated libraries for deep learning, computer vision, graphics, multimedia, and more.',
         restricted: ""
     },
     {
@@ -51,6 +53,8 @@ const cardData = [
             memoryUsageRel: '11',
             systemThroughput: '106',
         },
+        deviceName:'NVIDIA Jetson Nano',
+        deviceDescription: 'Jetson Nano is a small, powerful computer for embedded applications and AI IoT that delivers the power of modern AI in a $99 (1KU+) module. Get started fast with the comprehensive JetPack SDK with accelerated libraries for deep learning, computer vision, graphics, multimedia, and more.',
         restricted: ""
     },
     {
@@ -72,6 +76,8 @@ const cardData = [
             memoryUsageRel: '11',
             systemThroughput: '106',
         },
+        deviceName:'NVIDIA Jetson Nano',
+        deviceDescription: 'Jetson Nano is a small, powerful computer for embedded applications and AI IoT that delivers the power of modern AI in a $99 (1KU+) module. Get started fast with the comprehensive JetPack SDK with accelerated libraries for deep learning, computer vision, graphics, multimedia, and more.',
         restricted: ""
     },
     {
@@ -93,6 +99,8 @@ const cardData = [
             memoryUsageRel: '11',
             systemThroughput: '106',
         },
+        deviceName:'NVIDIA Jetson Nano',
+        deviceDescription: 'Jetson Nano is a small, powerful computer for embedded applications and AI IoT that delivers the power of modern AI in a $99 (1KU+) module. Get started fast with the comprehensive JetPack SDK with accelerated libraries for deep learning, computer vision, graphics, multimedia, and more.',
         restricted: ""
     },
     {
@@ -114,6 +122,8 @@ const cardData = [
             memoryUsageRel: '11',
             systemThroughput: '106',
         },
+        deviceName:'NVIDIA Jetson Nano',
+        deviceDescription: 'Jetson Nano is a small, powerful computer for embedded applications and AI IoT that delivers the power of modern AI in a $99 (1KU+) module. Get started fast with the comprehensive JetPack SDK with accelerated libraries for deep learning, computer vision, graphics, multimedia, and more.',
         restricted: "Restricted Block"
     },
     {
@@ -135,6 +145,8 @@ const cardData = [
             memoryUsageRel: '11',
             systemThroughput: '106',
         },
+        deviceName:'NVIDIA Jetson Nano',
+        deviceDescription: 'Jetson Nano is a small, powerful computer for embedded applications and AI IoT that delivers the power of modern AI in a $99 (1KU+) module. Get started fast with the comprehensive JetPack SDK with accelerated libraries for deep learning, computer vision, graphics, multimedia, and more.',
         restricted: ""
     },
     {
@@ -156,6 +168,8 @@ const cardData = [
             memoryUsageRel: '11',
             systemThroughput: '106',
         },
+        deviceName:'NVIDIA Jetson Nano',
+        deviceDescription: 'Jetson Nano is a small, powerful computer for embedded applications and AI IoT that delivers the power of modern AI in a $99 (1KU+) module. Get started fast with the comprehensive JetPack SDK with accelerated libraries for deep learning, computer vision, graphics, multimedia, and more.',
         restricted: "Restricted Block"
     },
     

@@ -1,6 +1,5 @@
 import {
   Card,
-  CardBody,
   Col,
   Row,
   TabContent,
@@ -13,11 +12,73 @@ import {
   ModalBody,
   ModalFooter,
   Button,
+  Container,
 } from "reactstrap";
+import CountUp from "react-countup";
 import classnames from "classnames";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 const RestrictedModal = () => {
+  const [restrictedModal, setRestrictedModal] = useState(false);
+  function tog_backdrop() {
+    setRestrictedModal(!restrictedModal);
+  }
+  return (
+    <>
+      <Link
+        to="#"
+        onClick={() => tog_backdrop()}
+        className="btn btn-primary stretched-link"
+      >
+        See Details
+      </Link>
+      <Modal
+        isOpen={restrictedModal}
+        toggle={() => {
+          tog_backdrop();
+        }}
+        backdrop={"static"}
+        id="staticBackdrop"
+        centered
+      >
+        <ModalHeader
+          id="staticBackdropLabel"
+          toggle={() => {
+            tog_backdrop();
+          }}
+        >
+          Restricted
+        </ModalHeader>
+        <div className="modal-body text-center p-5">
+          <lord-icon
+            src="https://cdn.lordicon.com/falqeilw.json"
+            trigger="loop"
+            colors="primary:#121331,secondary:#08a88a"
+            style={{ width: "120px", height: "120px" }}
+          ></lord-icon>
+          <div className="mt-4">
+            <h4 className="mb-3">Restricted block</h4>
+            <p className="text-muted mb-4">
+              {" "}
+              Sorry, this is a restricted block. You can't access this block
+              without authorized permission.
+            </p>
+            <div className="hstack gap-2 justify-content-center">
+              <Link
+                to="#"
+                className="btn btn-link link-success fw-medium"
+                onClick={() => setRestrictedModal(false)}
+              >
+                <i className="ri-close-line me-1 align-middle"></i> Close
+              </Link>
+            </div>
+          </div>
+        </div>
+      </Modal>
+    </>
+  );
+};
+const UnverifiedModal = () => {
   const [restrictedModal, setRestrictedModal] = useState(false);
   function tog_backdrop() {
     setRestrictedModal(!restrictedModal);
@@ -56,10 +117,10 @@ const RestrictedModal = () => {
             style={{ width: "120px", height: "120px" }}
           ></lord-icon>
           <div className="mt-4">
-            <h4 className="mb-3">Restricted block</h4>
+            <h4 className="mb-3">This block is not verified.</h4>
             <p className="text-muted mb-4">
               {" "}
-              Sorry, this is a restricted block. Kindly get in touch with our
+              This block is not verified. Kindly get in touch with our
               partnership team at{" "}
               <span style={{ color: "#3498db" }}>
                 partnerships@marketplace.com
@@ -148,7 +209,7 @@ const DetailsModal = ({ item }) => {
   function tog_modal() {
     setDetailsModal(!detailsModal);
   }
- 
+
   const [customActiveTab, setcustomActiveTab] = useState("1");
   const toggleTab = (tab2) => {
     if (customActiveTab !== tab2) {
@@ -199,16 +260,13 @@ const DetailsModal = ({ item }) => {
         <ModalBody>
           <Row className="g-4">
             <Col lg={4}>
-              <div className="sticky-side-div">
+              <div>
                 <Card className="ribbon-box border shadow-none right">
                   <img
                     src={item.image}
                     alt="orbitaal insight profile"
                     className="img-fluid rounded"
                   />
-                  <div className="position-absolute bottom-0 p-3">
-                    <div className="position-absolute top-0 end-0 start-0 bottom-0 bg-white opacity-25"></div>
-                  </div>
                 </Card>
               </div>
             </Col>
@@ -276,89 +334,100 @@ const DetailsModal = ({ item }) => {
               <TabContent activeTab={customActiveTab} className="text-muted">
                 <TabPane tabId="1" id="home1">
                   <div>
-                    <h3 className="mb-3">Performance</h3>
-                    <Row>
-                      <Col xl={3} md={6}>
-                        <Card style={{backgroundColor:'#3e324d'}}>
-                          <CardBody>
-                            <div className="d-flex justify-content-center">
-                              <h4 className="fs-22 fw-semibold ff-secondary mb-4">
-                                Latency
-                              </h4>
-                            </div>
-                            <div className="fs-22 fw-semibold ff-secondary d-flex justify-content-center">
-                              <span style={{ fontSize: "4rem" }}>
-                                <sup>{item.performance.latency}</sup>
-                              </span>
-                              <span style={{ fontSize: "1rem" }}>
-                                <sub>ms</sub>
-                              </span>
-                            </div>
-                          </CardBody>
-                        </Card>
-                      </Col>
-                      <Col xl={3} md={6}>
-                        <Card style={{backgroundColor:'#3e324d'}}>
-                          <CardBody>
-                            <div className="d-flex justify-content-center">
-                              <h4 className="fs-22 fw-semibold ff-secondary mb-4">
-                                Accuracy
-                              </h4>
-                            </div>
-                            <div className="fs-22 fw-semibold ff-secondary d-flex justify-content-center">
-                              <span style={{ fontSize: "4rem" }}>
-                                <sup>{item.performance.accuracy}</sup>
-                              </span>
-                              <span style={{ fontSize: "1rem" }}>
-                                <sub>%</sub>
-                              </span>
-                            </div>
-                          </CardBody>
-                        </Card>
-                      </Col>
-                      <Col xl={3} md={6}>
-                        <Card style={{backgroundColor:'#3e324d'}}>
-                          <CardBody>
-                            <div className="d-flex justify-content-center">
-                              <h4 className="fs-22 fw-semibold ff-secondary mb-4">
-                                CPU Usage
-                              </h4>
-                            </div>
-                            <div className="fs-22 fw-semibold ff-secondary d-flex justify-content-center">
-                              <span style={{ fontSize: "4rem" }}>
-                                <sup>{item.performance.cpuUsage}</sup>
-                              </span>
-                              <span style={{ fontSize: "1rem" }}>
-                                <sub>%</sub>
-                              </span>
-                            </div>
-                          </CardBody>
-                        </Card>
-                      </Col>
-                      <Col xl={3} md={4}>
-                        <Card style={{backgroundColor:'#3e324d'}}>
-                          <CardBody>
-                            <div className="d-flex justify-content-center">
-                              <h4 className="fs-22 fw-semibold ff-secondary mb-4">
-                                System Throughput
-                              </h4>
-                            </div>
-                            <div className="fs-22 fw-semibold ff-secondary d-flex justify-content-center">
-                              <span style={{ fontSize: "4rem" }}>
-                                <sup>{item.performance.systemThroughput}</sup>
-                              </span>
-                              <span style={{ fontSize: "1rem" }}>
-                                <sub>fps</sub>
-                              </span>
-                            </div>
-                          </CardBody>
-                        </Card>
-                      </Col>
-                    </Row>
                     <div>
                       <h3>Description</h3>
                     </div>
                     <p>{item.modalDescription}</p>
+                    <h3 className="mb-3">Performance</h3>
+
+                    <section className="py-5 position-relative bg-light">
+                      <Container>
+                        <Row className="text-center gy-4">
+                          <Col lg={3} className="col-6">
+                            <div>
+                              <h2 className="mb-2">
+                                <span
+                                  className="counter-value"
+                                  data-target="100"
+                                >
+                                  <CountUp
+                                    start={0}
+                                    end={item.performance.latency}
+                                    duration={1}
+                                  />
+                                </span>
+                                ms
+                              </h2>
+                              <div className="text-muted">Latency</div>
+                            </div>
+                          </Col>
+
+                          <Col lg={3} className="col-6">
+                            <div>
+                              <h2 className="mb-2">
+                                <span
+                                  className="counter-value"
+                                  data-target="24"
+                                >
+                                  <CountUp
+                                    start={0}
+                                    end={item.performance.accuracy}
+                                    duration={1}
+                                  />
+                                </span>
+                                %
+                              </h2>
+                              <div className="text-muted">Accuracy</div>
+                            </div>
+                          </Col>
+
+                          <Col lg={3} className="col-6">
+                            <div>
+                              <h2 className="mb-2">
+                                <span
+                                  className="counter-value"
+                                  data-target="20.3"
+                                >
+                                  <CountUp
+                                    start={0}
+                                    end={item.performance.cpuUsage}
+                                    duration={1}
+                                  />
+                                </span>
+                                %
+                              </h2>
+                              <div className="text-muted">CPU Usage</div>
+                            </div>
+                          </Col>
+
+                          <Col lg={3} className="col-6">
+                            <div>
+                              <h2 className="mb-2">
+                                <span
+                                  className="counter-value"
+                                  data-target="50"
+                                >
+                                  <CountUp
+                                    start={0}
+                                    end={item.performance.systemThroughput}
+                                    duration={1}
+                                  />
+                                </span>
+                                fps
+                              </h2>
+                              <div className="text-muted">
+                                System Throughput
+                              </div>
+                            </div>
+                          </Col>
+                        </Row>
+                      </Container>
+                    </section>
+                    <div className="mt-4">
+                      <h3>EDGE DEVICE</h3>
+                      <h6 className="mt-4">{item.deviceName}</h6>
+                    </div>
+                    <p>{item.deviceDescription}</p>
                   </div>
                 </TabPane>
                 <TabPane tabId="2">
@@ -410,4 +479,4 @@ const DetailsModal = ({ item }) => {
     </>
   );
 };
-export { RestrictedModal, MarketPlaceModal, DetailsModal };
+export { RestrictedModal, UnverifiedModal, MarketPlaceModal, DetailsModal };
