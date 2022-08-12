@@ -177,7 +177,7 @@ const Marketplace = () => {
                           style={{
                             border: "2px dashed #32383e",
                             borderRadius: "6px",
-                            minHeight: "25.5rem",
+                            minHeight: "10rem", minWidth: "100%",
                             display: "flex",
                             justifyContent: "center",
                           }}

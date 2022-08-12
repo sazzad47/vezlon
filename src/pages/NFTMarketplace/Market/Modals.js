@@ -424,7 +424,7 @@ const DetailsModal = ({ item }) => {
                       </Container>
                     </section>
                     <div className="mt-4">
-                      <h3>EDGE DEVICE</h3>
+                      <h3>Edge Device</h3>
                       <h6 className="mt-4">{item.deviceName}</h6>
                     </div>
                     <p>{item.deviceDescription}</p>

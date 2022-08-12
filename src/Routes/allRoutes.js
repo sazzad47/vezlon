@@ -69,6 +69,8 @@ import EcommerceSellerDetail from "../pages/Ecommerce/EcommerceSellers/Ecommerce
 
 //MarketplaceSoon 
 import MarketplaceSoon from "../pages/NFTMarketplace/Market";
+//Weather 
+import Weather from "../pages/Weather/index";
 
 // NFT Marketplace Pages
 import Marketplace from "../pages/NFTMarketplace/Marketplace";
@@ -396,6 +398,8 @@ const authProtectedRoutes = [
 
   //FinanceManagement
   { path: "/finance-mngt", component: FinanceManagement },
+  //Weather
+  { path: "/weather", component: Weather },
   //Pages
   { path: "/pages-starter", component: Starter },
   { path: "/pages-profile", component: SimplePage },

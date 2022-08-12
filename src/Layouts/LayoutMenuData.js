@@ -197,6 +197,12 @@ const Navdata = () => {
             badgeColor:"danger"
         },
         {
+            id: "weather",
+            label: "Weather",
+            link: "/weather",
+           
+        },
+        {
             id: "apps",
             label: "Apps",
             icon: "bx bx-layer",
