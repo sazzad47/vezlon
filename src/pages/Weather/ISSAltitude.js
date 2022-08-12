@@ -123,13 +123,7 @@ const ISSAltitude = ({ dataColors, setLatitude, setLongitude }) => {
   const altitude = data[4];
 
   const [arrayAlt, setArrayAlt] = useState([]);
-  let xValues = ["5 seconds ago",
-  "4 sconds ago",
-  "3 seconds ago",
-  "2 seconds ago",
-  "1 seconds ago",
-  "Now",]
-  const [xAxis, setXAxis] = useState([]);
+  
 
   useEffect(() => {
     const prepareArray = () => {
@@ -143,20 +137,10 @@ const ISSAltitude = ({ dataColors, setLatitude, setLongitude }) => {
     };
     prepareChart();
 
-    const updateXValues = () => {
-      
-      for (let i = 0; i <= xValues.length; i++ ) {
-        const Xval = xValues[i]
-        setXAxis((oldArray) => [...oldArray, Xval]);
-      }
-      
-    };
-    updateXValues();
-
     
    
   }, [altitude]);
-  console.log('arr', xAxis)
+ 
 
   
 
