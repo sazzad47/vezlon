@@ -67,7 +67,7 @@ const Weather = () => {
              
           <div className='mb-3' style={{height:'35rem',width:'100%', position:'relative'}}>
 
-          {/* <Globe latitude={latitude} longitude={longitude} /> */} globe
+          <Globe latitude={latitude} longitude={longitude} /> 
           </div>
            
            
