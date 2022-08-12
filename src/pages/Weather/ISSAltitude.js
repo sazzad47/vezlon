@@ -139,7 +139,7 @@ const ISSAltitude = ({ dataColors, setLatitude, setLongitude }) => {
     prepareArray();
     const prepareChart = () => {
      
-      if (arrayAlt.length > 5) arrayAlt.shift();
+      if (arrayAlt.length > 4) arrayAlt.shift();
     };
     prepareChart();
 
@@ -198,12 +198,12 @@ const ISSAltitude = ({ dataColors, setLatitude, setLongitude }) => {
 
     xaxis: {
       categories: ["5 seconds ago",
-      "4 sconds ago",
+      "4 seconds ago",
       "3 seconds ago",
       "2 seconds ago",
-      "1 seconds ago",
-      "Now"]
+      "1 seconds ago"]
     },
+    
   };
 
   return (
