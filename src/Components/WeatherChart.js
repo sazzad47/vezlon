@@ -190,7 +190,7 @@ const WeatherChart = ({latitude, longitude, dataColors }) => {
         xaxis: {
             categories: days,
             title: {
-                text: 'Day'
+                text: 'Date'
             }
         },
         yaxis: {

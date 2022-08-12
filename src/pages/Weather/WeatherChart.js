@@ -169,11 +169,10 @@ const WeatherChart = ({latitude, longitude, dataColors }) => {
             curve: 'straight'
         },
         title: {
-            text: 'Weather forecast',
+            text: 'Weather Forecast',
             align: 'left',
             style: {
-                fontWeight: 'bold',
-                fontSize:'25px'
+                fontWeight: 500,
             },
         },
         grid: {
@@ -190,7 +189,7 @@ const WeatherChart = ({latitude, longitude, dataColors }) => {
         xaxis: {
             categories: days,
             title: {
-                text: 'Day'
+                text: 'Dates'
             }
         },
         yaxis: {

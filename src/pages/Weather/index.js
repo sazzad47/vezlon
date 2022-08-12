@@ -7,6 +7,7 @@ import WorldMap from './WorldMap';
 import Globe from './Globe';
 import ISSStream from './ISSStream';
 import { Col, Row } from 'reactstrap';
+import BreadCrumb from '../../Components/Common/BreadCrumb';
 
 
 const Weather = () => {
@@ -16,6 +17,21 @@ const Weather = () => {
   return (
     <>
       <div className="page-content mx-3">
+      <Row>
+                <Col xs={12}>
+                    <div className="page-title-box d-sm-flex align-items-center justify-content-between">
+                        <h4 className="mb-sm-0">Weather</h4>
+
+                        <div className="page-title-right">
+                            <ol className="breadcrumb m-0">
+                                
+                                <li className="breadcrumb-item active">Weather</li>
+                            </ol>
+                        </div>
+
+                    </div>
+                </Col>
+            </Row>
         {/* <div style={{ display: 'flex', flexDirection: 'row', gap: '10px' }}>
           <div
             style={{
