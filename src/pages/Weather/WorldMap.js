@@ -1,8 +1,8 @@
-import React from 'react';
-import Marker from 'react-leaflet-enhanced-marker';
-import { MapContainer, Popup, TileLayer, useMap } from 'react-leaflet';
+import React from "react";
+import Marker from "react-leaflet-enhanced-marker";
+import { MapContainer, Popup, TileLayer, useMap } from "react-leaflet";
 
-import Satellite from '../../assets/images/satellite.png';
+import Satellite from "../../assets/images/satellite.png";
 
 const WorldMap = ({ latitude, longitude }) => {
   const position = [26.4887, 77.981];
@@ -15,7 +15,7 @@ const WorldMap = ({ latitude, longitude }) => {
           center={coord}
           zoom={3}
           scrollWheelZoom={false}
-          style={{ minHeight: '100%', minWidth: '100%' }}
+          style={{ minHeight: "100%", minWidth: "100%" }}
         >
           <TileLayer
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -23,7 +23,7 @@ const WorldMap = ({ latitude, longitude }) => {
           />
           <Marker
             position={coord}
-            icon={<img src={Satellite} style={{ width: '100px' }} />}
+            icon={<img src={Satellite} style={{ width: "100px" }} />}
           >
             <Popup>INTERNATIONAL SPACE STATION LIVE COORDINATES</Popup>
           </Marker>

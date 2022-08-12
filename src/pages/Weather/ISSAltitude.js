@@ -1,31 +1,33 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from "react";
 import ReactApexChart from "react-apexcharts";
 
 function getChartColorsArray(colors) {
   colors = JSON.parse(colors);
   return colors.map(function (value) {
-      var newValue = value.replace(" ", "");
-      if (newValue.indexOf(",") === -1) {
-          var color = getComputedStyle(document.documentElement).getPropertyValue(newValue);
-          if (color.indexOf("#") !== -1)
-              color = color.replace(" ", "");
-          if (color) return color;
-          else return newValue;
+    var newValue = value.replace(" ", "");
+    if (newValue.indexOf(",") === -1) {
+      var color = getComputedStyle(document.documentElement).getPropertyValue(
+        newValue
+      );
+      if (color.indexOf("#") !== -1) color = color.replace(" ", "");
+      if (color) return color;
+      else return newValue;
+    } else {
+      var val = value.split(",");
+      if (val.length === 2) {
+        var rgbaColor = getComputedStyle(
+          document.documentElement
+        ).getPropertyValue(val[0]);
+        rgbaColor = "rgba(" + rgbaColor + "," + val[1] + ")";
+        return rgbaColor;
       } else {
-          var val = value.split(',');
-          if (val.length === 2) {
-              var rgbaColor = getComputedStyle(document.documentElement).getPropertyValue(val[0]);
-              rgbaColor = "rgba(" + rgbaColor + "," + val[1] + ")";
-              return rgbaColor;
-          } else {
-              return newValue;
-          }
+        return newValue;
       }
+    }
   });
 }
-const ISSAltitude = ({dataColors, setLatitude, setLongitude}) => {
-
-    const [data, setData] = useState([]);
+const ISSAltitude = ({ dataColors, setLatitude, setLongitude }) => {
+  const [data, setData] = useState([]);
   // @ts-ignore
   const [loading, setLoading] = useState(false);
   let lat;
@@ -49,7 +51,7 @@ const ISSAltitude = ({dataColors, setLatitude, setLongitude}) => {
 
   const fetchData = () => {
     setLoading(true);
-    fetch('https://api.wheretheiss.at/v1/satellites/25544')
+    fetch("https://api.wheretheiss.at/v1/satellites/25544")
       .then((response) => response.json())
       .then((data) => {
         lat = data.latitude.toFixed(2);
@@ -60,10 +62,10 @@ const ISSAltitude = ({dataColors, setLatitude, setLongitude}) => {
         const dateObject = new Date(milliseconds);
         const humanDateFormatLong = dateObject.toString();
         // Changing the name of Time Zone from long to short (e.g. to CEST)
-        const stringTemp1 = humanDateFormatLong.split('(');
+        const stringTemp1 = humanDateFormatLong.split("(");
         const stringTemp2 = stringTemp1[1].slice(0, -1);
-        const stringTemp3 = stringTemp2.split(' ');
-        let stringTemp4 = '';
+        const stringTemp3 = stringTemp2.split(" ");
+        let stringTemp4 = "";
         for (let i = 0; i < stringTemp3.length; i++) {
           stringTemp4 = stringTemp4 + stringTemp3[i].charAt(0);
         }
@@ -109,7 +111,6 @@ const ISSAltitude = ({dataColors, setLatitude, setLongitude}) => {
         setLatitude(data.latitude);
         setLongitude(data.longitude);
         setLoading(false);
-       
       })
       .catch((e) => {
         setLoading(false);
@@ -119,107 +120,95 @@ const ISSAltitude = ({dataColors, setLatitude, setLongitude}) => {
 
   React.useEffect(() => {}, [data]);
 
- 
-  const altitude = data[4]
+  const altitude = data[4];
 
-  // const initialAlt = [parseFloat(altitude)]
-   
   const [arrayAlt, setArrayAlt] = useState([]);
-  const [xValues , setXValues] = useState([]);
-  
-   useEffect(() => {
-     const prepareArray = () => {
-      setArrayAlt(oldArray => [...oldArray, parseFloat(altitude)]);
-   };
-    
-     prepareArray()
+  const [xValues, setXValues] = useState([]);
+
+  useEffect(() => {
+    const prepareArray = () => {
+      setArrayAlt((oldArray) => [...oldArray, parseFloat(altitude)]);
+    };
+
+    prepareArray();
     const prepareChart = () => {
-     
-      if (arrayAlt.length > 5) 
-        arrayAlt.shift();
-  
-    }
+      if (arrayAlt.length > 5) arrayAlt.shift();
+    };
     prepareChart();
 
     const updateXValues = () => {
-        
-      const val = parseInt(xValues.length + 5)
-     
-      xValues.push(val)
-    }
+      const val = parseInt(xValues.length + 5);
+
+      xValues.push(val);
+    };
     updateXValues();
     const prepareXValues = () => {
-   
-      if (xValues.length > 6) 
-      xValues.shift();
-  
-    }
+      if (xValues.length > 6) xValues.shift();
+    };
     prepareXValues();
-  
-    
-   
-   
-   }, [altitude])  
-   
-   
-   
-  
+  }, [altitude]);
+
   //  console.log('xVal', xValues)
 
   var linechartBasicColors = getChartColorsArray(dataColors);
-  const series = [{
+  const series = [
+    {
       name: "Altitude",
-      data: arrayAlt
-  }];
+      data: arrayAlt,
+    },
+  ];
   var options = {
-      chart: {
-          height: 350,
-          type: 'line',
-          zoom: {
-              enabled: false
-          },
-          toolbar: {
-              show: false
-          }
+    chart: {
+      height: 350,
+      type: "line",
+      zoom: {
+        enabled: false,
       },
-      markers: {
-          size: 4,
+      toolbar: {
+        show: false,
       },
-      dataLabels: {
-          enabled: false
+    },
+    markers: {
+      size: 4,
+    },
+    dataLabels: {
+      enabled: false,
+    },
+    stroke: {
+      curve: "straight",
+    },
+    colors: linechartBasicColors,
+    title: {
+      text: "ISS Altitude",
+      align: "left",
+      style: {
+        fontWeight: 500,
       },
-      stroke: {
-          curve: 'straight'
-      },
-      colors: linechartBasicColors,
-      title: {
-          text: 'ISS Altitude',
-          align: 'left',
-          style: {
-              fontWeight: 500,
-          },
-      },
+    },
 
-      xaxis: {
-          categories: ['25 seconds ago', '20 sconds ago', '15 seconds ago', '10 seconds ago', '5 seconds ago' ,'Now'],
-      }
+    xaxis: {
+      categories: [
+        "25 seconds ago",
+        "20 sconds ago",
+        "15 seconds ago",
+        "10 seconds ago",
+        "5 seconds ago",
+        "Now",
+      ],
+    },
   };
- 
-   
-    return (
-        <React.Fragment>
-            <ReactApexChart
-                options={options}
-                series={series}
-                type="line"
-                height="350"
-                className="apex-charts"
-            />
-        </React.Fragment>
-    );
+
+  return (
+    <React.Fragment>
+      <ReactApexChart
+        options={options}
+        series={series}
+        type="line"
+        height="350"
+        className="apex-charts"
+      />
+    </React.Fragment>
+  );
 };
 
- 
-
-
-export default ISSAltitude
+export default ISSAltitude;
