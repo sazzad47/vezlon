@@ -133,7 +133,7 @@ const ISSData = ({ setLatitude, setLongitude, dataColors }) => {
   ];
   var options = {
     chart: {
-      height: 180,
+      height: 300,
       type: "line",
       zoom: {
         enabled: false,
@@ -189,7 +189,7 @@ const ISSData = ({ setLatitude, setLongitude, dataColors }) => {
         options={options}
         series={series}
         type="line"
-        height="180"
+        height="300"
         className="apex-charts"
       />
     </React.Fragment>
