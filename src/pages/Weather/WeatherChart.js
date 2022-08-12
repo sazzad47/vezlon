@@ -264,7 +264,10 @@ const WeatherChart = ({latitude, longitude, dataColors }) => {
         chart: {
             height: 350,
             type: "line",
-            stacked: false
+            stacked: false,
+            toolbar: {
+                show: false
+            }
         },
         dataLabels: {
             enabled: false
