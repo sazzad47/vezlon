@@ -1,6 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
-import { Viewer, Entity } from "resium";
-import { MapContainer, Marker, Popup, TileLayer, useMap } from "react-leaflet";
+import React from "react";
 import MapTabContainer from "./mapTabContainer";
 import ISSData from "./issData";
 import WorldMap from "./WorldMap";

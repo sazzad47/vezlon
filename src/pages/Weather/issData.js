@@ -116,34 +116,19 @@ const ISSData = ({ setLatitude, setLongitude, dataColors }) => {
         setLatitude(data.latitude);
         setLongitude(data.longitude);
         setLoading(false);
-        // calculateRadius(altitude);
-        // calculateRadius20degrees(altitude);
-        // prepareArray(altitude);
-        // prepareDynamicMatrix(humanDateFormatUTC, speed, altitude, lat, long);
-        // Adding a 6 seconds delay to drawISS3D function
-        //   setTimeout(function () {
-        //     drawISS3D(lat, long, altitude);
-        //   }, 6000);
       })
       .catch((e) => {
         setLoading(false);
         console.log(e);
       });
   };
-  const speed = data[3];
-  const altitude = data[4];
-  const visibility = data[5];
-  const solarLat = data[6];
-  const solarLong = data[7];
   React.useEffect(() => {}, [data]);
   const seriesData = data.slice(3, 9);
-  console.log("data", seriesData);
 
   var linechartBasicColors = getChartColorsArray(dataColors);
   const series = [
     {
       data: seriesData,
-      // data: [lat, long, speed, altitude, visibility, solarLat, solarLong]
     },
   ];
   var options = {

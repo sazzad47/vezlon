@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import ReactApexChart from "react-apexcharts";
 import moment from "moment-timezone";
-import WeeklyWeather from "./WeeklyWeather";
-import TodaysWeather from "./TodaysWeather";
 
 function getChartColorsArray(colors) {
   colors = JSON.parse(colors);
@@ -33,28 +31,16 @@ function getChartColorsArray(colors) {
 const WeatherChart = ({ latitude, longitude, dataColors }) => {
   const [weatherData, setWeatherData] = useState({});
 
-  // const getWeatherData = async () => {
-  //     const res = await fetch(
-  //         `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&appid=783846624ca63c9a9fcdd9321a7c9318&exclude=minutely&units=metric`
-  //       );
 
-  //       const data = await res.json();
-  //       setWeatherData(data)
-  //       console.log('data', data)
-
-  // }
   useEffect(() => {
     const getWeatherData = async () => {
       const res = await fetch(
         `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&appid=9ff929331fff018a45487cc72df2643f&exclude=minutely&units=metric`
       );
-      // const res = await fetch(
-      //     `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&appid=783846624ca63c9a9fcdd9321a7c9318&exclude=minutely&units=metric`
-      //   );
 
       const data = await res.json();
       setWeatherData(data);
-      console.log("data", data);
+    
     };
 
     getWeatherData();
@@ -83,7 +69,7 @@ const WeatherChart = ({ latitude, longitude, dataColors }) => {
   const cloudData = weeklyWeather?.map((cloud) => {
     return cloud.clouds;
   });
-  console.log("humidity", cloudData);
+ 
 
   var WeatherChartColors = getChartColorsArray(dataColors);
   var series = [
@@ -137,7 +123,7 @@ const WeatherChart = ({ latitude, longitude, dataColors }) => {
     },
     grid: {
       row: {
-        colors: ["transparent", "transparent"], // takes an array which will be repeated on columns
+        colors: ["transparent", "transparent"], 
         opacity: 0.2,
       },
       borderColor: "#f1f1f1",
