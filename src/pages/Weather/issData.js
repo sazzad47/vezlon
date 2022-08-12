@@ -128,14 +128,10 @@ const ISSData = ({ setLatitude, setLongitude, dataColors }) => {
         console.log(e);
       });
   };
-  const speed = data[3]
-  const altitude = data[4]
-  const visibility = data[5]
-  const solarLat = data[6]
-  const solarLong = data[7]
+ 
   React.useEffect(() => {}, [data]);
   const seriesData = data.slice(3,9)
-  console.log('data', seriesData)
+  
   
   var linechartBasicColors = getChartColorsArray(dataColors);
   const series = [{

@@ -44,7 +44,7 @@ const WeatherChart = ({latitude, longitude, dataColors }) => {
 
     const getWeatherData = async () => {
         const res = await fetch(
-            `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&appid=ddc2248b8bd927580514c4f63c0cf214&exclude=minutely&units=metric`
+            `https://api.openweathermap.org/data/2.5/onecall?lat=33.44&lon=-94.04&appid=3eef9f2d84e05f88af25418a5a1c6ba0&exclude=minutely&units=metric`
           );
         // const res = await fetch(
         //     `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&appid=783846624ca63c9a9fcdd9321a7c9318&exclude=minutely&units=metric`
@@ -52,7 +52,7 @@ const WeatherChart = ({latitude, longitude, dataColors }) => {
         
           const data = await res.json();
           setWeatherData(data)
-          console.log('data', data)
+         
          
     }
   
@@ -60,8 +60,8 @@ const WeatherChart = ({latitude, longitude, dataColors }) => {
        
         
          
-     }, [latitude, longitude])
-     
+     }, [])
+     console.log('data', weatherData)
 
     // const getHourlyWeather = (hourlyData, timezone) => {
     //     const endOfDay = moment().tz(timezone).endOf("day").valueOf();
@@ -82,9 +82,9 @@ const WeatherChart = ({latitude, longitude, dataColors }) => {
     // const url = `https://api.openweathermap.org/data/2.5/forecast?q='London'&appid=32ba0bfed592484379e51106cef3f204`
     
     const days = weeklyWeather?.map((day) => {
-        return moment.unix(day.dt).tz(timezone).format("dddd")
+        return moment.unix(day.dt).tz(timezone).format("MMM Do YY");
     })
-    // console.log('days', days)
+    
     const maxTemps = weeklyWeather?.map((maxTemp) => {
         return maxTemp.temp.max
         
@@ -101,11 +101,19 @@ const WeatherChart = ({latitude, longitude, dataColors }) => {
         return humidity.humidity
         
     })
+    const pressureData = weeklyWeather?.map((pressure) => {
+        return pressure.pressure
+        
+    })
     const cloudData = weeklyWeather?.map((cloud) => {
         return cloud.clouds
         
     })
-    console.log('humidity', cloudData)
+
+   
+    
+    
+   
     // const maxTemp1 = weeklyWeather[0].temp.max;
     // const maxTemp2 = weeklyWeather[1].temp.max;
     // const maxTemp3 = weeklyWeather[2].temp.max;
@@ -127,83 +135,327 @@ const WeatherChart = ({latitude, longitude, dataColors }) => {
     
     
     var WeatherChartColors = getChartColorsArray(dataColors);
+    // var series = [
+    // {
+    //     name: "Max Temp",
+    //     data: maxTemps
+    // },
+    // {
+    //     name: "Min Temp",
+    //     data: minTemps
+    // },
+    // {
+    //     name: "Wind",
+    //     data: windSpeed
+    // },
+    // {
+    //     name: "Cloud Average",
+    //     data: cloudData
+    // },
+    // {
+    //     name: "Humidity",
+    //     data: humidityData
+    // },
+    // ];
+    // var options = {
+    //     chart: {
+    //         height: 380,
+    //         type: 'line',
+    //         zoom: {
+    //             enabled: false
+    //         },
+    //         toolbar: {
+    //             show: false
+    //         }
+    //     },
+    //     colors: WeatherChartColors,
+    //     dataLabels: {
+    //         enabled: false,
+    //     },
+    //     stroke: {
+    //         width: [3, 3],
+    //         curve: 'straight'
+    //     },
+    //     title: {
+    //         text: 'Weather Forecast',
+    //         align: 'left',
+    //         style: {
+    //             fontWeight: 500,
+    //         },
+    //     },
+    //     grid: {
+    //         row: {
+    //             colors: ['transparent', 'transparent'], // takes an array which will be repeated on columns
+    //             opacity: 0.2
+    //         },
+    //         borderColor: '#f1f1f1'
+    //     },
+    //     markers: {
+    //         style: 'inverted',
+    //         size: 6
+    //     },
+    //     xaxis: {
+    //         categories: days,
+    //         title: {
+    //             text: 'Dates'
+    //         }
+    //     },
+    //     yaxis: {
+    //         min: 1,
+    //         max: 100
+    //     },
+    //     legend: {
+    //         position: 'top',
+    //         horizontalAlign: 'right',
+    //         floating: true,
+    //         offsetY: -25,
+    //         offsetX: -5
+    //     },
+    //     responsive: [{
+    //         breakpoint: 600,
+    //         options: {
+    //             chart: {
+    //                 toolbar: {
+    //                     show: false
+    //                 }
+    //             },
+    //             legend: {
+    //                 show: false
+    //             },
+    //         }
+    //     }]
+    // };
     var series = [
-    {
-        name: "Max Temp",
-        data: maxTemps
-    },
-    {
-        name: "Min Temp",
-        data: minTemps
-    },
-    {
-        name: "Wind",
-        data: windSpeed
-    },
-    {
-        name: "Cloud Average",
-        data: cloudData
-    },
-    {
-        name: "Humidiy",
-        data: humidityData
-    },
-    ];
-    var options = {
-        chart: {
-            height: 380,
-            type: 'line',
-            zoom: {
-                enabled: false
-            },
-            toolbar: {
-                show: false
-            }
+        {
+            name: "Max Temp",
+            type: "line",
+            data: maxTemps
         },
-        colors: WeatherChartColors,
+        {
+            name: "Min Temp",
+            type: "line",
+            data: minTemps
+        },
+        {
+            name: "Wind Speed",
+            type: "line",
+            data: windSpeed
+        },
+        {
+            name: "Cloud Average",
+            type: "line",
+            data: cloudData
+        },
+        {
+            name: "Humidity",
+            type: "line",
+            data: humidityData
+        },
+        {
+            name: "Pressure",
+            type: "line",
+            data: pressureData
+        },
+       
+    ]
+
+    var options = {
+        
+        chart: {
+            height: 350,
+            type: "line",
+            stacked: false
+        },
         dataLabels: {
-            enabled: false,
+            enabled: false
         },
         stroke: {
-            width: [3, 3],
-            curve: 'straight'
+            width: 2
         },
         title: {
-            text: 'Weather Forecast',
-            align: 'left',
-            style: {
-                fontWeight: 500,
-            },
-        },
-        grid: {
-            row: {
-                colors: ['transparent', 'transparent'], // takes an array which will be repeated on columns
-                opacity: 0.2
-            },
-            borderColor: '#f1f1f1'
-        },
-        markers: {
-            style: 'inverted',
-            size: 6
+        text: 'Weather Forecast',
+        align: 'left',
+        style: {
+            fontWeight: 500,
+         },
         },
         xaxis: {
             categories: days,
-            title: {
-                text: 'Dates'
-            }
         },
-        yaxis: {
-            min: 1,
-            max: 100
-        },
+        yaxis: [
+            {
+                seriesName: "Max Temp",
+                axisTicks: {
+                    show: true
+                },
+                axisBorder: {
+                    show: true,
+                    color: "#008FFB"
+                },
+                labels: {
+                    style: {
+                        colors: ["#008FFB"]
+                    },
+                    formatter: function (value) {
+                        return value.toFixed(2) + " °C";
+                      }
+                },
+                title: {
+                    text: "Max Temp",
+                    style: {
+                        color: "#008FFB"
+                    }
+                },
+                tooltip: {
+                    enabled: false
+                }
+            },
+            {
+                seriesName: "Min Temp",
+                
+                axisTicks: {
+                    show: true
+                },
+                axisBorder: {
+                    show: true,
+                    color: "#FEB019"
+                },
+                labels: {
+                    style: {
+                        colors: ["#FEB019"]
+                    },
+                    formatter: function (value) {
+                        return value.toFixed(2) + " °C";
+                      }
+                },
+                title: {
+                    text: "Min Temp",
+                    style: {
+                        color: "#FEB019"
+                    }
+                },
+                tooltip: {
+                    enabled: false
+                }
+            },
+            {
+                seriesName: "Wind Speed",
+                axisTicks: {
+                    show: true
+                },
+                axisBorder: {
+                    show: true,
+                    color: "#008FFB"
+                },
+                labels: {
+                    style: {
+                        colors: ["#008FFB"]
+                    },
+                    formatter: function (value) {
+                        return value.toFixed(2) + " ms⁻¹";
+                      }
+                },
+                title: {
+                    text: "Wind Speed",
+                    style: {
+                        color: "#008FFB"
+                    }
+                },
+                tooltip: {
+                    enabled: false
+                }
+            },
+            {
+                seriesName: "Cloud Average",
+                opposite: true,
+                axisTicks: {
+                    show: true
+                },
+                axisBorder: {
+                    show: true,
+                    color: "#008FFB"
+                },
+                labels: {
+                    style: {
+                        colors: ["#008FFB"]
+                    },
+                    formatter: function (value) {
+                        return value + "%";
+                      }
+                },
+                title: {
+                    text: "Cloud Average",
+                    style: {
+                        color: "#008FFB"
+                    }
+                },
+                tooltip: {
+                    enabled: false
+                }
+            },
+            {
+                seriesName: "Humidity",
+                opposite: true,
+                axisTicks: {
+                    show: true
+                },
+                axisBorder: {
+                    show: true,
+                    color: "#008FFB"
+                },
+                labels: {
+                    style: {
+                        colors: ["#008FFB"]
+                    },
+                    formatter: function (value) {
+                        return value + "%";
+                      }
+                },
+                title: {
+                    text: "Humidity",
+                    style: {
+                        color: "#008FFB"
+                    }
+                },
+                tooltip: {
+                    enabled: false
+                }
+            },
+            {
+                seriesName: "Pressure",
+                opposite: true,
+                axisTicks: {
+                    show: true
+                },
+                axisBorder: {
+                    show: true,
+                    color: "#008FFB"
+                },
+                labels: {
+                    style: {
+                        colors: ["#008FFB"]
+                    },
+                    formatter: function (value) {
+                        return value + "hPa";
+                      }
+                },
+                title: {
+                    text: "Pressure",
+                    style: {
+                        color: "#008FFB"
+                    }
+                },
+                tooltip: {
+                    enabled: false
+                }
+            },
+           
+        ],
         legend: {
-            position: 'top',
-            horizontalAlign: 'right',
-            floating: true,
-            offsetY: -25,
-            offsetX: -5
+            horizontalAlign: "center",
+            offsetX: 40
         },
-        responsive: [{
+            responsive: [{
             breakpoint: 600,
             options: {
                 chart: {
@@ -214,6 +466,9 @@ const WeatherChart = ({latitude, longitude, dataColors }) => {
                 legend: {
                     show: false
                 },
+                yaxis: {
+                    show: false
+                }
             }
         }]
     };
