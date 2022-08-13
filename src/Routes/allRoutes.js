@@ -399,7 +399,7 @@ const authProtectedRoutes = [
   //FinanceManagement
   // { path: "/finance-mngt", component: FinanceManagement },
   //Weather
-  { path: "/weather", component: Weather },
+  { path: "/iss-analytics", component: Weather },
   //Pages
   { path: "/pages-starter", component: Starter },
   { path: "/pages-profile", component: SimplePage },

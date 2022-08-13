@@ -416,10 +416,10 @@ const Navdata = () => {
             isHeader: true,
         },
         {
-            id: "weather",
-            label: "Weather",
+            id: "issAnalytics",
+            label: "ISS Analytics",
             icon: "bx bx-sitemap",
-            link: "/weather",
+            link: "/iss-analytics",
         },
         // {
         //     id: "finance",
