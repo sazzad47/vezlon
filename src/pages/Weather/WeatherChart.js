@@ -4,6 +4,7 @@ import moment from "moment-timezone";
 import WeeklyWeather from './WeeklyWeather';
 import TodaysWeather from './TodaysWeather';
 import TempConverter from './TempConverter';
+import Quantities from './Quantities';
 
 function getChartColorsArray(colors) {
     colors = JSON.parse(colors);
@@ -86,18 +87,121 @@ const WeatherChart = ({latitude, longitude, dataColors }) => {
         return moment.unix(day.dt).tz(timezone).format("MMM Do YY");
     })
     
-    const maxTemps = weeklyWeather?.map((maxTemp) => {
-        return maxTemp.temp.max
-        
-    })
-    const minTemps = weeklyWeather?.map((minTemp) => {
-        return minTemp.temp.min
-        
-    })
-    const windSpeed = weeklyWeather?.map((wind) => {
-        return wind.wind_speed
-        
-    })
+    const [tempUnit, setTempUnit] = useState();
+    const [speedUnit, setSpeedUnit] = useState();
+    const [pressureUnit, setPressureUnit] = useState();
+   
+    const maxTempConverter = (tempUnit) => {
+        switch(tempUnit) {
+            case 'Kelvin':
+                
+                return {data:weeklyWeather?.map((maxTemp) => 
+                    maxTemp.temp.max + 273.15
+                    
+                ), suffix: ' K'};
+            case 'Celsius':
+                return {data:weeklyWeather?.map((maxTemp) =>
+                    maxTemp.temp.max
+                    
+                ), suffix: ' °C'};
+                
+                
+            case 'Fahrenheit':
+                return {data:weeklyWeather?.map((maxTemp) => 
+                    maxTemp.temp.max * (9 / 5) + 32
+                    
+               ), suffix: ' °F'};
+                default:
+                    return {data:weeklyWeather?.map((maxTemp) =>
+                        maxTemp.temp.max
+                        
+                    ), suffix: ' °C'};
+        }
+    }
+   
+            const minTempConverter = (tempUnit) => {
+                switch(tempUnit) {
+                    case 'Kelvin':
+                        
+                        return {data: weeklyWeather?.map((minTemp) => 
+                            minTemp.temp.min + 273.15
+                            
+                        ), suffix:' K'};
+                    case 'Celsius':
+                        return {data:weeklyWeather?.map((minTemp) =>
+                            minTemp.temp.min
+                            
+                        ), suffix: ' °C'};
+                        
+                        
+                    case 'Fahrenheit':
+                        return {data:weeklyWeather?.map((minTemp) => 
+                            minTemp.temp.min * (9 / 5) + 32
+                            
+                    ), suffix: ' °F'};
+                        default:
+                            return {data:weeklyWeather?.map((minTemp) =>
+                                minTemp.temp.min
+                                
+                            ), suffix: ' °C'};
+                }
+            }
+            const speedConverter = (speedUnit) => {
+                switch(speedUnit) {
+                    case 'Miles per hour':
+                        
+                        return {data: weeklyWeather?.map((wind) => 
+                            wind.wind_speed * 2.236936
+                            
+                        ), suffix:' mph'};
+                    case 'Meter per second':
+                        return {data: weeklyWeather?.map((wind) => 
+                            wind.wind_speed 
+                            
+                        ), suffix:' ms⁻¹'};
+                        
+                        
+                    case 'Kelometer per hour':
+                        return {data: weeklyWeather?.map((wind) => 
+                            wind.wind_speed * 3.6
+                            
+                        ), suffix:' kmh⁻¹'};
+                        default:
+                            return {data: weeklyWeather?.map((wind) => 
+                                wind.wind_speed 
+                                
+                            ), suffix:' ms⁻¹'};
+                }
+            }
+            const pressureConverter = (pressureUnit) => {
+                switch(pressureUnit) {
+                    case 'Hectopascal':
+                        
+                        return {data: weeklyWeather?.map((pressure) => 
+                            pressure.pressure
+                            
+                        ), suffix:' hpa'};
+                    case 'Pascal':
+                        return {data: weeklyWeather?.map((pressure) => 
+                            pressure.pressure * 100
+                            
+                        ), suffix:' pa'};
+                        
+                        
+                    case 'Standard atmosphere':
+                        return {data: weeklyWeather?.map((pressure) => 
+                            pressure.pressure * 0.000987
+                            
+                        ), suffix:' atm'};
+                        default:
+                            return {data: weeklyWeather?.map((pressure) => 
+                                pressure.pressure
+                                
+                            ), suffix:' hpa'};
+                }
+            }
+   
+   
     const humidityData = weeklyWeather?.map((humidity) => {
         return humidity.humidity
         
@@ -115,132 +219,24 @@ const WeatherChart = ({latitude, longitude, dataColors }) => {
     
     
    
-    // const maxTemp1 = weeklyWeather[0].temp.max;
-    // const maxTemp2 = weeklyWeather[1].temp.max;
-    // const maxTemp3 = weeklyWeather[2].temp.max;
-    // const maxTemp4 = weeklyWeather[3].temp.max;
-    // const maxTemp5 = weeklyWeather[4].temp.max;
-    // const maxTemp6 = weeklyWeather[5].temp.max;
-    // const maxTemp7 = weeklyWeather[6].temp.max;
-   
-    // const minTemp1 = weeklyWeather[0].temp.min;
-    // const minTemp2 = weeklyWeather[1].temp.min;
-    // const minTemp3 = weeklyWeather[2].temp.min;
-    // const minTemp4 = weeklyWeather[3].temp.min;
-    // const minTemp5 = weeklyWeather[4].temp.min;
-    // const minTemp6 = weeklyWeather[5].temp.min;
-    // const minTemp7 = weeklyWeather[6].temp.min;
-    
-    // let days = []
-    // days.push.apply(days, weeklyWeather)
-    
     
     var WeatherChartColors = getChartColorsArray(dataColors);
-    // var series = [
-    // {
-    //     name: "Max Temp",
-    //     data: maxTemps
-    // },
-    // {
-    //     name: "Min Temp",
-    //     data: minTemps
-    // },
-    // {
-    //     name: "Wind",
-    //     data: windSpeed
-    // },
-    // {
-    //     name: "Cloud Average",
-    //     data: cloudData
-    // },
-    // {
-    //     name: "Humidity",
-    //     data: humidityData
-    // },
-    // ];
-    // var options = {
-    //     chart: {
-    //         height: 380,
-    //         type: 'line',
-    //         zoom: {
-    //             enabled: false
-    //         },
-    //         toolbar: {
-    //             show: false
-    //         }
-    //     },
-    //     colors: WeatherChartColors,
-    //     dataLabels: {
-    //         enabled: false,
-    //     },
-    //     stroke: {
-    //         width: [3, 3],
-    //         curve: 'straight'
-    //     },
-    //     title: {
-    //         text: 'Weather Forecast',
-    //         align: 'left',
-    //         style: {
-    //             fontWeight: 500,
-    //         },
-    //     },
-    //     grid: {
-    //         row: {
-    //             colors: ['transparent', 'transparent'], // takes an array which will be repeated on columns
-    //             opacity: 0.2
-    //         },
-    //         borderColor: '#f1f1f1'
-    //     },
-    //     markers: {
-    //         style: 'inverted',
-    //         size: 6
-    //     },
-    //     xaxis: {
-    //         categories: days,
-    //         title: {
-    //             text: 'Dates'
-    //         }
-    //     },
-    //     yaxis: {
-    //         min: 1,
-    //         max: 100
-    //     },
-    //     legend: {
-    //         position: 'top',
-    //         horizontalAlign: 'right',
-    //         floating: true,
-    //         offsetY: -25,
-    //         offsetX: -5
-    //     },
-    //     responsive: [{
-    //         breakpoint: 600,
-    //         options: {
-    //             chart: {
-    //                 toolbar: {
-    //                     show: false
-    //                 }
-    //             },
-    //             legend: {
-    //                 show: false
-    //             },
-    //         }
-    //     }]
-    // };
+   
     var series = [
         {
             name: "Max Temp",
             type: "line",
-            data: maxTemps
+            data: maxTempConverter(tempUnit).data
         },
         {
             name: "Min Temp",
             type: "line",
-            data: minTemps
+            data: minTempConverter(tempUnit).data
         },
         {
             name: "Wind Speed",
             type: "line",
-            data: windSpeed
+            data: speedConverter(speedUnit).data
         },
         {
             name: "Cloud Average",
@@ -255,7 +251,7 @@ const WeatherChart = ({latitude, longitude, dataColors }) => {
         {
             name: "Pressure",
             type: "line",
-            data: pressureData
+            data: pressureConverter(pressureUnit).data
         },
        
     ]
@@ -301,7 +297,7 @@ const WeatherChart = ({latitude, longitude, dataColors }) => {
                         colors: ["#008FFB"]
                     },
                     formatter: function (value) {
-                        return value.toFixed(2) + " °C";
+                        return value.toFixed(2) + maxTempConverter(tempUnit).suffix;
                       }
                 },
                 title: {
@@ -329,7 +325,7 @@ const WeatherChart = ({latitude, longitude, dataColors }) => {
                         colors: ["#FEB019"]
                     },
                     formatter: function (value) {
-                        return value.toFixed(2) + " °C";
+                        return value.toFixed(2) + minTempConverter(tempUnit).suffix;
                       }
                 },
                 title: {
@@ -356,7 +352,7 @@ const WeatherChart = ({latitude, longitude, dataColors }) => {
                         colors: ["#008FFB"]
                     },
                     formatter: function (value) {
-                        return value.toFixed(2) + " ms⁻¹";
+                        return value.toFixed(2) + speedConverter(speedUnit).suffix;
                       }
                 },
                 title: {
@@ -440,7 +436,7 @@ const WeatherChart = ({latitude, longitude, dataColors }) => {
                         colors: ["#008FFB"]
                     },
                     formatter: function (value) {
-                        return value + "hPa";
+                        return value.toFixed(2) + pressureConverter(pressureUnit).suffix;
                       }
                 },
                 title: {
@@ -505,7 +501,7 @@ const WeatherChart = ({latitude, longitude, dataColors }) => {
             />:'not found'}
             <div className='mt-4'>
 
-             <TempConverter/>
+             <TempConverter tempUnit = {tempUnit} setTempUnit= {setTempUnit} speedUnit={speedUnit} setSpeedUnit={setSpeedUnit} setPressureUnit={setPressureUnit} pressureUnit={pressureUnit} />
             </div>
         </React.Fragment>
     );

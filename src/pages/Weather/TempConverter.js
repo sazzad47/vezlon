@@ -1,91 +1,67 @@
 import React, { useState } from 'react'
 import { Card, CardBody, CardHeader, Col, Form, Input, Label, Row } from 'reactstrap';
-const TempConverter = () => {
-    const [input, setInput] = useState(0);
-    const [output, setOutput] = useState(0);
+import Quantities from './Quantities';
+const TempConverter = ({tempUnit, setTempUnit, speedUnit, setSpeedUnit, pressureUnit, setPressureUnit}) => {
+   
+    const [parameter, setParameter] = useState()
 
-    const [from, setFrom] = useState('');
-    const [to, setTo] = useState('');
 
-    const convertTo = (e) => {
-        setTo(e.target.value)
-        const formValid = !isNaN(+input);
-        if (!formValid) {
-          return;
-        }
-        if (!from || !to) {
-            return;
-        }
-        (from === to)? (
-            to==='Fahrenheit'?
-            setOutput((+input - 32) * (5/9)):
-            setOutput(+input * (9 / 5) + 32) 
-            
-           
-        ) : (
-            setOutput(input)
-            
-        )
-
-      };
-    const convertFrom = (e) => {
-        setFrom(e.target.value)
-        const formValid = !isNaN(+input);
-        if (!formValid) {
-          return;
-        }
-        if (!from || !to) {
-            return;
-        }
-        (from === to)? (
-            to==='Fahrenheit'?
-            setOutput((+input - 32) * (5/9)):
-            setOutput(+input * (9 / 5) + 32) 
-            
-           
-        ) : (
-            setOutput(input)
-            
-        )
-
-      };
-      console.log('from', from)
-
+    const quantities = Quantities.map((quantity, index) => (
+        <option key={index} defaultValue={quantity.quantity}>{quantity.quantity}</option>
+    ))
+    const units = Quantities.find((quantity) => quantity.quantity===parameter)?.units.map((unit, index) => (
+        <option key={index} defaultValue={unit}>{unit}</option>
+    ))
+    
+    const handleChange = (e) => {
+        if (parameter==='Temperature')
+         return setTempUnit(e.target.value);
+        if (parameter==='Speed') 
+         return setSpeedUnit(e.target.value);
+        if (parameter==='Pressure')
+         return setPressureUnit(e.target.value);
+    }
+  
   return (
     <> 
     
     <Card>
-        <CardHeader> Temperature Unit Converter </CardHeader>
+        <CardHeader>Unit Converter </CardHeader>
         <CardBody>
 
       
-        <Form onSubmit={convertTo}>
+        <Form>
             <Row className="row-cols-lg-auto g-3 align-items-center">
-                <Col xs={12} md={4} lg={4}>
-                    <Label className="visually-hidden" htmlFor="inlineFormInputGroupInput">Input</Label>
-                    <div className="input-group">
-                        <Input type="text" onChange={(e) => setInput(parseFloat(e.target.value))} className="form-control" id="inlineFormInputGroupInput" placeholder="Enter temperature" />
-                    </div>
-                </Col>
-                <Col xs={12} md={4} lg={4}>
+               <Col xs={12} md={3} lg={3}>
                     <Label className="visually-hidden" htmlFor="inlineFormSelectPref">Preference</Label>
-                    <select onChange={convertFrom} className="form-select" data-choices data-choices-sorting="true" id="inlineFormSelectPref">
-                        <option >from...</option>
-                        <option  defaultValue="Celsius">Celsius</option>
-                        <option defaultValue="Fahrenheit">Fahrenheit</option>
+                    <select onChange={(e) => setParameter(e.target.value)} className="form-select" data-choices data-choices-sorting="true" id="inlineFormSelectPref">
+                        <option >Choose parameter...</option>
+                       {quantities}
                     </select>
                 </Col>
-                <Col xs={12} md={4} lg={4}>
+                {/* <Col xs={12} md={3} lg={3}>
+                    <Label className="visually-hidden" htmlFor="inlineFormInputGroupInput">Input</Label>
+                    <div className="input-group">
+                        <Input type="text" onChange={(e) => setInput(parseFloat(e.target.value))} className="form-control" id="inlineFormInputGroupInput" placeholder="Enter input" />
+                    </div>
+                </Col> */}
+                <Col xs={12} md={3} lg={3}>
+                    <Label className="visually-hidden" htmlFor="inlineFormSelectPref">Preference</Label>
+                    <select onChange={handleChange} className="form-select" data-choices data-choices-sorting="true" id="inlineFormSelectPref">
+                        <option >Convert to</option>
+                        {units}
+                    </select>
+                </Col>
+                {/* <Col xs={12} md={3} lg={3}>
                     <Label className="visually-hidden" htmlFor="inlineFormSelectPref">Preference</Label>
                     <select onChange={convertTo} className="form-select" data-choices data-choices-sorting="true" id="inlineFormSelectPref">
                         <option >to...</option>
-                        <option  defaultValue="Celsius">Celsius</option>
-                        <option defaultValue="Fahrenheit">Fahrenheit</option>
+                        {units}
                     </select>
-                </Col>
-                <Col xs={12} md={12} lg={12} style={{height:'5rem'}} className='border-top d-flex align-items-center justify-content-center'>
+                </Col> */}
+                {/* <Col xs={12} md={12} lg={12} style={{height:'5rem'}} className='border-top d-flex align-items-center justify-content-center'>
                     
-                    <Col xs={12} md={4} lg={4} className='bg-light d-flex align-items-center justify-content-center mx-3'>
+                    <Col xs={12} md={3} lg={3} className='bg-light d-flex align-items-center justify-content-center mx-3'>
                     {to==='Celsius'? 
                   <h5 className='my-2'>
                     {output.toFixed(2)} °C
@@ -102,7 +78,7 @@ const TempConverter = () => {
                 
                      
                     
-                </Col>
+                </Col> */}
             </Row>
         </Form>
         </CardBody>
