@@ -3,6 +3,7 @@ import ReactApexChart from "react-apexcharts";
 import moment from "moment-timezone";
 import WeeklyWeather from './WeeklyWeather';
 import TodaysWeather from './TodaysWeather';
+import TempConverter from './TempConverter';
 
 function getChartColorsArray(colors) {
     colors = JSON.parse(colors);
@@ -494,6 +495,7 @@ const WeatherChart = ({latitude, longitude, dataColors }) => {
             {/* <button onClick={getWeatherData}>getData</button> */}
             {/* <WeeklyWeather weeklyWeather={weeklyWeather} timezone= {timezone} /> */}
             {/* <TodaysWeather weather={weatherData.current} timezone={timezone} /> */}
+           
             {weatherData? <ReactApexChart
                 options={options}
                 series={series}
@@ -501,6 +503,10 @@ const WeatherChart = ({latitude, longitude, dataColors }) => {
                 height="380"
                 className="apex-charts"
             />:'not found'}
+            <div className='mt-4'>
+
+             <TempConverter/>
+            </div>
         </React.Fragment>
     );
 };
