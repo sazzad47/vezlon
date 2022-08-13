@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import ReactApexChart from "react-apexcharts";
+import AltitudeConverter from './AltitudeConverter';
 
 function getChartColorsArray(colors) {
   colors = JSON.parse(colors);
@@ -129,12 +130,16 @@ const ISSAltitude = ({dataColors, setLatitude, setLongitude}) => {
   
    useEffect(() => {
      const prepareArray = () => {
+      const valid = !isNaN(altitude);
+      if (!valid) {
+        return;
+      }
       setArrayAlt(oldArray => [...oldArray, parseFloat(altitude)]);
    };
     
      prepareArray()
     const prepareChart = () => {
-     
+      
       if (arrayAlt.length > 4) 
         arrayAlt.shift();
   
@@ -155,14 +160,59 @@ const ISSAltitude = ({dataColors, setLatitude, setLongitude}) => {
    }, [altitude])  
    
    
-   
+   const [altitudeUnit, setAltitudeUnit] = useState();
   
-  //  console.log('xVal', xValues)
+   const altitudeConverter = (altitudeUnit) => {
+    switch(altitudeUnit) {
+        case 'Mile':
+            
+            return {
+                altitude:arrayAlt?.map((altidute) => 
+                altidute * 0.621371,
+                
+            ),
+                 
+                suffix:' mi'
+              };
+        case 'Meter':
+            return {
+              altitude: 
+              arrayAlt?.map((altidute) => 
+                altidute * 1000,
+                
+            ),
+            
+             
+                
+               suffix:' m'};
+            
+            
+        case 'Kelometer':
+            return {
+              altitude: arrayAlt?.map((altidute) => 
+              altidute 
+              
+          ),
+           
+                
+              suffix:' km'};
+            default:
+                return {
+                  altitude: arrayAlt?.map((altidute) => 
+                  altidute 
+                  
+              ),
+                 
+                    
+                  suffix:' km'};
+    }
+}
+  
 
   var linechartBasicColors = getChartColorsArray(dataColors);
   const series = [{
       name: "Altitude",
-      data: arrayAlt
+      data: altitudeConverter(altitudeUnit).altitude
   }];
   var options = {
       chart: {
@@ -195,6 +245,16 @@ const ISSAltitude = ({dataColors, setLatitude, setLongitude}) => {
 
       xaxis: {
           categories: ['5 seconds ago', '4 seconds ago', '3 seconds ago', '2 seconds ago', '1 second ago'],
+      },
+      yaxis: {
+        labels: {
+          style: {
+              colors: ["#008FFB"]
+          },
+          formatter: function (value) {
+              return value.toFixed(2) + altitudeConverter(altitudeUnit).suffix;
+            }
+      },
       }
   };
  
@@ -207,7 +267,11 @@ const ISSAltitude = ({dataColors, setLatitude, setLongitude}) => {
                 type="line"
                 height="350"
                 className="apex-charts"
-            />
+            /> 
+            <div className='mt-5'>
+
+            <AltitudeConverter setAltitudeUnit={setAltitudeUnit} />
+            </div>
         </React.Fragment>
     );
 };

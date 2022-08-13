@@ -21,4 +21,19 @@ const Quantities = [
        ]
      },
 ]
+ export const issParameters = [
+   { quantity: "Altitude",
+     units: [
+        "Mile",
+        "Meter", 
+        "Kelometer"
+     ]},
+   { quantity: "Velocity",
+     units: [
+        "Miles per hour",
+        "Meter per second", 
+        "Kelometer per hour"
+     ]},
+ ]
+
 export default Quantities

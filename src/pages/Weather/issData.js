@@ -2,8 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import ReactApexChart from "react-apexcharts";
 // @ts-ignore
-import { Card, CardBody, CardHeader, Col } from 'reactstrap';
+import { Card, CardBody, CardHeader, Col, Table } from 'reactstrap';
 import { dataPoints } from './data';
+import PreviewCardHeader from '../../Components/Common/PreviewCardHeader';
+import { moment } from 'moment-timezone';
+import TempConverter from './TempConverter';
+import SpeedConverter from './SpeedConverter';
 
 function getChartColorsArray(colors) {
   colors = JSON.parse(colors);
@@ -106,10 +110,7 @@ const ISSData = ({ setLatitude, setLongitude, dataColors }) => {
           altitude,
           // @ts-ignore
           // @ts-ignore
-          solar_lat,
-          // @ts-ignore
-          solar_lon,
-          // @ts-ignore
+        
         ]);
         setLatitude(data.latitude);
         setLongitude(data.longitude);
@@ -130,125 +131,129 @@ const ISSData = ({ setLatitude, setLongitude, dataColors }) => {
   };
  
   React.useEffect(() => {}, [data]);
-  const seriesData = data.slice(3,9)
-  
-  
-  var linechartBasicColors = getChartColorsArray(dataColors);
-  const series = [{
-      
-      data: seriesData
-      // data: [lat, long, speed, altitude, visibility, solarLat, solarLong]
-  }];
-  var options = {
-      chart: {
-          height: 300,
-          type: 'line',
-          zoom: {
-              enabled: false
-          },
-          toolbar: {
-              show: false
-          }
-      },
-      markers: {
-          size: 4,
-      },
-      dataLabels: {
-          enabled: false
-      },
-      stroke: {
-          curve: 'straight'
-      },
-      colors: linechartBasicColors,
-      title: {
-          text: 'ISS Data',
-          align: 'left',
-          style: {
-              fontWeight: 500,
-          },
-      },
 
-      xaxis: {
-          categories: ['Latitude', 'Longitude', 'Speed', 'Altitude', 'Solar Latitude', 'Solar Longitude'],
-      },
-      yaxis: {
-        min: -200,
-      }
-  };
+   
+  const [velocityUnit, setVelocityUnit] = useState();
+  const [altitudeUnit, setAltitudeUnit] = useState();
+  const timestamp = data[1] * 1000;
+  const localTime = new Date(timestamp).toLocaleTimeString()
 
+  const altitudeConverter = (altitudeUnit) => {
+    switch(altitudeUnit) {
+        case 'Mile':
+            
+            return {
+                altitude: data[6] * 0.621371,
+               
+                suffix:' mi'
+              };
+        case 'Meter':
+            return {
+              altitude: data[6] * 1000,
+             
+                
+               suffix:' m'};
+            
+            
+        case 'Kelometer':
+            return {
+              altitude: data[6],
+           
+                
+              suffix:' km'};
+            default:
+                return {
+                  altitude: data[6],
+                 
+                    
+                  suffix:' km'};
+    }
+}
+  
+  const velocityConverter = (velocityUnit) => {
+    switch(velocityUnit) {
+        case 'Miles per hour':
+            
+            return {
+              
+                velocity: data[5] / 1.609344,
+                suffix:' mph'
+              };
+        case 'Meter per second':
+            return {
+            
+              velocity: data[5] * 0.277778,
+                
+               suffix:' ms⁻¹'};
+            
+            
+        case 'Kelometer per hour':
+            return {
+            
+              velocity: data[5],
+                
+              suffix:' kmh⁻¹'};
+            default:
+                return {
+                
+                  velocity: data[5],
+                    
+                  suffix:' kmh⁻¹'};
+    }
+}
+  
   return (
     <React.Fragment>
-      {/* <div className='d-flex justify-content-between'>
-        <span>
-          <span>Date:</span>
-          <span className='mx-1'>{data[0]}</span>
-        </span>
-        <span>
-          <span>Timestamp:</span>
-          <span className='mx-1'>{data[1]}</span>
-        </span>
-      </div> */}
-        
-            <ReactApexChart
-                options={options}
-                series={series}
-                type="line"
-                height="300"
-                className="apex-charts"
-            />
-      {/* <Card>
-        <CardHeader className="align-items-center d-flex">
-          <h4 className="card-title mb-0 flex-grow-1">ISS LIVE DATA</h4>
-        </CardHeader>
-
-        <CardBody style={{ padding: '0' }}>
-          <div
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'center',
-              alignItems: 'stretch',
-            }}
-          >
-            {(dataPoints || []).map((item, index) => (
-              <div
-                key={index}
-                style={{
-                  display: 'flex',
-                  flexDirection: 'row',
-                  padding: '1rem 1rem',
-                  borderTop: '1px solid #32383e',
-                  borderBottom: '1px solid #32383e',
-                  alignItems: 'center',
-                }}
-              >
-                <div
-                  style={{ width: '50%', fontSize: '14px', fontWeight: '600' }}
-                >
-                  {item.label}
-                </div>
-                <div
-                  style={{
-                    width: '50%',
-                    fontSize: '13px',
-                    fontWeight: '600',
-                  }}
-                >
-                  <div
-                    style={{
-                      overflow: 'hidden',
-                      textOverflow: 'ellipsis',
-                      whiteSpace: 'nowrap',
-                    }}
-                  >
-                    {data[index]}
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </CardBody>
-      </Card> */}
+     
+            <Col xl={12} >
+                                <Card>
+                                  <CardHeader className='d-flex align-items-center justify-content-between'>
+                                    <div> 
+                                    ISS Data
+                                      </div>  
+                                      <div>
+                                      {localTime}
+                                        </div> 
+                                    </CardHeader>
+                                
+                                    <CardBody>
+                                        
+                                        <div className="ISS Data">
+                                            <div className="table-responsive">
+                                                <Table className="table-striped table-nowrap align-middle mb-0">
+                                            
+                                                    <tbody>
+                                                       
+                                                        <tr>
+                                                            <td className="fw-medium">Latitude</td>
+                                                            <td>{data[3]} °</td>
+                                      
+                                                        </tr>
+                                                        <tr>
+                                                            <td className="fw-medium">Longitude</td>
+                                                            <td>{data[4]} °</td>
+                                                            
+                                                        </tr>
+                                                        <tr>
+                                                            <td className="fw-medium">Velocity</td>
+                                                            <td>{velocityConverter(velocityUnit).velocity} {velocityConverter(velocityUnit).suffix}</td>
+                                                           
+                                                        </tr>
+                                                        <tr>
+                                                            <td className="fw-medium">Altitude</td>
+                                                            <td>{altitudeConverter(altitudeUnit).altitude} {altitudeConverter(altitudeUnit).suffix}</td>
+                                                           
+                                                        </tr>
+                                                    </tbody>
+                                                </Table>
+                                            </div>
+                                        </div>
+                                       
+                                    </CardBody>
+                                </Card>
+                                <SpeedConverter velocityUnit={velocityUnit} setVelocityUnit={setVelocityUnit} altitudeUnit={altitudeUnit} setAltitudeUnit={setAltitudeUnit} />
+                            </Col>                
+     
     </React.Fragment>
   );
 };

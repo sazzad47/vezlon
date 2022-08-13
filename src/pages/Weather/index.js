@@ -32,50 +32,7 @@ const Weather = () => {
                     </div>
                 </Col>
             </Row>
-        {/* <div style={{ display: 'flex', flexDirection: 'row', gap: '10px' }}>
-          <div
-            style={{
-              flex: '3',
-              display: 'flex',
-              flexDirection: 'column',
-            }}
-          >
-            <div style={{ flex: '3' }}>
-              <Globe latitude={latitude} longitude={longitude} />
-              <div style={{ width: '100%' }}>
-                <MapTabContainer />
-              </div>
-            </div>
-          </div>
-          <div
-            style={{
-              flex: 1,
-              display: 'flex',
-              flexDirection: 'column',
-              gap: '5px',
-            }}
-          >
-            <div style={{ height: '33%' }}>
-              <WorldMap latitude={latitude} longitude={longitude} />
-            </div>
-
-            <div style={{ height: '33%', width: '100%' }}>
-              <ISSStream width="100%" height="100%" />
-            </div>
-
-            <div
-              style={{
-                flex: 1,
-                overflow: 'hidden',
-                overflowY: 'scroll',
-              }}
-            >
-              <ISSData setLatitude={setLatitude} setLongitude={setLongitude} />
-            </div>
-          </div>
-         
-        </div> */}
-       
+        
         
         <Row>
           <Col xl={8} md={12}>

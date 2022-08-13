@@ -5,6 +5,7 @@ import WeeklyWeather from './WeeklyWeather';
 import TodaysWeather from './TodaysWeather';
 import TempConverter from './TempConverter';
 import Quantities from './Quantities';
+import ISSData from './issData';
 
 function getChartColorsArray(colors) {
     colors = JSON.parse(colors);
