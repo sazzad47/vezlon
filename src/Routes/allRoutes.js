@@ -68,7 +68,7 @@ import EcommerceSellers from "../pages/Ecommerce/EcommerceSellers/index";
 import EcommerceSellerDetail from "../pages/Ecommerce/EcommerceSellers/EcommerceSellerDetail";
 
 //MarketplaceSoon 
-// import MarketplaceSoon from "../pages/NFTMarketplace/Market";
+import MarketplaceSoon from "../pages/NFTMarketplace/Market";
 //Weather 
 import Weather from "../pages/Weather/index";
 
@@ -161,7 +161,7 @@ import CoverSignUp from "../pages/AuthenticationInner/Register/CoverSignUp";
 import BasicPasswReset from '../pages/AuthenticationInner/PasswordReset/BasicPasswReset';
 
 //financeManagement
-// import FinanceManagement from "../pages/FinanceManagement";
+import FinanceManagement from "../pages/FinanceManagement";
 
 //pages
 import Starter from '../pages/Pages/Starter/Starter';
@@ -291,7 +291,7 @@ const authProtectedRoutes = [
   
    //Marketplace Soon
 
-  // {path: "/marketplace", component: MarketplaceSoon},
+  {path: "/marketplace", component: MarketplaceSoon},
 
   // NFT Marketplace
   { path: "/apps-nft-marketplace", component: Marketplace },
@@ -397,7 +397,7 @@ const authProtectedRoutes = [
   { path: "/maps-leaflet", component: LeafletMaps },
 
   //FinanceManagement
-  // { path: "/finance-mngt", component: FinanceManagement },
+  { path: "/finance-mngt", component: FinanceManagement },
   //Weather
   { path: "/iss-analytics", component: Weather },
   //Pages

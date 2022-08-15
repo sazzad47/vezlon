@@ -188,14 +188,14 @@ const Navdata = () => {
                 
             ],
         },
-        // {
-        //     id: "marketplace",
-        //     label: "Marketplace",
-        //     icon: "bx bx-store",
-        //     link: "/marketplace",
-        //     badgeName:"Soon",
-        //     badgeColor:"danger"
-        // },
+        {
+            id: "marketplace",
+            label: "Marketplace",
+            icon: "bx bx-store",
+            link: "/marketplace",
+            badgeName:"Soon",
+            badgeColor:"danger"
+        },
         {
             id: "apps",
             label: "Apps",
@@ -421,12 +421,12 @@ const Navdata = () => {
             icon: "bx bx-sitemap",
             link: "/iss-analytics",
         },
-        // {
-        //     id: "finance",
-        //     label: "Finance Management",
-        //     icon: "bx bx-notepad",
-        //     link: "/finance-mngt",
-        // },
+        {
+            id: "finance",
+            label: "Finance Management",
+            icon: "bx bx-notepad",
+            link: "/finance-mngt",
+        },
         {
             id: "authentication",
             label: "Authentication",

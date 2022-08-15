@@ -6,13 +6,22 @@ import ISSData from './issData';
 import WorldMap from './WorldMap';
 import Globe from './Globe';
 import ISSStream from './ISSStream';
-import { Col, Row } from 'reactstrap';
+import { Col, Input, Label, Row } from 'reactstrap';
 import BreadCrumb from '../../Components/Common/BreadCrumb';
+import RightSideISSData from './RightSideISSData';
 
 
 const Weather = () => {
+ 
   const [latitude, setLatitude] = React.useState();
   const [longitude, setLongitude] = React.useState();
+  const [altitude, setAltitude] = React.useState();
+
+  const [pause, setPause] = useState(false)
+
+
+  const handlePause = () => setPause(!pause);
+  console.log('pause', pause)
   
   return (
     <>
@@ -40,12 +49,25 @@ const Weather = () => {
              
           <div className='mb-3' style={{height:'35rem',width:'100%', position:'relative'}}>
 
-          <Globe latitude={latitude} longitude={longitude} /> 
+          <Globe latitude={latitude} longitude={longitude} altitude={altitude} /> 
           </div>
+          
            
            
           </Col>
           <Col xl={4} md={12} style={{maxHeight:'35rem'}}>
+          <div style={{height: '3rem'}} className="d-flex align-items-center justify-content-end form-check form-switch form-switch-right form-switch-md">
+            {/* <div>
+
+                        <Label className="form-label text-muted">Center ISS</Label>
+                        <Input className="form-check-input code-switcher" type="checkbox" />
+            </div> */}
+            <div>
+
+                        <Label className="form-label text-muted">Pause Updates</Label>
+                        <Input onChange={(e) => setPause(e.target.checked)} className="form-check-input code-switcher" type="checkbox" />
+            </div>
+           </div>
           <div className='mt-3 mt-md-0' style={{height:'25%', }}>
             <WorldMap latitude={latitude} longitude={longitude} />
           </div>
@@ -53,7 +75,7 @@ const Weather = () => {
              <ISSStream width='100%' height='100%' />
           </div>
           <div  className='mb-3 mt-3' style={{ height: '50%', overflow: 'hidden'}}>
-             <ISSData setLatitude={setLatitude} setLongitude={setLongitude} dataColors='["--vz-primary", "--vz-success"]' />
+             <RightSideISSData pause = {pause} setLatitude={setLatitude} setLongitude={setLongitude} setAltitude ={setAltitude} dataColors='["--vz-primary", "--vz-success"]' />
           </div>
           </Col>
         </Row>
@@ -61,7 +83,7 @@ const Weather = () => {
           <Col className='mt-3'>
           
 
-          <MapTabContainer setLatitude={setLatitude} setLongitude={setLongitude} latitude={latitude} dataColors='["--vz-primary", "--vz-success"]' longitude={longitude}/>
+          <MapTabContainer  pause = {pause} setLatitude={setLatitude} setLongitude={setLongitude} altitude={altitude} latitude={latitude} dataColors='["--vz-primary", "--vz-success"]' longitude={longitude}/>
           
           </Col>
         </Row>

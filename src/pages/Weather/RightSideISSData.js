@@ -8,8 +8,6 @@ import PreviewCardHeader from '../../Components/Common/PreviewCardHeader';
 import { moment } from 'moment-timezone';
 import TempConverter from './TempConverter';
 import SpeedConverter from './SpeedConverter';
-import RightSideISSData from './RightSideISSData';
-import ISSTable from './ISSTable';
 
 function getChartColorsArray(colors) {
   colors = JSON.parse(colors);
@@ -35,12 +33,13 @@ function getChartColorsArray(colors) {
 }
 
 
-const ISSData = ({setXAxis, xAxis,  pause, setLatitude, setLongitude, dataColors }) => {
+const RightSideISSData = ({pause, setLatitude, setLongitude, dataColors, setAltitude }) => {
   const [data, setData] = useState([]);
   // @ts-ignore
   const [loading, setLoading] = useState(false);
   let lat;
   let long;
+ 
 
   // to call 1 time at start so the data is loaded
   useEffect(() => {
@@ -50,17 +49,26 @@ const ISSData = ({setXAxis, xAxis,  pause, setLatitude, setLongitude, dataColors
 
   // to call fetch data every 10 seconds
   useEffect(() => {
-    const myInterval = setInterval(fetchData, 10000);
-     
 
-    return () => {
+    //  const myInterval = setInterval(fetchData, 10000);
+
+    
       // should clear the interval when the component unmounts
-      xAxis.unshift(xAxis.length)
+      // if(!pause) {
+
+      //   return clearInterval(myInterval)
+      // } else {
+      //   return;
+      // }
      
-      // xAxis.push([...xAxis, xAxis.length + 5])
+      const myInterval = setInterval(fetchData, 10000);
+
+      return () => {
+      // should clear the interval when the component unmounts
       
       clearInterval(myInterval);
     };
+    
   });
 
   const fetchData = () => {
@@ -73,6 +81,7 @@ const ISSData = ({setXAxis, xAxis,  pause, setLatitude, setLongitude, dataColors
       .then((data) => {
         lat = data.latitude.toFixed(2);
         long = data.longitude.toFixed(2);
+        console.log('data2', data)
         // Converting Unix epoch time to human-readable date and time
         const unixTimestamp = data.timestamp;
         const milliseconds = unixTimestamp * 1000;
@@ -120,13 +129,11 @@ const ISSData = ({setXAxis, xAxis,  pause, setLatitude, setLongitude, dataColors
           altitude,
           // @ts-ignore
           // @ts-ignore
-          solar_lat,
-          // @ts-ignore
-          solar_lon,
-          // @ts-ignore
+        
         ]);
         setLatitude(data.latitude);
         setLongitude(data.longitude);
+        setAltitude(data.altitude)
         setLoading(false);
         // calculateRadius(altitude);
         // calculateRadius20degrees(altitude);
@@ -214,7 +221,7 @@ const ISSData = ({setXAxis, xAxis,  pause, setLatitude, setLongitude, dataColors
                   suffix:' kmh⁻¹'};
     }
 }
-  console.log('solar data', data)
+  
   return (
     <React.Fragment>
      
@@ -238,16 +245,6 @@ const ISSData = ({setXAxis, xAxis,  pause, setLatitude, setLongitude, dataColors
                                                     <tbody>
                                                        
                                                         <tr>
-                                                            <td className="fw-medium">Current Unix Time</td>
-                                                            <td>{data[1]}</td>
-                                      
-                                                        </tr>
-                                                        <tr>
-                                                            <td className="fw-medium">Current Local Time</td>
-                                                            <td>{data[0]}</td>
-                                      
-                                                        </tr>
-                                                        <tr>
                                                             <td className="fw-medium">Latitude</td>
                                                             <td>{data[3]} °</td>
                                       
@@ -263,24 +260,9 @@ const ISSData = ({setXAxis, xAxis,  pause, setLatitude, setLongitude, dataColors
                                                            
                                                         </tr>
                                                         <tr>
-                                                            <td className="fw-medium">Visibility</td>
-                                                            <td>{data[2]}</td>
-                                                            
-                                                        </tr>
-                                                        <tr>
                                                             <td className="fw-medium">Altitude</td>
                                                             <td>{altitudeConverter(altitudeUnit).altitude} {altitudeConverter(altitudeUnit).suffix}</td>
                                                            
-                                                        </tr>
-                                                        <tr>
-                                                            <td className="fw-medium">Solar latitude</td>
-                                                            <td>{data[7]} °</td>
-                                                            
-                                                        </tr>
-                                                        <tr>
-                                                            <td className="fw-medium">Solar Longitude</td>
-                                                            <td>{data[8]} °</td>
-                                                            
                                                         </tr>
                                                     </tbody>
                                                 </Table>
@@ -289,12 +271,11 @@ const ISSData = ({setXAxis, xAxis,  pause, setLatitude, setLongitude, dataColors
                                        
                                     </CardBody>
                                 </Card>
-                                <ISSTable dataColors='["--vz-primary", "--vz-info", "--vz-warning", "--vz-success"]' data={data} velocityUnit={velocityUnit} setVelocityUnit={setVelocityUnit} altitudeUnit={altitudeUnit} setAltitudeUnit={setAltitudeUnit}/>
-                                <SpeedConverter velocityUnit={velocityUnit} setVelocityUnit={setVelocityUnit} altitudeUnit={altitudeUnit} setAltitudeUnit={setAltitudeUnit} />
+                                {/* <SpeedConverter velocityUnit={velocityUnit} setVelocityUnit={setVelocityUnit} altitudeUnit={altitudeUnit} setAltitudeUnit={setAltitudeUnit} /> */}
                             </Col>                
      
     </React.Fragment>
   );
 };
 
-export default ISSData;
+export default RightSideISSData;

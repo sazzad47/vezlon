@@ -64,7 +64,7 @@ const WeatherChart = ({latitude, longitude, dataColors }) => {
         
          
      }, [])
-     console.log('data', weatherData)
+    
 
     // const getHourlyWeather = (hourlyData, timezone) => {
     //     const endOfDay = moment().tz(timezone).endOf("day").valueOf();
@@ -162,7 +162,7 @@ const WeatherChart = ({latitude, longitude, dataColors }) => {
                         ), suffix:' ms⁻¹'};
                         
                         
-                    case 'Kelometer per hour':
+                    case 'Kilometer per hour':
                         return {data: weeklyWeather?.map((wind) => 
                             wind.wind_speed * 3.6
                             
@@ -221,7 +221,7 @@ const WeatherChart = ({latitude, longitude, dataColors }) => {
     
    
     
-    var WeatherChartColors = getChartColorsArray(dataColors);
+    const linechartcustomerColors = getChartColorsArray(dataColors)
    
     var series = [
         {
@@ -260,19 +260,27 @@ const WeatherChart = ({latitude, longitude, dataColors }) => {
     var options = {
         
         chart: {
-            height: 350,
-            type: "line",
-            stacked: false,
-            toolbar: {
-                show: false
-            }
-        },
-        dataLabels: {
-            enabled: false
-        },
-        stroke: {
-            width: 2
-        },
+      height: 370,
+      type: "line",
+      toolbar: {
+        show: false,
+      },
+    },
+    stroke: {
+      curve: "straight",
+      dashArray: [0, 0, 8],
+      width: [2, 0, 2.2],
+    },
+    fill: {
+      opacity: [0.1, 0.9, 1],
+    },
+    markers: {
+      size: [0, 0, 0],
+      strokeWidth: 2,
+      hover: {
+        size: 4,
+      },
+    },
         title: {
         text: 'Weather Forecast',
         align: 'left',
@@ -282,180 +290,109 @@ const WeatherChart = ({latitude, longitude, dataColors }) => {
         },
         xaxis: {
             categories: days,
+            axisTicks: {
+                show: false,
+              },
+              axisBorder: {
+                show: false,
+              },
         },
-        yaxis: [
-            {
-                seriesName: "Max Temp",
-                axisTicks: {
-                    show: true
-                },
-                axisBorder: {
-                    show: true,
-                    color: "#008FFB"
-                },
-                labels: {
-                    style: {
-                        colors: ["#008FFB"]
-                    },
-                    formatter: function (value) {
-                        return value.toFixed(2) + maxTempConverter(tempUnit).suffix;
-                      }
-                },
-                title: {
-                    text: "Max Temp",
-                    style: {
-                        color: "#008FFB"
-                    }
-                },
-                tooltip: {
-                    enabled: false
-                }
+        grid: {
+            show: true,
+            xaxis: {
+              lines: {
+                show: true,
+              },
             },
-            {
-                seriesName: "Min Temp",
-                
-                axisTicks: {
-                    show: true
-                },
-                axisBorder: {
-                    show: true,
-                    color: "#FEB019"
-                },
-                labels: {
-                    style: {
-                        colors: ["#FEB019"]
-                    },
-                    formatter: function (value) {
-                        return value.toFixed(2) + minTempConverter(tempUnit).suffix;
-                      }
-                },
-                title: {
-                    text: "Min Temp",
-                    style: {
-                        color: "#FEB019"
-                    }
-                },
-                tooltip: {
-                    enabled: false
-                }
+            yaxis: {
+              lines: {
+                show: false,
+              },
+              min: -1000
             },
-            {
-                seriesName: "Wind Speed",
-                axisTicks: {
-                    show: true
-                },
-                axisBorder: {
-                    show: true,
-                    color: "#008FFB"
-                },
-                labels: {
-                    style: {
-                        colors: ["#008FFB"]
-                    },
-                    formatter: function (value) {
-                        return value.toFixed(2) + speedConverter(speedUnit).suffix;
-                      }
-                },
-                title: {
-                    text: "Wind Speed",
-                    style: {
-                        color: "#008FFB"
-                    }
-                },
-                tooltip: {
-                    enabled: false
-                }
+            padding: {
+              top: 0,
+              right: -2,
+              bottom: 15,
+              left: 10,
             },
-            {
-                seriesName: "Cloud Average",
-                opposite: true,
-                axisTicks: {
-                    show: true
-                },
-                axisBorder: {
-                    show: true,
-                    color: "#008FFB"
-                },
-                labels: {
-                    style: {
-                        colors: ["#008FFB"]
-                    },
-                    formatter: function (value) {
-                        return value + "%";
-                      }
-                },
-                title: {
-                    text: "Cloud Average",
-                    style: {
-                        color: "#008FFB"
-                    }
-                },
-                tooltip: {
-                    enabled: false
-                }
-            },
-            {
-                seriesName: "Humidity",
-                opposite: true,
-                axisTicks: {
-                    show: true
-                },
-                axisBorder: {
-                    show: true,
-                    color: "#008FFB"
-                },
-                labels: {
-                    style: {
-                        colors: ["#008FFB"]
-                    },
-                    formatter: function (value) {
-                        return value + "%";
-                      }
-                },
-                title: {
-                    text: "Humidity",
-                    style: {
-                        color: "#008FFB"
-                    }
-                },
-                tooltip: {
-                    enabled: false
-                }
-            },
-            {
-                seriesName: "Pressure",
-                opposite: true,
-                axisTicks: {
-                    show: true
-                },
-                axisBorder: {
-                    show: true,
-                    color: "#008FFB"
-                },
-                labels: {
-                    style: {
-                        colors: ["#008FFB"]
-                    },
-                    formatter: function (value) {
-                        return value.toFixed(2) + pressureConverter(pressureUnit).suffix;
-                      }
-                },
-                title: {
-                    text: "Pressure",
-                    style: {
-                        color: "#008FFB"
-                    }
-                },
-                tooltip: {
-                    enabled: false
-                }
-            },
-           
-        ],
-        legend: {
+          },
+          legend: {
+            show: true,
             horizontalAlign: "center",
-            offsetX: 40
-        },
+            offsetX: 0,
+            offsetY: -5,
+            markers: {
+              width: 9,
+              height: 9,
+              radius: 6,
+            },
+            itemMargin: {
+              horizontal: 10,
+              vertical: 0,
+            },
+          },
+          plotOptions: {
+            bar: {
+              columnWidth: "30%",
+              barHeight: "70%",
+            },
+          },
+          colors: linechartcustomerColors,
+        tooltip: {
+            shared: true,
+            y: [
+              {
+                formatter: function (y) {
+                  if (typeof y !== "undefined") {
+                    return y.toFixed(2) + maxTempConverter(tempUnit).suffix;
+                  }
+                  return y;
+                },
+              },
+              {
+                formatter: function (y) {
+                  if (typeof y !== "undefined") {
+                    return "$" + y.toFixed(2) + minTempConverter(tempUnit).suffix;
+                  }
+                  return y;
+                },
+              },
+              {
+                formatter: function (y) {
+                  if (typeof y !== "undefined") {
+                    return y.toFixed(0) + speedConverter(speedUnit).suffix;
+                  }
+                  return y;
+                },
+              },
+              {
+                formatter: function (y) {
+                  if (typeof y !== "undefined") {
+                    return y.toFixed(0) + " %";
+                  }
+                  return y;
+                },
+              },
+              {
+                formatter: function (y) {
+                  if (typeof y !== "undefined") {
+                    return y.toFixed(0) + " %";
+                  }
+                  return y;
+                },
+              },
+              {
+                formatter: function (y) {
+                  if (typeof y !== "undefined") {
+                    return y.toFixed(0) + pressureConverter(pressureUnit).suffix;
+                  }
+                  return y;
+                },
+              },
+            ],
+          },
+       
             responsive: [{
             breakpoint: 600,
             options: {
@@ -467,9 +404,7 @@ const WeatherChart = ({latitude, longitude, dataColors }) => {
                 legend: {
                     show: false
                 },
-                yaxis: {
-                    show: false
-                }
+               
             }
         }]
     };
@@ -497,7 +432,7 @@ const WeatherChart = ({latitude, longitude, dataColors }) => {
                 options={options}
                 series={series}
                 type="line"
-                height="380"
+                height="370"
                 className="apex-charts"
             />:'not found'}
             <div className='mt-4'>

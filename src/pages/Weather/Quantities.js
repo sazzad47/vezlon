@@ -10,7 +10,7 @@ const Quantities = [
      units: [
         "Miles per hour",
         "Meter per second", 
-        "Kelometer per hour"
+        "Kilometer per hour"
        ]
      },
     {quantity: "Pressure",
@@ -26,13 +26,13 @@ const Quantities = [
      units: [
         "Mile",
         "Meter", 
-        "Kelometer"
+        "Kilometer"
      ]},
    { quantity: "Velocity",
      units: [
         "Miles per hour",
         "Meter per second", 
-        "Kelometer per hour"
+        "Kilometer per hour"
      ]},
  ]
 

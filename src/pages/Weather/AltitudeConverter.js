@@ -34,7 +34,7 @@ const AltitudeConverter = ({setAltitudeUnit}) => {
                         <option >Convert to...</option>
                          <option defaultValue='Mile'>Mile</option>
                          <option defaultValue='Meter'>Meter</option>
-                         <option defaultValue='Kelometer'>Kelometer</option>
+                         <option defaultValue='Kilometer'>Kilometer</option>
                     </select>
                 </Col>
                 {/* <Col xs={12} md={3} lg={3}>
