@@ -42,7 +42,22 @@ const Weather = () => {
                 </Col>
             </Row>
         
-        
+        <Row>
+          <Col xl={12} md={12}>
+        <div style={{height: '3rem'}} className="d-flex align-items-center justify-content-end form-check form-switch form-switch-right form-switch-md">
+            {/* <div>
+
+                        <Label className="form-label text-muted">Center ISS</Label>
+                        <Input className="form-check-input code-switcher" type="checkbox" />
+            </div> */}
+            <div>
+
+                        <Label className="form-label text-muted">Pause Updates</Label>
+                        <Input onChange={(e) => setPause(e.target.checked)} className="form-check-input code-switcher" type="checkbox" />
+            </div>
+           </div>
+          </Col>
+        </Row>
         <Row>
           <Col xl={8} md={12}>
           
@@ -55,26 +70,15 @@ const Weather = () => {
            
            
           </Col>
-          <Col xl={4} md={12} style={{maxHeight:'35rem'}}>
-          <div style={{height: '3rem'}} className="d-flex align-items-center justify-content-end form-check form-switch form-switch-right form-switch-md">
-            {/* <div>
-
-                        <Label className="form-label text-muted">Center ISS</Label>
-                        <Input className="form-check-input code-switcher" type="checkbox" />
-            </div> */}
-            <div>
-
-                        <Label className="form-label text-muted">Pause Updates</Label>
-                        <Input onChange={(e) => setPause(e.target.checked)} className="form-check-input code-switcher" type="checkbox" />
-            </div>
-           </div>
-          <div className='mt-3 mt-md-0' style={{height:'25%', }}>
+          <Col xl={4} md={12} style={{maxHeight:'33.4rem'}}>
+          
+          <div className='mt-3 mt-md-0' style={{height:'30%', }}>
             <WorldMap latitude={latitude} longitude={longitude} />
           </div>
-          <div className='mt-3' style={{height: '25%', minWidth:'100%',}}>
+          <div className='mt-3' style={{height: '30%', minWidth:'100%',}}>
              <ISSStream width='100%' height='100%' />
           </div>
-          <div  className='mb-3 mt-3' style={{ height: '50%', overflow: 'hidden'}}>
+          <div  className='mb-3 mt-3' style={{ height: '40%', overflow: 'hidden'}}>
              <RightSideISSData pause = {pause} setLatitude={setLatitude} setLongitude={setLongitude} setAltitude ={setAltitude} dataColors='["--vz-primary", "--vz-success"]' />
           </div>
           </Col>

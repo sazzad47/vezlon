@@ -259,11 +259,11 @@ const RightSideISSData = ({pause, setLatitude, setLongitude, dataColors, setAlti
                                                             <td>{velocityConverter(velocityUnit).velocity} {velocityConverter(velocityUnit).suffix}</td>
                                                            
                                                         </tr>
-                                                        <tr>
+                                                        {/* <tr>
                                                             <td className="fw-medium">Altitude</td>
                                                             <td>{altitudeConverter(altitudeUnit).altitude} {altitudeConverter(altitudeUnit).suffix}</td>
                                                            
-                                                        </tr>
+                                                        </tr> */}
                                                     </tbody>
                                                 </Table>
                                             </div>
