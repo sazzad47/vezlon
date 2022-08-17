@@ -75,6 +75,7 @@
     "react-jvectormap": "^0.0.16",
     "react-leaflet": "^3.2.5",
     "react-leaflet-enhanced-marker": "^1.0.21",
+    "react-leaflet-fullscreen": "^2.0.2",
     "react-masonry-component": "^6.3.0",
     "react-masonry-css": "^1.0.16",
     "react-meta-tags": "^1.0.1",

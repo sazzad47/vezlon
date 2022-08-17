@@ -18,31 +18,37 @@ const Globe = ({ latitude, longitude, altitude }) => {
   const screen = useRef();
 
   console.log('screen', viewerRef)
-  
-  useEffect ( () => {
 
-    const prepareArr = () => {
-     
-      if (typeof(latitude || longitude) === 'undefined') {
-          return;
-      }
-      
+  const [operatorLat, setOperatorLat] = useState()
+  const [operatorLong, setOperatorLong] = useState()
+  const [operatorCity, setOperatorCity] = useState()
 
-        coordinates.push(latitude, longitude)
+  function showPosition() {
+    fetch("https://ipwhois.app/json/?objects=city,latitude,longitude")
+      .then((response) => response.json())
+      .then((data) => {
+        let currentLat = parseFloat(data.latitude).toFixed(2);
+        let currentLong = parseFloat(data.longitude).toFixed(2);
+        let currentCity = data.city;
+        setOperatorLat(currentLat);
+        setOperatorLong(currentLong);
+        setOperatorCity(currentCity);
+        // Adding position marker - the main map
        
-      
-      
-      
-      
-
-     
-     
- 
-  }
-  prepareArr()
+        // Adding position to the 3D Map
         
-         
-     }, [latitude, longitude])
+        // Showing Local Solar Time
+        
+      })
+      .catch(console.error);
+  }
+  setTimeout(function () {
+    showPosition();
+  }, 500);
+  
+ 
+
+  
      
   
   
@@ -51,7 +57,7 @@ const Globe = ({ latitude, longitude, altitude }) => {
 
    
          
-    if (latitude && longitude) {
+    if (latitude && longitude && operatorLat && operatorLong && operatorCity) {
       setIssLatitude(latitude);
       setIssLongtitude(longitude);
       if (viewerRef) {
@@ -60,6 +66,26 @@ const Globe = ({ latitude, longitude, altitude }) => {
           position: Cesium.Cartesian3.fromDegrees(longitude, latitude, parseFloat(altitude) * 1000),
         
           point: {pixelSize: 6, color: Cesium.Color.GOLD},
+        });
+     
+        viewerRef.entities.add({
+         
+          position: Cesium.Cartesian3.fromDegrees(Number(operatorLat), Number(operatorLong), 100),
+        
+          point: {pixelSize: 6, color: Cesium.Color.GOLD},
+          label: {
+            text:`You are here in ${operatorCity}`,
+            show: true,
+            showBackground: true,
+            font: "15px Open Sans sans-serif",
+            horizontalOrigin: Cesium.HorizontalOrigin.LEFT,
+            verticalOrigin: Cesium.VerticalOrigin.CENTER,
+            pixelOffset: new Cesium.Cartesian2(15, 0),
+            backgroundColor: Cesium.Color.WHITE,
+            fillColor: Cesium.Color.PURPLE,
+            style: Cesium.LabelStyle.FILL,
+           
+          },
         });
         const newEntity = viewerRef.entities.add({
           name: 'ISS',
@@ -78,7 +104,7 @@ const Globe = ({ latitude, longitude, altitude }) => {
             horizontalOrigin: Cesium.HorizontalOrigin.LEFT,
             verticalOrigin: Cesium.VerticalOrigin.CENTER,
             pixelOffset: new Cesium.Cartesian2(15, 0),
-            backgroundColor: Cesium.Color.WHITESMOKE,
+            backgroundColor: Cesium.Color.WHITE,
             fillColor: Cesium.Color.PURPLE,
             style: Cesium.LabelStyle.FILL,
            
