@@ -61,32 +61,32 @@ const Globe = ({ latitude, longitude, altitude }) => {
       setIssLatitude(latitude);
       setIssLongtitude(longitude);
       if (viewerRef) {
-        // viewerRef.entities.add({
+        viewerRef.entities.add({
          
-        //   position: Cesium.Cartesian3.fromDegrees(longitude, latitude, parseFloat(altitude) * 1000),
+          position: Cesium.Cartesian3.fromDegrees(longitude, latitude, parseFloat(altitude) * 1000),
         
-        //   point: {pixelSize: 6, color: Cesium.Color.GOLD},
-        // });
+          point: {pixelSize: 6, color: Cesium.Color.GOLD},
+        });
      
-        // viewerRef.entities.add({
+        viewerRef.entities.add({
          
-        //   position: Cesium.Cartesian3.fromDegrees(Number(operatorLat), Number(operatorLong), 100),
+          position: Cesium.Cartesian3.fromDegrees(Number(operatorLat), Number(operatorLong), 100),
         
-        //   point: {pixelSize: 6, color: Cesium.Color.GOLD},
-        //   label: {
-        //     text:`You are here in ${operatorCity}`,
-        //     show: true,
-        //     showBackground: true,
-        //     font: "15px Open Sans sans-serif",
-        //     horizontalOrigin: Cesium.HorizontalOrigin.LEFT,
-        //     verticalOrigin: Cesium.VerticalOrigin.CENTER,
-        //     pixelOffset: new Cesium.Cartesian2(15, 0),
-        //     backgroundColor: Cesium.Color.WHITE,
-        //     fillColor: Cesium.Color.PURPLE,
-        //     style: Cesium.LabelStyle.FILL,
+          point: {pixelSize: 6, color: Cesium.Color.GOLD},
+          label: {
+            text:`You are here in ${operatorCity}`,
+            show: true,
+            showBackground: true,
+            font: "15px Open Sans sans-serif",
+            horizontalOrigin: Cesium.HorizontalOrigin.LEFT,
+            verticalOrigin: Cesium.VerticalOrigin.CENTER,
+            pixelOffset: new Cesium.Cartesian2(15, 0),
+            backgroundColor: Cesium.Color.WHITE,
+            fillColor: Cesium.Color.PURPLE,
+            style: Cesium.LabelStyle.FILL,
            
-        //   },
-        // });
+          },
+        });
         const newEntity = viewerRef.entities.add({
           name: 'ISS',
           position: Cesium.Cartesian3.fromDegrees(longitude, latitude, 100),
