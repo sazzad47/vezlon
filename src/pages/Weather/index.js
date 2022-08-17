@@ -14,6 +14,7 @@ import RightSideISSData from './RightSideISSData';
 const Weather = () => {
  
   const [latitude, setLatitude] = React.useState();
+  const [latlngs, setLatlngs] = useState([]);
   const [longitude, setLongitude] = React.useState();
   const [altitude, setAltitude] = React.useState();
 
@@ -78,7 +79,7 @@ const Weather = () => {
                                    
                                    
                                         <div id="gmaps-markers" className="wmap" style={{ position: "relative" }}>
-                                        <WorldMap latitude={latitude} longitude={longitude} />
+                                        <WorldMap latlngs ={latlngs} latitude={latitude} longitude={longitude} />
                                             </div>
                                     
                                 </Card>
@@ -107,7 +108,7 @@ const Weather = () => {
           <Col className='mt-5'>
           
 
-          <MapTabContainer  pause = {pause} setLatitude={setLatitude} setLongitude={setLongitude} altitude={altitude} latitude={latitude} dataColors='["--vz-primary", "--vz-success"]' longitude={longitude}/>
+          <MapTabContainer latlngs = {latlngs} setLatlngs = {setLatlngs}  pause = {pause} setLatitude={setLatitude} setLongitude={setLongitude} altitude={altitude} latitude={latitude} dataColors='["--vz-primary", "--vz-success"]' longitude={longitude}/>
           
           </Col>
         </Row>

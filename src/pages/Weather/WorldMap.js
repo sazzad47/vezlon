@@ -1,20 +1,20 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import "react-leaflet-fullscreen/dist/styles.css";
 import Marker from 'react-leaflet-enhanced-marker';
-import { MapContainer, Popup, TileLayer, Tooltip, useMap } from 'react-leaflet';
+import { MapContainer, Polyline, Popup, TileLayer, Tooltip, useMap } from 'react-leaflet';
 import { FullscreenControl } from "react-leaflet-fullscreen";
 import Satellite from '../../assets/images/satellite.png';
 import FullScreenDropdown from '../../Components/Common/FullScreenDropdown';
 
 
-const WorldMap = ({ latitude, longitude }) => {
+const WorldMap = ({latlngs, latitude, longitude }) => {
   const position = [26.4887, 77.981];
   const coord = [latitude, longitude];
   const [operatorLat, setOperatorLat] = useState();
   const [operatorLong, setOperatorLong] = useState();
   const [operatorCity, setOperatorCity] = useState();
   const operatorPosition = [operatorLat, operatorLong];
-
+  
   function showPosition() {
     fetch("https://ipwhois.app/json/?objects=city,latitude,longitude")
       .then((response) => response.json())
@@ -39,9 +39,40 @@ const WorldMap = ({ latitude, longitude }) => {
   }, 500);
   
 
+
+ const options = {
+  "delay": 400,
+  "dashArray": [
+    10,
+    20
+  ],
+  "weight": 5,
+  "color": "#0000FF",
+  "pulseColor": "#FFFFFF",
+  "paused": false,
+  "reverse": false,
+  "hardwareAccelerated": true
+};
+
+const pos = [
+  [36.460353, 126.440674],
+  [34.789594, 135.438084], //to jpn
+  [36.460353, 126.440674],
+  [55.410343, 37.902312], //to rus
+  [36.460353, 126.440674],
+  [40.085148, 116.552407] //to chi
+];
+  const trajectory = [];
+
+  useEffect(() => {
+    trajectory.push(latitude, longitude)
+  },[latitude, longitude])
+  console.log('trajectory', latlngs)
+
+
   return (
     <>
-      {latitude || longitude ? (
+      {latitude && longitude && latlngs ? (
         <>
         <MapContainer
           center={coord}
@@ -68,6 +99,8 @@ const WorldMap = ({ latitude, longitude }) => {
             You are here in {operatorCity} <br/> Latitude: {operatorLat} ° <br/> Longitude: {operatorLong} °
             </Tooltip>
           </Marker>
+         <Polyline positions={latlngs} color="red" />
+          {/* {latlngs ? <AntPath positions={latlngs} options={options} /> : null}   */}
           <FullscreenControl position = 'topright' forceSeparateButton = {true}/>
         </MapContainer>
        

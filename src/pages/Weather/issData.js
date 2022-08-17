@@ -35,7 +35,7 @@ function getChartColorsArray(colors) {
 }
 
 
-const ISSData = ({setXAxis, xAxis,  pause, setLatitude, setLongitude, dataColors }) => {
+const ISSData = ({setXAxis, setLatlngs, xAxis,  pause, setLatitude, setLongitude, dataColors }) => {
   const [data, setData] = useState([]);
   // @ts-ignore
   const [loading, setLoading] = useState(false);
@@ -107,6 +107,7 @@ const ISSData = ({setXAxis, xAxis,  pause, setLatitude, setLongitude, dataColors
         trajectory.push(lat, long);
         // @ts-ignore
         let latlngs = trajectory.map((elem) => parseFloat(elem));
+        setLatlngs((oldArr) => [...oldArr, latlngs]);
         setData([
           // @ts-ignore
           humanDateFormat,

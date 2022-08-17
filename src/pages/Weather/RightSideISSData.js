@@ -204,7 +204,7 @@ const RightSideISSData = ({pause, setLatitude, setLongitude, dataColors, setAlti
             
               velocity: data[5] * 0.277778,
                 
-               suffix:' ms⁻¹'};
+               suffix:' mps'};
             
             
         case 'Kilometer per hour':
@@ -212,13 +212,13 @@ const RightSideISSData = ({pause, setLatitude, setLongitude, dataColors, setAlti
             
               velocity: data[5],
                 
-              suffix:' kmh⁻¹'};
+              suffix:' kph'};
             default:
                 return {
                 
                   velocity: data[5],
                     
-                  suffix:' kmh⁻¹'};
+                  suffix:' kph'};
     }
 }
   
