@@ -94,7 +94,7 @@ const MapTabContainer = ({latlngs, setLatlngs, pause, setLatitude, setLongitude,
 
       <TabContent
         activeTab={customActiveTab}
-        className="border border-top-0 p-2 p-md-4 p-lg-4"
+        className="border border-top-0 p-2 p-md-2 p-lg-4"
         id="nav-tabContent"
         style={{minHeight:'30rem'}}
       >

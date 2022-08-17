@@ -62,7 +62,7 @@ const Weather = () => {
         </Row>
         <Row className='mb-3'>
           
-          <Col xl={8} md={12}>
+          <Col xl={8} md={12} sm={12}>
           
             
           <div style={{minHeight:'36.7rem',width:'100%', position:'relative'}}>
@@ -73,7 +73,7 @@ const Weather = () => {
            
            
           </Col>
-          <Col xl={4} md={12}>
+          <Col xl={4} md={12} sm={12}>
            <div style={{maxHeight:'33rem'}}> 
                                 <Card>
                                    
