@@ -6,7 +6,7 @@ const Quantities = [
         "Fahrenheit"
        ]
      },
-    {quantity: "Speed",
+    {quantity: "Wind Speed",
      units: [
         "Miles per hour",
         "Meter per second", 
@@ -23,6 +23,12 @@ const Quantities = [
 ]
  export const issParameters = [
    { quantity: "Altitude",
+     units: [
+        "Mile",
+        "Meter", 
+        "Kilometer"
+     ]},
+   { quantity: "Radius",
      units: [
         "Mile",
         "Meter", 

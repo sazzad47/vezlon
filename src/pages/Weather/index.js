@@ -6,7 +6,7 @@ import ISSData from './issData';
 import WorldMap from './WorldMap';
 import Globe from './Globe';
 import ISSStream from './ISSStream';
-import { Col, Input, Label, Row } from 'reactstrap';
+import { Card, CardBody, Col, Input, Label, Row } from 'reactstrap';
 import BreadCrumb from '../../Components/Common/BreadCrumb';
 import RightSideISSData from './RightSideISSData';
 
@@ -44,6 +44,7 @@ const Weather = () => {
         
         <Row>
           <Col xl={12} md={12}>
+           
         <div style={{height: '3rem'}} className="d-flex align-items-center justify-content-end form-check form-switch form-switch-right form-switch-md">
             {/* <div>
 
@@ -58,11 +59,12 @@ const Weather = () => {
            </div>
           </Col>
         </Row>
-        <Row>
+        <Row className='mb-3'>
+          
           <Col xl={8} md={12}>
           
-             
-          <div className='mb-3' style={{height:'35rem',width:'100%', position:'relative'}}>
+            
+          <div style={{minHeight:'36.7rem',width:'100%', position:'relative'}}>
 
           <Globe latitude={latitude} longitude={longitude} altitude={altitude} /> 
           </div>
@@ -70,21 +72,39 @@ const Weather = () => {
            
            
           </Col>
-          <Col xl={4} md={12} style={{maxHeight:'33.4rem'}}>
-          
-          <div className='mt-3 mt-md-0' style={{height:'30%', }}>
-            <WorldMap latitude={latitude} longitude={longitude} />
-          </div>
-          <div className='mt-3' style={{height: '30%', minWidth:'100%',}}>
-             <ISSStream width='100%' height='100%' />
-          </div>
-          <div  className='mb-3 mt-3' style={{ height: '40%', overflow: 'hidden'}}>
-             <RightSideISSData pause = {pause} setLatitude={setLatitude} setLongitude={setLongitude} setAltitude ={setAltitude} dataColors='["--vz-primary", "--vz-success"]' />
+          <Col xl={4} md={12}>
+           <div style={{maxHeight:'33rem'}}> 
+                                <Card>
+                                   
+                                   
+                                        <div id="gmaps-markers" className="wmap" style={{ position: "relative" }}>
+                                        <WorldMap latitude={latitude} longitude={longitude} />
+                                            </div>
+                                    
+                                </Card>
+                                <Card>
+                                   
+                                   
+                                        <div id="gmaps-markers" className="wmap" style={{ position: "relative" }}>
+                                        <ISSStream width='100%' height='100%' />
+                                            </div>
+                                    
+                                </Card>
+                                <Card>
+                                   
+                                   
+                                        <div id="gmaps-markers" className="wmap" style={{ position: "relative" }}>
+                                        <RightSideISSData pause = {pause} setLatitude={setLatitude} setLongitude={setLongitude} setAltitude ={setAltitude} dataColors='["--vz-primary", "--vz-success"]' />
+                                            </div>
+                                    
+                                </Card>
+                           
           </div>
           </Col>
+        
         </Row>
         <Row>
-          <Col className='mt-3'>
+          <Col className='mt-5'>
           
 
           <MapTabContainer  pause = {pause} setLatitude={setLatitude} setLongitude={setLongitude} altitude={altitude} latitude={latitude} dataColors='["--vz-primary", "--vz-success"]' longitude={longitude}/>

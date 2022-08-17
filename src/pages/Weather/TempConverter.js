@@ -16,7 +16,7 @@ const TempConverter = ({tempUnit, setTempUnit, speedUnit, setSpeedUnit, pressure
     const handleChange = (e) => {
         if (parameter==='Temperature')
          return setTempUnit(e.target.value);
-        if (parameter==='Speed') 
+        if (parameter==='Wind Speed') 
          return setSpeedUnit(e.target.value);
         if (parameter==='Pressure')
          return setPressureUnit(e.target.value);
@@ -47,8 +47,8 @@ const TempConverter = ({tempUnit, setTempUnit, speedUnit, setSpeedUnit, pressure
                 </Col> */}
                 <Col xs={12} md={3} lg={3}>
                     <Label className="visually-hidden" htmlFor="inlineFormSelectPref">Preference</Label>
-                    <select onChange={handleChange} className="form-select" data-choices data-choices-sorting="true" id="inlineFormSelectPref">
-                        <option >Convert to</option>
+                    <select disabled = {!parameter} onChange={handleChange} className="form-select" data-choices data-choices-sorting="true" id="inlineFormSelectPref">
+                        <option >Convert to...</option>
                         {units}
                     </select>
                 </Col>

@@ -1,5 +1,5 @@
 // @ts-nocheck
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Viewer, Entity } from 'resium';
 import * as Resium from 'resium';
 import * as Cesium from 'cesium';
@@ -14,6 +14,10 @@ const Globe = ({ latitude, longitude, altitude }) => {
   const [iSSEntity, setISSEntity] = useState(null);
   const [coordinates, setCoordinates] = useState([])
   // const [longArr, setLongArr] = useState([])
+
+  const screen = useRef();
+
+  console.log('screen', viewerRef)
   
   useEffect ( () => {
 
@@ -40,7 +44,7 @@ const Globe = ({ latitude, longitude, altitude }) => {
          
      }, [latitude, longitude])
      
-   console.log('coordinate', coordinates)
+  
   
 
   useEffect(() => {
@@ -52,9 +56,9 @@ const Globe = ({ latitude, longitude, altitude }) => {
       setIssLongtitude(longitude);
       if (viewerRef) {
         viewerRef.entities.add({
-          // Setting up the ISS position and altitude
+         
           position: Cesium.Cartesian3.fromDegrees(longitude, latitude, parseFloat(altitude) * 1000),
-          // ISS is rendered as a gold point
+        
           point: {pixelSize: 6, color: Cesium.Color.GOLD},
         });
         const newEntity = viewerRef.entities.add({

@@ -111,19 +111,19 @@ const ISSTable = ({velocityUnit, altitudeUnit, data, dataColors}) => {
                 return {data: velocityArr?.map((velocity) => 
                     velocity * 0.277778
                     
-                ), suffix:' ms⁻¹'};
+                ), suffix:' mps'};
                 
                 
             case 'Kilometer per hour':
                 return {data: velocityArr?.map((velocity) => 
                     velocity 
                     
-                ), suffix:' kmh⁻¹'};
+                ), suffix:' kph'};
                 default:
                     return {data: velocityArr?.map((velocity) => 
                         velocity 
                         
-                    ), suffix:' kmh⁻¹'};
+                    ), suffix:' kph'};
         }
     }
   
@@ -146,7 +146,7 @@ const ISSTable = ({velocityUnit, altitudeUnit, data, dataColors}) => {
                                         <Table className="align-middle mb-0">
                                         <thead>
                                                         <tr>
-                                                            <th scope="row">GMT time</th>
+                                                            <th scope="row">GMT Time</th>
                                                             <th scope="row">Orbital Velocity</th>
                                                             <th scope="row">Altitude</th>
                                                             <th scope="row">Latitude</th>
@@ -160,36 +160,36 @@ const ISSTable = ({velocityUnit, altitudeUnit, data, dataColors}) => {
                                                 <td>{dateArr[0]}</td>
                                                 <td>{speedConverter(velocityUnit).data[0]} {speedConverter(velocityUnit).suffix}</td>
                                                 <td>{altitudeConverter(altitudeUnit).data[0]} {altitudeConverter(altitudeUnit).suffix}</td>
-                                                <td>{latArr[0]}</td>
-                                                <td>{longArr[0]}</td>
+                                                <td>{latArr[0]} °</td>
+                                                <td>{longArr[0]} °</td>
                                              </tr>
                                              {dateArr.length > 1 && <tr>
                                                 <td>{dateArr[1]}</td>
                                                 <td>{speedConverter(velocityUnit).data[1]} {speedConverter(velocityUnit).suffix}</td>
                                                 <td>{altitudeConverter(altitudeUnit).data[1]} {altitudeConverter(altitudeUnit).suffix}</td>
-                                                <td>{latArr[1]}</td>
-                                                <td>{longArr[1]}</td>
+                                                <td>{latArr[1]} °</td>
+                                                <td>{longArr[1]} °</td>
                                              </tr>}
                                              {dateArr.length > 2 && <tr>
                                                 <td>{dateArr[2]}</td>
                                                 <td>{speedConverter(velocityUnit).data[2]} {speedConverter(velocityUnit).suffix}</td>
                                                 <td>{altitudeConverter(altitudeUnit).data[2]} {altitudeConverter(altitudeUnit).suffix}</td>
-                                                <td>{latArr[2]}</td>
-                                                <td>{longArr[2]}</td>
+                                                <td>{latArr[2]} °</td>
+                                                <td>{longArr[2]} °</td>
                                              </tr>}
                                              {dateArr.length > 3 && <tr>
                                                 <td>{dateArr[3]}</td>
                                                 <td>{speedConverter(velocityUnit).data[3]} {speedConverter(velocityUnit).suffix}</td>
                                                 <td>{altitudeConverter(altitudeUnit).data[3]} {altitudeConverter(altitudeUnit).suffix}</td>
-                                                <td>{latArr[3]}</td>
-                                                <td>{longArr[3]}</td>
+                                                <td>{latArr[3]} °</td>
+                                                <td>{longArr[3]} °</td>
                                              </tr>}
                                              {dateArr.length > 4 && <tr>
                                                 <td>{dateArr[4]}</td>
                                                 <td>{speedConverter(velocityUnit).data[4]} {speedConverter(velocityUnit).suffix}</td>
                                                 <td>{altitudeConverter(altitudeUnit).data[4]} {altitudeConverter(altitudeUnit).suffix}</td>
-                                                <td>{latArr[4]}</td>
-                                                <td>{longArr[4]}</td>
+                                                <td>{latArr[4]} °</td>
+                                                <td>{longArr[4]} °</td>
                                              </tr>}
                                                 
                                             </tbody>

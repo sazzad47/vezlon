@@ -33,6 +33,7 @@ const MapTabContainer = ({ pause, setLatitude, setLongitude, dataColors, latitud
       setcustomActiveTab(tab);
     }
   };
+  console.log('lat, lon', latitude, longitude)
 
   return (
     <>
@@ -93,13 +94,13 @@ const MapTabContainer = ({ pause, setLatitude, setLongitude, dataColors, latitud
 
       <TabContent
         activeTab={customActiveTab}
-        className="border border-top-0 p-4"
+        className="border border-top-0 p-2 p-md-4 p-lg-4"
         id="nav-tabContent"
         style={{minHeight:'30rem'}}
       >
         <TabPane id="nav-weather" tabId="weather" >
          
-        <WeatherChart dataColors='["--vz-success", "--vz-info", "--vz-danger"]' latitude={latitude} longitude={longitude}/>
+        <WeatherChart dataColors='["--vz-success", "--vz-info", "--vz-danger"]' setLatitude={setLatitude} setLongitude={setLongitude} latitude={latitude} longitude={longitude}/>
         </TabPane>
         <TabPane id="nav-cameras" tabId="cameras" style={{minHeight:'30rem', position:'relative'}}>
             
