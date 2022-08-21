@@ -1,27 +1,40 @@
 // @ts-nocheck
-import React, { useEffect, useRef, useState } from 'react';
-import { Viewer, Entity } from 'resium';
-import * as Resium from 'resium';
-import * as Cesium from 'cesium';
-
+import React, { useEffect, useRef, useState } from "react";
+import { Viewer, Entity } from "resium";
+import * as Resium from "resium";
+import * as Cesium from "cesium";
 
 const Globe = ({ latitude, longitude, altitude }) => {
   const [loading, setLoading] = useState(false);
-  const [position, setPosition] = useState()
+  const [position, setPosition] = useState();
   const [issLatitude, setIssLatitude] = useState(0);
   const [issLongtitude, setIssLongtitude] = useState(0);
   const [viewerRef, setViewerRef] = useState(null);
   const [iSSEntity, setISSEntity] = useState(null);
-  const [coordinates, setCoordinates] = useState([])
+  const [coordinates, setCoordinates] = useState([]);
   // const [longArr, setLongArr] = useState([])
 
-  const screen = useRef();
+  // const canvas = useRef();
+  // const scene = new Cesium.Scene({
+  //   canvas : viewerRef,
+  // });
 
-  console.log('screen', viewerRef)
+  // const fullScreenHandler = () => {
+  //   const canvas = viewerRef;
+  //   if ('webkitRequestFullscreen' in canvas) {
+  //             canvas['webkitRequestFullscreen']() // Safari
+  //         } else {
+  //             canvas.Fullscreen.requestFullscreen();
+  //         }
+  //     }
+  //     Cesium.fullscreenButton.viewModel.command.beforeExecute.addEventListener(fullScreenHandler)
+  //     Cesium.fullscreenButton.viewModel.command.afterExecute.addEventListener(fullScreenHandler)
 
-  const [operatorLat, setOperatorLat] = useState()
-  const [operatorLong, setOperatorLong] = useState()
-  const [operatorCity, setOperatorCity] = useState()
+  // console.log('screen', viewerRef)
+
+  const [operatorLat, setOperatorLat] = useState();
+  const [operatorLong, setOperatorLong] = useState();
+  const [operatorCity, setOperatorCity] = useState();
 
   function showPosition() {
     fetch("https://ipwhois.app/json/?objects=city,latitude,longitude")
@@ -34,47 +47,42 @@ const Globe = ({ latitude, longitude, altitude }) => {
         setOperatorLong(currentLong);
         setOperatorCity(currentCity);
         // Adding position marker - the main map
-       
+
         // Adding position to the 3D Map
-        
+
         // Showing Local Solar Time
-        
       })
       .catch(console.error);
   }
   setTimeout(function () {
     showPosition();
   }, 500);
-  
- 
-
-  
-     
-  
-  
 
   useEffect(() => {
-
-   
-         
     if (latitude && longitude && operatorLat && operatorLong && operatorCity) {
       setIssLatitude(latitude);
       setIssLongtitude(longitude);
       if (viewerRef) {
         viewerRef.entities.add({
-         
-          position: Cesium.Cartesian3.fromDegrees(longitude, latitude, parseFloat(altitude) * 1000),
-        
-          point: {pixelSize: 6, color: Cesium.Color.GOLD},
+          position: Cesium.Cartesian3.fromDegrees(
+            longitude,
+            latitude,
+            parseFloat(altitude) * 1000
+          ),
+
+          point: { pixelSize: 6, color: Cesium.Color.GOLD },
         });
-     
+
         viewerRef.entities.add({
-         
-          position: Cesium.Cartesian3.fromDegrees(Number(operatorLat), Number(operatorLong), 100),
-        
-          point: {pixelSize: 6, color: Cesium.Color.GOLD},
+          position: Cesium.Cartesian3.fromDegrees(
+            Number(operatorLat),
+            Number(operatorLong),
+            100
+          ),
+
+          point: { pixelSize: 6, color: Cesium.Color.GOLD },
           label: {
-            text:`You are here in ${operatorCity}`,
+            text: `You are here in ${operatorCity}`,
             show: true,
             showBackground: true,
             font: "15px Open Sans sans-serif",
@@ -84,20 +92,21 @@ const Globe = ({ latitude, longitude, altitude }) => {
             backgroundColor: Cesium.Color.WHITE,
             fillColor: Cesium.Color.PURPLE,
             style: Cesium.LabelStyle.FILL,
-           
           },
         });
         const newEntity = viewerRef.entities.add({
-          name: 'ISS',
+          name: "ISS",
           position: Cesium.Cartesian3.fromDegrees(longitude, latitude, 100),
           point: {
             pixelSize: 10,
-            point: {pixelSize: 8, color: Cesium.Color.YELLOW},
+            point: { pixelSize: 8, color: Cesium.Color.YELLOW },
             outlineColor: Cesium.Color.BLACK,
             outlineWidth: 2,
           },
           label: {
-            text:`Latitude: ${latitude.toFixed(2)}, Longitude: ${longitude.toFixed(2)}`,
+            text: `Latitude: ${latitude.toFixed(
+              2
+            )}, Longitude: ${longitude.toFixed(2)}`,
             show: true,
             showBackground: true,
             font: "15px Open Sans sans-serif",
@@ -107,13 +116,9 @@ const Globe = ({ latitude, longitude, altitude }) => {
             backgroundColor: Cesium.Color.WHITE,
             fillColor: Cesium.Color.PURPLE,
             style: Cesium.LabelStyle.FILL,
-           
           },
-       
-
         });
 
-  
         // remove previous entity
         if (iSSEntity) {
           viewerRef.entities.remove(iSSEntity);
@@ -122,15 +127,13 @@ const Globe = ({ latitude, longitude, altitude }) => {
         setISSEntity(newEntity);
         // showISSTrajectory()
       }
-    
     }
-    
   }, [iSSEntity, latitude, longitude, viewerRef]);
 
   return (
-   
+    <>
       <Viewer
-        style={{height:'100%', width:'100%', position:'absolute' }}
+        style={{ height: "100%", width: "100%", position: "absolute" }}
         infoBox={true}
         ref={(e) => {
           if (e !== null) {
@@ -143,11 +146,9 @@ const Globe = ({ latitude, longitude, altitude }) => {
         projectionPicker={true}
         baseLayerPicker={true}
         navigationHelpButton={true}
-      >
-         
-       
-      </Viewer>
-   
+      ></Viewer>
+      <button>enter full screen</button>
+    </>
   );
 };
 

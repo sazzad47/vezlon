@@ -159,7 +159,8 @@ import CoverSignIn from '../pages/AuthenticationInner/Login/CoverSignIn';
 import BasicSignUp from '../pages/AuthenticationInner/Register/BasicSignUp';
 import CoverSignUp from "../pages/AuthenticationInner/Register/CoverSignUp";
 import BasicPasswReset from '../pages/AuthenticationInner/PasswordReset/BasicPasswReset';
-
+//Smart Node
+import Flow from "../pages/Smartnode/Flow";
 //financeManagement
 import FinanceManagement from "../pages/FinanceManagement";
 
@@ -395,7 +396,8 @@ const authProtectedRoutes = [
   { path: "/maps-google", component: GoogleMaps },
   { path: "/maps-vector", component: VectorMaps },
   { path: "/maps-leaflet", component: LeafletMaps },
-
+  //Smart Node
+  { path: "/smartnode", component: Flow },
   //FinanceManagement
   { path: "/finance-mngt", component: FinanceManagement },
   //Weather

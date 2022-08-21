@@ -422,6 +422,12 @@ const Navdata = () => {
             link: "/iss-analytics",
         },
         {
+            id: "smartnode",
+            label: "Smart Nodes",
+            icon: "bx bx-network-chart",
+            link: "/smartnode",
+        },
+        {
             id: "finance",
             label: "Finance Management",
             icon: "bx bx-notepad",
