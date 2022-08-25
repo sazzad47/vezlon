@@ -1,21 +1,25 @@
 import React from "react";
 import moment from "moment-timezone";
 
+
 export default function WeeklyWeather({ weeklyWeather, timezone }) {
   return (
     <div className="weekly">
       <h3 className="weekly__title">
         Weekly <span>Weather</span>
       </h3>
-
-      {weeklyWeather.length > 0 &&
-        weeklyWeather.map((weather, index) => {
-          if (index === 0) {
+    
+     {weeklyWeather.length > 0 && 
+     weeklyWeather.map((weather, index) => {
+        if (index === 0) {
             return;
-          }
-          return <div key={weather.dt}></div>;
-        })}
-
+        }
+        return (
+              <div key={weather.dt}></div>
+        )
+     })}
+      
+      
       {weeklyWeather.length > 0 &&
         weeklyWeather.map((weather, index) => {
           if (index === 0) {

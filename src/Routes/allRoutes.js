@@ -150,6 +150,7 @@ import LineAwesomeIcons from "../pages/Icons/LineAwesomeIcons/LineAwesomeIcons";
 
 //Maps
 import GoogleMaps from "../pages/Maps/GoogleMaps/GoogleMaps";
+import SensorMaps from "../pages/Maps/SensorMaps/SensorMaps";
 import VectorMaps from "../pages/Maps/VectorMaps/VectorMaps";
 import LeafletMaps from "../pages/Maps/LeafletMaps/LeafletMaps";
 
@@ -159,7 +160,8 @@ import CoverSignIn from '../pages/AuthenticationInner/Login/CoverSignIn';
 import BasicSignUp from '../pages/AuthenticationInner/Register/BasicSignUp';
 import CoverSignUp from "../pages/AuthenticationInner/Register/CoverSignUp";
 import BasicPasswReset from '../pages/AuthenticationInner/PasswordReset/BasicPasswReset';
-
+//Smart Node
+import Flow from "../pages/Smartnodes/Flow";
 //financeManagement
 import FinanceManagement from "../pages/FinanceManagement";
 
@@ -172,6 +174,7 @@ import Timeline from '../pages/Pages/Timeline/Timeline';
 import Faqs from '../pages/Pages/Faqs/Faqs';
 import Pricing from '../pages/Pages/Pricing/Pricing';
 import Gallery from '../pages/Pages/Gallery/Gallery';
+import Graph from "../pages/Pages/Graph/Graph";
 import Maintenance from '../pages/Pages/Maintenance/Maintenance';
 import ComingSoon from '../pages/Pages/ComingSoon/ComingSoon';
 import SiteMap from '../pages/Pages/SiteMap/SiteMap';
@@ -393,13 +396,15 @@ const authProtectedRoutes = [
 
   //Maps
   { path: "/maps-google", component: GoogleMaps },
+  { path: "/sensor-map", component: SensorMaps },
   { path: "/maps-vector", component: VectorMaps },
   { path: "/maps-leaflet", component: LeafletMaps },
-
+  //Smart Node
+  { path: "/smartnodes", component: Flow },
   //FinanceManagement
   { path: "/finance-mngt", component: FinanceManagement },
   //Weather
-  { path: "/weather", component: Weather },
+  { path: "/iss-analytics", component: Weather },
   //Pages
   { path: "/pages-starter", component: Starter },
   { path: "/pages-profile", component: SimplePage },
@@ -408,6 +413,7 @@ const authProtectedRoutes = [
   { path: "/pages-timeline", component: Timeline },
   { path: "/pages-faqs", component: Faqs },
   { path: "/pages-gallery", component: Gallery },
+  { path: "/pages-Graph", component: Graph },
   { path: "/pages-pricing", component: Pricing },
   { path: "/pages-sitemap", component: SiteMap },
   { path: "/pages-search-results", component: SearchResults },

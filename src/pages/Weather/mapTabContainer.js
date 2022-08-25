@@ -1,41 +1,51 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import {
+  Card,
+  CardBody,
+  Col,
+  Container,
+  Input,
+  Label,
+  Tooltip,
   Nav,
   NavItem,
   NavLink,
+  Row,
   TabContent,
   TabPane,
-} from "reactstrap";
-import classnames from "classnames";
-import ISSData from "./issData";
-import Cameras from "./Cameras";
-import { WeatherChart } from "./WeatherChart";
-import ISSAltitude from "./ISSAltitude";
+} from 'reactstrap';
+import classnames from 'classnames';
+import ISSStream from './ISSStream';
+import Trending from './Trending ';
+import ISSData from './issData';
+import Cameras from './Cameras';
+import { WeatherChart } from './WeatherChart';
+import WeatherData from './WeatherData';
+import ISSAltitude from './ISSAltitude';
 
-const MapTabContainer = ({
-  setLatitude,
-  setLongitude,
-  latitude,
-  longitude,
-}) => {
-  const [customActiveTab, setcustomActiveTab] = useState("weather");
+
+
+const MapTabContainer = ({latlngs, setLatlngs, pause, setLatitude, setLongitude, dataColors, latitude, longitude, altitude}) => {
+  const [customActiveTab, setcustomActiveTab] = useState('weather');
+  const [xAxis, setXAxis] = useState([]);
   const toggleCustom = (tab) => {
     if (customActiveTab !== tab) {
       setcustomActiveTab(tab);
     }
   };
+ 
 
   return (
     <>
       <Nav tabs className="nav-tabs-custom nav-success">
         <NavItem>
           <NavLink
-            style={{ cursor: "pointer" }}
+            style={{ cursor: 'pointer' }}
             className={classnames({
-              active: customActiveTab === "weather",
+              active: customActiveTab === 'weather',
             })}
             onClick={() => {
-              toggleCustom("weather");
+              toggleCustom('weather');
             }}
           >
             Weather
@@ -43,12 +53,12 @@ const MapTabContainer = ({
         </NavItem>
         <NavItem>
           <NavLink
-            style={{ cursor: "pointer" }}
+            style={{ cursor: 'pointer' }}
             className={classnames({
-              active: customActiveTab === "cameras",
+              active: customActiveTab === 'cameras',
             })}
             onClick={() => {
-              toggleCustom("cameras");
+              toggleCustom('cameras');
             }}
           >
             Cameras
@@ -56,12 +66,12 @@ const MapTabContainer = ({
         </NavItem>
         <NavItem>
           <NavLink
-            style={{ cursor: "pointer" }}
+            style={{ cursor: 'pointer' }}
             className={classnames({
-              active: customActiveTab === "stats",
+              active: customActiveTab === 'stats',
             })}
             onClick={() => {
-              toggleCustom("stats");
+              toggleCustom('stats');
             }}
           >
             Stats
@@ -69,12 +79,12 @@ const MapTabContainer = ({
         </NavItem>
         <NavItem>
           <NavLink
-            style={{ cursor: "pointer" }}
+            style={{ cursor: 'pointer' }}
             className={classnames({
-              active: customActiveTab === "issAltitude",
+              active: customActiveTab === 'issAltitude',
             })}
             onClick={() => {
-              toggleCustom("issAltitude");
+              toggleCustom('issAltitude');
             }}
           >
             ISS Altitude
@@ -84,35 +94,26 @@ const MapTabContainer = ({
 
       <TabContent
         activeTab={customActiveTab}
-        className="border border-top-0 p-4"
+        className="border border-top-0 p-2 p-md-2 p-lg-4"
         id="nav-tabContent"
+        style={{minHeight:'30rem'}}
       >
-        <TabPane id="nav-weather" tabId="weather">
-          weather
-          <WeatherChart
-            dataColors='["--vz-primary", "--vz-success"]'
-            latitude={latitude}
-            longitude={longitude}
-          />
+        <TabPane id="nav-weather" tabId="weather" >
+         
+        <WeatherChart dataColors='["--vz-success", "--vz-info", "--vz-danger"]' setLatitude={setLatitude} setLongitude={setLongitude} latitude={latitude} longitude={longitude}/>
         </TabPane>
-        <TabPane id="nav-cameras" tabId="cameras">
-          <Cameras />
+        <TabPane id="nav-cameras" tabId="cameras" style={{minHeight:'30rem', position:'relative'}}>
+            
+
+             <Cameras />
+        
+            
         </TabPane>
-        <TabPane id="nav-stats" tabId="stats">
-          <ISSData
-            setLatitude={setLatitude}
-            setLongitude={setLongitude}
-            latitude={latitude}
-            dataColors='["--vz-primary", "--vz-success"]'
-            longitude={longitude}
-          />
+        <TabPane id="nav-stats" tabId="stats" >
+          <ISSData setLatlngs ={setLatlngs} xAxis={xAxis} setXAxis = {setXAxis} pause = {pause} setLatitude={setLatitude} setLongitude={setLongitude} latitude={latitude} dataColors='["--vz-primary", "--vz-success"]' longitude={longitude}/>
         </TabPane>
-        <TabPane id="nav-issAltitude" tabId="issAltitude">
-          <ISSAltitude
-            dataColors='["--vz-primary", "--vz-success"]'
-            latitude={latitude}
-            longitude={longitude}
-          />
+        <TabPane id="nav-issAltitude" tabId="issAltitude" >
+          <ISSAltitude xAxis = {xAxis} dataColors='["--vz-primary", "--vz-success"]' latitude={latitude} longitude={longitude} altitude = {altitude} />
         </TabPane>
       </TabContent>
     </>

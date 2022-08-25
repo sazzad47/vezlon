@@ -6,9 +6,9 @@ import {
   CHANGE_LAYOUT_POSITION,
   CHANGE_TOPBAR_THEME,
   CHANGE_SIDEBAR_SIZE_TYPE,
-  CHANGE_SIDEBAR_VIEW,  
+  CHANGE_SIDEBAR_VIEW,
   CHANGE_SIDEBAR_IMAGE_TYPE,
-  RESET_VALUE
+  RESET_VALUE,
 } from './actionType';
 
 //constants
@@ -21,8 +21,8 @@ import {
   topbarThemeTypes,
   leftsidbarSizeTypes,
   leftSidebarViewTypes,
-  leftSidebarImageTypes
-} from "../../Components/constants/layout";
+  leftSidebarImageTypes,
+} from '../../Components/constants/layout';
 
 const INIT_STATE = {
   layoutType: layoutTypes.VERTICAL,
@@ -84,15 +84,15 @@ const Layout = (state = INIT_STATE, action) => {
       return {
         ...state,
         leftSidebarViewType: action.payload,
-      }; 
-      
-      case CHANGE_SIDEBAR_IMAGE_TYPE: 
+      };
+
+    case CHANGE_SIDEBAR_IMAGE_TYPE:
       return {
         ...state,
         leftSidebarImageType: action.payload,
       };
 
-      case RESET_VALUE:
+    case RESET_VALUE:
       return {
         ...state,
         resetValue: INIT_STATE,

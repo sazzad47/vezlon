@@ -197,12 +197,6 @@ const Navdata = () => {
             badgeColor:"danger"
         },
         {
-            id: "weather",
-            label: "Weather",
-            link: "/weather",
-           
-        },
-        {
             id: "apps",
             label: "Apps",
             icon: "bx bx-layer",
@@ -422,6 +416,24 @@ const Navdata = () => {
             isHeader: true,
         },
         {
+            id: "issAnalytics",
+            label: "ISS Analytics",
+            icon: "bx bx-sitemap",
+            link: "/iss-analytics",
+        },
+        {
+            id: "smartnodes",
+            label: "Smart Nodes",
+            icon: "bx bx-network-chart",
+            link: "/smartnodes",
+        },
+        {
+            id: "sensorsMap",
+            label: "Sensor Map",
+            icon: "bx bx-equalizer",
+            link: "/sensor-map",
+        },
+        {
             id: "finance",
             label: "Finance Management",
             icon: "bx bx-notepad",
@@ -606,6 +618,12 @@ const Navdata = () => {
                     id: "starter",
                     label: "Starter",
                     link: "/pages-starter",
+                    parentId: "pages",
+                },
+                {
+                    id: "graph",
+                    label: "Graph",
+                    link: "/pages-Graph",
                     parentId: "pages",
                 },
                 {

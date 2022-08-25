@@ -1,0 +1,68 @@
+.sensorCardInformation {
+  color: white;
+}
+.sensorMapPopup {
+  left: -396px !important;
+}
+.sensorMapPopup .leaflet-popup-content-wrapper {
+  background: transparent !important;
+  box-shadow: unset !important;
+  height: 290px !important;
+}
+.sensorMapPopupCardHeader .float-end {
+  color: white;
+}
+.sensorMapCardBody {
+  color: white;
+}
+.sensorMapPopup .leaflet-popup-content-wrapper .leaflet-popup-content {
+  width: 750px !important;
+}
+.sensorSignalIcon {
+  vertical-align: middle !important;
+  font-size: 17px;
+}
+.sensorBatteryIcon {
+  vertical-align: middle !important;
+  font-size: 22px;
+}
+.sensorPopupHeaderIcons {
+  font-size: 15px !important;
+}
+.ipAddressHeading {
+  white-space: nowrap;
+}
+
+.fullIconLevel {
+  color: #13c56b;
+}
+
+.mediumIconLevel {
+  color: #e8bc52;
+}
+.lowIconLevel {
+  color: #ed5e5e;
+}
+.diagram-component {
+  width: 400px;
+  height: 400px;
+}
+.sensor-leaflet-map {
+  height: unset !important;
+
+}
+.linkPopupTitle {
+  text-align: center;
+  color:#333333;
+}
+.heatMapLegend {
+  background-color: white;
+}
+
+.sensor-leaflet-map .leaflet-container{
+  font:unset !important;
+  font-family: unset !important;
+}
+.popupConnectedSensorsTitle{
+  white-space: nowrap;
+}

@@ -178,7 +178,7 @@ const RecentOrders = () => {
 
                 <Col sm={4} className="col-xxl-1">
                   <div>
-                    <button type="button" className="btn btn-primary w-100">
+                    <button style={{minWidth:'100%'}} type="button" className="btn btn-primary w-100">
                       {" "}
                       <i className="ri-equalizer-fill me-1 align-bottom"></i>
                       Filters

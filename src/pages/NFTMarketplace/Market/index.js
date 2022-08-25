@@ -109,23 +109,26 @@ const Marketplace = () => {
                   <TabPane tabId="1" id="home1">
                     <Row>
                       {cardData.map((item, index) => (
-                        <Col xl={4} lg={4} md={12} sm={12} key={index}>
-                          <Card>
+                        <Col xl={4} lg={4} md={6} sm={6} xs ={12} key={index}>
+                          <div className="mb-4 mb-md-4 mb-lg-5" style={{height:'25rem', position:'relative'}}>
+                          <Card style={{position:'absolute', height:'100%', width:'100%'}}>
                             <div
-                              style={{ minHeight: "10rem", minWidth: "100%" }}
+                              style={{ maxHeight: "10", minWidth: "100%" }}
                             >
                               <img
                                 style={{
-                                  width: "100%",
-                                  height: "100%",
-                                  objectFit: "contain",
+                                  padding:'0',
+                                  margin:'0',
+                                  width:'100%',
+                                  maxHeight:'100%'
+                
                                 }}
                                 src={item.image}
                                 alt="..."
                               />
                             </div>
 
-                            <CardBody>
+                            <CardBody style={{minHeight:'40%'}}>
                               <h5 className="card-title">{item.heading}</h5>
                               <p className="text-muted">{item.subHeading}</p>
                               <div className="d-flex align-items-end justify-content-between">
@@ -145,7 +148,7 @@ const Marketplace = () => {
                                 </p>
                               </div>
                             </CardBody>
-                            <CardFooter className="d-flex align-items-center justify-content-between">
+                            <CardFooter style={{minHeight:'10%'}} className="d-flex align-items-center justify-content-between">
                               {item.restricted ? (
                                 <RestrictedModal />
                               ) : (
@@ -161,6 +164,7 @@ const Marketplace = () => {
                               ) : null}
                             </CardFooter>
                           </Card>
+                          </div>
                         </Col>
                       ))}
                     </Row>
@@ -172,12 +176,15 @@ const Marketplace = () => {
                       <p>Manage your custom building blocks to the platform</p>
                     </div>
                     <Row>
-                      <Col xl={4} lg={4} md={12} sm={12}>
+                      <Col xl={4} lg={4} md={6} sm={6} xs ={12}>
+                        <div className="mb-4 mb-md-4 mb-lg-5" style={{minHeight: "25rem", minWidth: "100%", position:'relative'}}> 
                         <Card
                           style={{
                             border: "2px dashed #32383e",
                             borderRadius: "6px",
-                            minHeight: "10rem", minWidth: "100%",
+                            position:'absolute',
+                            width:'100%',
+                            height:'100%',
                             display: "flex",
                             justifyContent: "center",
                           }}
@@ -206,18 +213,23 @@ const Marketplace = () => {
                             labelButtonProcessItem="upload"
                           />
                         </Card>
+                        </div>
                       </Col>
                       {files.map((item, index) => (
-                        <Col xl={4} lg={4} md={12} sm={12} key={index}>
-                          <Card>
+                        <Col xl={4} lg={4} md={6} sm={6} xs ={12} key={index}>
+                          <div className="mb-4 mb-md-4 mb-lg-5" style={{height:'25rem', position:'relative'}}>
+
+                         
+                          <Card style={{position:'absolute', height:'100%', width:'100%'}}>
                             <div
-                              style={{ minHeight: "10rem", minWidth: "100%" }}
+                              style={{ maxHeight: "10rem", minWidth: "100%" }}
                             >
                               <img
                                 style={{
-                                  width: "100%",
-                                  height: "100%",
-                                  objectFit: "contain",
+                                  padding:'0',
+                                  margin:'0',
+                                  width:'100%',
+                                  maxHeight:'100%'
                                 }}
                                 src={orbitalsm}
                                 alt="..."
@@ -256,6 +268,7 @@ const Marketplace = () => {
                               </p>
                             </CardFooter>
                           </Card>
+                          </div>
                         </Col>
                       ))}
                     </Row>
