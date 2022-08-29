@@ -1,33 +1,26 @@
-import React, { useState } from 'react';
-import {
-  Nav,
-  NavItem,
-  NavLink,
-  TabContent,
-  TabPane,
-} from 'reactstrap';
-import classnames from 'classnames';
-import DnDFlow from './Dragdrop';
-import ImageH from './ImageH';
-
+import React, { useState } from "react";
+import { Nav, NavItem, NavLink, TabContent, TabPane } from "reactstrap";
+import classnames from "classnames";
+import DnDFlow from "./Dragdrop";
+import ImageH from "./ImageH";
 const TabContainer = () => {
-    const [customActiveTab, setcustomActiveTab] = useState('smartNodes');
-    const toggleCustom = (tab) => {
-      if (customActiveTab !== tab) {
-        setcustomActiveTab(tab);
-      }
-    };
+  const [customActiveTab, setcustomActiveTab] = useState("smartNodes");
+  const toggleCustom = (tab) => {
+    if (customActiveTab !== tab) {
+      setcustomActiveTab(tab);
+    }
+  };
   return (
     <>
       <Nav tabs className="nav-tabs-custom nav-success">
         <NavItem>
           <NavLink
-            style={{ cursor: 'pointer' }}
+            style={{ cursor: "pointer" }}
             className={classnames({
-              active: customActiveTab === 'smartNodes',
+              active: customActiveTab === "smartNodes",
             })}
             onClick={() => {
-              toggleCustom('smartNodes');
+              toggleCustom("smartNodes");
             }}
           >
             Smart Nodes
@@ -35,39 +28,37 @@ const TabContainer = () => {
         </NavItem>
         <NavItem>
           <NavLink
-            style={{ cursor: 'pointer' }}
+            style={{ cursor: "pointer" }}
             className={classnames({
-              active: customActiveTab === 'imageHandler',
+              active: customActiveTab === "imageHandler",
             })}
             onClick={() => {
-              toggleCustom('imageHandler');
+              toggleCustom("imageHandler");
             }}
           >
             Image Handler
           </NavLink>
         </NavItem>
       </Nav>
-
       <TabContent
         activeTab={customActiveTab}
         className="border border-top-0"
         id="nav-tabContent"
-        style={{minHeight:'30rem',width:'100%', position:'relative', overflow:'hidden'}}
+        style={{
+          minHeight: "30rem",
+          width: "100%",
+          position: "relative",
+          overflow: "hidden",
+        }}
       >
         <TabPane id="nav-smartNodes" tabId="smartNodes">
-         
-          <DnDFlow/>
+          <DnDFlow />
         </TabPane>
         <TabPane id="nav-imageHandler" tabId="imageHandler">
-            
-
-          <ImageH/>
-        
-            
+          <ImageH />
         </TabPane>
       </TabContent>
     </>
-  )
-}
-
-export default TabContainer
+  );
+};
+export default TabContainer;
