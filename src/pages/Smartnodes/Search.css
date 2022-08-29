@@ -62,9 +62,10 @@
 
   }
   .dndTool .drag-drop {
+    margin-top: 2rem;
     font-size: 10px;
     color:black;
-    min-height: 80%;
+    min-height: 100%;
   }
    .deleteBtn {
     min-height: 1.5rem;
@@ -150,9 +151,35 @@
   margin: 0px 0px;
   cursor: pointer;
 }
-input[type='file'] {
-  color:transparent
+.inputfile {
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
 }
+.inputfile + label {
+  padding: 0 1rem;
+  border: 1px solid #05d0e3; 
+  border-radius: 5px;
+  font-size: 10px;
+  color: #05d0e3;
+  background-color: #020d1f;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.inputfile:focus + label,
+.inputfile + label:hover {
+  background-color: #03183a;
+}
+.inputfile:focus + label {
+	outline: 1px dotted #03183a;
+	outline: -webkit-focus-ring-color auto 5px;
+}
+
+
 .button1 {
   background-color: #020d1f;
   color: #05d0e3;
@@ -172,7 +199,6 @@ input[type='file'] {
   color: #05d0e3;
   border: 1px solid #05d0e3; 
   border-radius: 5px;
-  width: 100%; 
   position: relative;
   padding: 0px 0px;
   text-align: center;
@@ -181,6 +207,7 @@ input[type='file'] {
   font-size: 8px;
   margin-right: 0;
   cursor: pointer;
+  width: 100%;
 }
 .node-bg {
   
@@ -188,7 +215,7 @@ input[type='file'] {
     background-size: 20px 20px;
  
 }
-.react-flow__node {
+.custom-node {
   position: relative;
   height: 2rem;
   display: flex;
@@ -198,18 +225,27 @@ input[type='file'] {
   color: #05d0e3 !important;
   border: 1px solid #05d0e3 !important;
 }
-.react-flow__node::before {
-  position: absolute;
-  content: "x";
-  top: -50%;
-  left: 100%;
-  background-color: #062a63;
-  color: #05d0e3;
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
+.custom-node:hover {
+  background-color: #1a192b !important;
+  color: #05d0e3 !important;
+  border: 1px solid #05d0e3 !important;
 }
-.react-flow__node:hover {
+.customImg-node {
+  position: relative;
+  min-height: 13rem;
+  min-width: 10rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #020d1f !important;
+  color: #05d0e3 !important;
+  border: 1px solid #05d0e3 !important;
+}
+.withImg {
+  min-height: 18rem !important;
+}
+.customImg-node:hover {
   background-color: #1a192b !important;
   color: #05d0e3 !important;
   border: 1px solid #05d0e3 !important;

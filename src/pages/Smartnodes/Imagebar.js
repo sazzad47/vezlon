@@ -10,6 +10,9 @@ function Sidebar() {
   return (
     <aside>
       <div className="heading">Drag/Drop nodes</div>
+      <div className="element" onDragStart={(event) => onDragStart(event, 'Load Model')} draggable>
+      Load Model
+      </div>
       <div className="element" onDragStart={(event) => onDragStart(event, 'Load Image')} draggable>
       Load Image
       </div>

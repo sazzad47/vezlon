@@ -7,54 +7,70 @@ import ReactFlow, {
   useEdgesState,
   Controls,
 } from 'react-flow-renderer';
-
+import MsgToast from "../../Components/Common/MsgToast";
 import Sidebar from './Sidebar';
 import { MarkerType } from 'react-flow-renderer';
 import './Search.css';
-import { Col, DropdownItem, DropdownMenu, DropdownToggle, Row, UncontrolledDropdown } from 'reactstrap';
+import { Col, DropdownItem, DropdownMenu, DropdownToggle, Form, Input, Label, Modal, ModalBody, ModalHeader, Row, UncontrolledDropdown } from 'reactstrap';
+import CustomNode from './CustomNode';
 
 
-const initialNodes = [
+const initialNodes = ({setNodes, nodes, setUpdateMsg}) => [
   {
     id: '1',
-    type: 'input',
+    type: 'custom',
     data: {
-      label: 'UI'
+      label: 'UI',
+      setNodes,
+      nodes,
+    
     },
+    
     position: { x: 100, y: 0 },
   },
   {
     id: '2',
+    type: 'custom',
     data: {
-      label: 'CAMERA'
+      label: 'CAMERA',
+      setNodes,
+      nodes,
+    
     },
     position: { x: 50, y: 100 },
   },
   {
     id: '3',
+    type: 'custom',
     data: {
-      label: '3D-model generator'
+      label: '3D-model generator',
+      setNodes,
+      nodes,
+    
     },
     position: { x: 50, y: 200 },
-    style: {
-      
-      border: '1px solid #222138',
-      width: 180,
-    },
   },
   {
     id: '4',
+    type: 'custom',
     position: { x: 250, y: 100 },
     data: {
       label: 'CLOTH SELECTOR',
+      setNodes,
+      nodes,
+    
     },
   },
   ,
   {
     id: '5',
+    type: 'custom',
     position: { x: 150, y: 300 },
     data: {
       label: 'RENDERER',
+      setNodes,
+      nodes,
+    
     },
   },
   
@@ -70,6 +86,7 @@ const initialedges = [
     type: 'step',
     labelStyle: { fill: '#05d0e3'}, 
     labelBgStyle: { fill: '#020d1f'},
+    
   },
   { id: 'e1-4', 
     source: '1', 
@@ -115,43 +132,30 @@ const initialedges = [
 ];
 
 let id = 6;
-const getId = () => `dndnode_${id++}`;
-
+const getId = () => `${id++}`;
+const nodeTypes = { custom: CustomNode };
 const DnDFlow = () => {
-
+  
+ 
   const reactFlowWrapper = useRef(null);
-  const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
+  const [nodes, setNodes, onNodesChange] = useNodesState([]);
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialedges);
   const [reactFlowInstance, setReactFlowInstance] = useState(null);
+
 
   const onConnect = useCallback((params) => setEdges((eds) => addEdge(params, eds)), []);
   const onDragOver = useCallback((event) => {
     event.preventDefault();
-    // event.dataTransfer.dropEffect = 'move';
+    event.dataTransfer.dropEffect = 'move';
   }, []);
-  const [nodeHidden, setNodeHidden] = useState(false);
-  const [nodeName, setNodeName] = useState();
-  console.log('nodes', nodes)
-  console.log('nodehidden', nodeHidden)
-  
-  // useEffect(() => {
-  //   setNodes((nds) =>
-  //     nds.map((node) => {
-  //       if (node.id === nodeName) {
-  //         // when you update a simple type you can just update the value
-  //         node.hidden = nodeHidden;
-  //       }
+ 
+ 
 
-  //       return node;
-  //     })
-  //   );
-    
-  // }, [nodeHidden, setNodes]);
+  useEffect(() => {
+    setNodes(initialNodes({setNodes, nodes}))
+  },[])
+
   
-  const deleteNode = (name) => {
-    setNodes((nodes) => nodes.filter((element) => element.data.label !== name));
-    
-  };
  
   const onDrop = useCallback(
     (event) => {
@@ -171,23 +175,29 @@ const DnDFlow = () => {
       });
       const newNode = {
         id: getId(),
-        type,
+        type:'custom',
         position,
-        data: { label:`${type}`  },
+        data: { 
+          label:`${type}`,
+          setNodes ,
+          nodes,
+          },
       };
 
       setNodes((nds) => nds.concat(newNode));
     },
     [reactFlowInstance]
   );
-  console.log('reactFlow', reactFlowWrapper)
+ 
   return (
+   
      <Row className='dndContainer'>
+      
       <Col xs={12} md={10} className='p-0 m-0 pe-3'>
-
+    
     <div className="dndflow">
       <ReactFlowProvider>
-        <div draggable className="reactflow-wrapper" ref={reactFlowWrapper}>
+        <div className="reactflow-wrapper" ref={reactFlowWrapper}>
           <ReactFlow
            
             nodes={nodes}
@@ -199,6 +209,7 @@ const DnDFlow = () => {
             onInit={setReactFlowInstance}
             onDrop={onDrop}
             onDragOver={onDragOver}
+            nodeTypes={nodeTypes}
             fitView
             
           >
@@ -212,29 +223,16 @@ const DnDFlow = () => {
     </div>
       </Col>
       <Col xs={12} md={2} className='dndTool px-1'>
-        <Row className='deleteNode'>
-          <div className='heading px-5'>Delete Nodes</div>
-        <div className="flex-shrink-0">
-        <UncontrolledDropdown className="card-header-dropdown" direction='start'>
-            <DropdownToggle className="deleteBtn" role="button" tag="a">
-               Delete a Node<i className="mdi mdi-chevron-down align-middle ms-1"></i>
-            </DropdownToggle>
-            <DropdownMenu className="dropdown-menu dropdown-menu-end">
-                <DropdownItem onClick={() => deleteNode('UI')}>UI</DropdownItem>
-                <DropdownItem onClick={() => deleteNode('CAMERA')}>CAMERA</DropdownItem>
-                <DropdownItem onClick={() => deleteNode('CLOTH SELECTOR')}>CLOTH SELECTOR</DropdownItem>
-                <DropdownItem onClick={() => deleteNode('3D-model generator')}>3D-model generator</DropdownItem>
-                <DropdownItem onClick={() => deleteNode('RENDERER')}>RENDERER</DropdownItem>
-            </DropdownMenu>
-        </UncontrolledDropdown>
-    </div>
-        </Row>
+       
         <Row className='drag-drop'>
 
       <Sidebar />
         </Row>
       </Col>
+
+    
      </Row>
+    
   );
 };
 

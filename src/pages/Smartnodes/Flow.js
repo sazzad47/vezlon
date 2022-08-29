@@ -5,6 +5,8 @@ import DnDFlow from './Dragdrop';
 import {  Row, Col, Card, CardBody, CardHeader } from 'reactstrap';
 import { Container } from 'reactstrap';
 import TabContainer from './TabContainer';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 function Flow() {
   
    return (
@@ -12,6 +14,7 @@ function Flow() {
     <div>
       
       <React.Fragment>
+      <ToastContainer autoClose={2000} closeButton={true} hideProgressBar={false} />
       
       <div className="page-content">
       <Container fluid>
