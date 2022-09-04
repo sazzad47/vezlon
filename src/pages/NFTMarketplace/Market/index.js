@@ -14,7 +14,7 @@ import {
   Nav,
   CardFooter,
 } from "reactstrap";
-
+import './style.css'
 import classnames from "classnames";
 import BreadCrumb from "../../../Components/Common/BreadCrumb";
 import orbitalsm from "../../../assets/images/marketplaceSoon/orbital.png";
@@ -110,26 +110,21 @@ const Marketplace = () => {
                     <Row>
                       {cardData.map((item, index) => (
                         <Col xl={4} lg={4} md={6} sm={6} xs ={12} key={index}>
-                          <div className="mb-4 mb-md-4 mb-lg-5" style={{height:'25rem', position:'relative'}}>
-                          <Card style={{position:'absolute', height:'100%', width:'100%'}}>
+                          <div className="mb-4 mb-md-4 mb-lg-5">
+                          <Card style={{minHeight:'28rem'}}>
                             <div
-                              style={{ maxHeight: "10", minWidth: "100%" }}
+                              
                             >
                               <img
-                                style={{
-                                  padding:'0',
-                                  margin:'0',
-                                  width:'100%',
-                                  maxHeight:'100%'
-                
-                                }}
+                               
+                                className="img-fluid h-100 w-100 object-cover"
                                 src={item.image}
                                 alt="..."
                               />
                             </div>
 
                             <CardBody style={{minHeight:'40%'}}>
-                              <h5 className="card-title">{item.heading}</h5>
+                              <h5 style={{height:'3rem'}} className="card-title">{item.heading}</h5>
                               <p className="text-muted">{item.subHeading}</p>
                               <div className="d-flex align-items-end justify-content-between">
                                 <p
@@ -175,16 +170,17 @@ const Marketplace = () => {
                       <h3>Custom Blocks</h3>
                       <p>Manage your custom building blocks to the platform</p>
                     </div>
-                    <Row>
-                      <Col xl={4} lg={4} md={6} sm={6} xs ={12}>
-                        <div className="mb-4 mb-md-4 mb-lg-5" style={{minHeight: "25rem", minWidth: "100%", position:'relative'}}> 
+                    <Row fluid>
+                      <Col xl={4} lg={4} md={6} sm={6} xs ={12} >
+                        <div className="mb-4 mb-md-4 mb-lg-5"> 
                         <Card
+                          
                           style={{
                             border: "2px dashed #32383e",
                             borderRadius: "6px",
-                            position:'absolute',
-                            width:'100%',
-                            height:'100%',
+                           
+                            minHeight:'28rem',
+                            height:'28rem',
                             display: "flex",
                             justifyContent: "center",
                           }}
@@ -196,14 +192,15 @@ const Marketplace = () => {
                             maxFiles={10}
                             name="files"
                             className="filepond filepond-input-multiple"
+                            
                             allowImagePreview={false}
                             onaddfile={() =>
                               toast.success("Successfully uploaded")
                             }
-                            labelIdle={`<div>
+                            labelIdle={`<div style="min-height:100%">
                                 <div                                                
                                 >
-                                <div className="mb-3">
+                                <div>
                                     <i style="font-size:calc(1.475rem + 2.2vw)" class="display-4 text-muted ri-upload-cloud-2-fill"></i>                                                                            
                                 </div>
                                 <h4 style="font-size:1.2rem">Drop files here or click to upload.</h4>
@@ -217,27 +214,23 @@ const Marketplace = () => {
                       </Col>
                       {files.map((item, index) => (
                         <Col xl={4} lg={4} md={6} sm={6} xs ={12} key={index}>
-                          <div className="mb-4 mb-md-4 mb-lg-5" style={{height:'25rem', position:'relative'}}>
+                          <div className="mb-4 mb-md-4 mb-lg-5" >
 
                          
-                          <Card style={{position:'absolute', height:'100%', width:'100%'}}>
+                          <Card style={{minHeight:'28rem'}}>
                             <div
-                              style={{ maxHeight: "10rem", minWidth: "100%" }}
+                             
                             >
                               <img
-                                style={{
-                                  padding:'0',
-                                  margin:'0',
-                                  width:'100%',
-                                  maxHeight:'100%'
-                                }}
+                               
+                                className="img-fluid h-100 w-100 object-cover"
                                 src={orbitalsm}
                                 alt="..."
                               />
                             </div>
 
                             <CardBody>
-                              <h5 className="card-title">Building Detection</h5>
+                              <h5 style={{height:'3rem'}} className="card-title">Building Detection</h5>
                               <p className="text-muted">
                                 This block provides a water-related geohazards
                                 prediction processing workflow with Sentinel-2
@@ -273,7 +266,7 @@ const Marketplace = () => {
                       ))}
                     </Row>
 
-                    <Row className="mt-5">
+                    <Row>
                       <Col xxl={6}>
                         <Card>
                           <Row className="g-0">

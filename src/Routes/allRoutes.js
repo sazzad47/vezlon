@@ -431,6 +431,16 @@ const authProtectedRoutes = [
 ];
 
 const publicRoutes = [
+  
+ //Marketplace Soon
+ {path: "/marketplace", component: MarketplaceSoon},
+ //Smart Node
+ { path: "/smartnodes", component: Flow },
+ //FinanceManagement
+ { path: "/finance-mngt", component: FinanceManagement },
+ //Weather
+ { path: "/iss-analytics", component: Weather },
+
   // Authentication Page
   { path: "/logout", component: Logout },
   { path: "/login", component: Login },
