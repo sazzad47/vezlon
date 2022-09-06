@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import Leaflet from "leaflet";
-import { MapContainer } from "react-leaflet";
+import Leaflet, {control} from "leaflet";
+import { AttributionControl, MapContainer, TileLayer } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import "./sensorMap.css";
 import "leaflet.heat";
@@ -37,6 +37,7 @@ export default class MapMarkerCustomIcons extends Component {
     this.sensorList = [];
     this.mapLayers = [];
   }
+  
 
   componentDidMount() {
     smartSensor.forEach((element) => {
@@ -55,6 +56,8 @@ export default class MapMarkerCustomIcons extends Component {
     setTimeout(() => {
       this.createHeatMaps(eventCases2);
     }, 10000);
+
+    
   }
 
   createLinkPopupData = (sensorNames, connectionStrength) => {
@@ -107,7 +110,7 @@ export default class MapMarkerCustomIcons extends Component {
 
 
   };
-
+  
   populateHeatLayers = (newHeatCoordinates,polyLines) => {
     newHeatCoordinates.map((element) => {
       polyLines.push(element);
@@ -177,7 +180,7 @@ export default class MapMarkerCustomIcons extends Component {
 
         var polyline = Leaflet.polyline(comArr, {
           color: "red",
-          weight: 2,
+          weight: 5,
           dashArray: 4,
           attribution: tempName,
         }).bindPopup(this.createLinkPopupData(tempName, 5));
@@ -229,7 +232,7 @@ export default class MapMarkerCustomIcons extends Component {
       });
     }
   };
-
+  
 
   findExisitngHeatAreas = (heatLayer) => {
     if (this.exisitngHeatLayers.length !== 0) {
@@ -278,9 +281,9 @@ export default class MapMarkerCustomIcons extends Component {
       }
     });
   };
-
+  
   createMapLegend = (map) => {
-    var legend = Leaflet.control({ position: "bottomleft" });
+    var legend = Leaflet.control({ position: "bottomright" });
     legend.onAdd = function (map) {
       var div = Leaflet.DomUtil.create("div", "heatMapLegend");
       div.innerHTML += "<h5 style='color:black'>Sensor Detection</h5>";
@@ -293,21 +296,27 @@ export default class MapMarkerCustomIcons extends Component {
       return div;
     };
     map.addControl(legend);
+   
+    
+    
   };
-
+ 
   render() {
+    // this.mapRef.current.addControl();
+    console.log('instance', this.mapLayers)
+   
     let layer = Leaflet.tileLayer(
       "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-      {
-        attribution:
-          '&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
-      }
+      // {
+      //   attribution:
+      //     '&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+      // }
     );
     const position = [this.state.lat, this.state.lng];
 
     return (
       <Row>
-        <Col lg={4}>
+        <Col lg={3}>
           <CardBody>
             <SensorMapFilterSideBar
               mapRef={this.mapRef}
@@ -316,27 +325,37 @@ export default class MapMarkerCustomIcons extends Component {
             />
           </CardBody>
         </Col>
-        <Col lg={8}>
+        <Col lg={9}>
           <MapContainer
             center={position}
             zoom={this.state.zoom}
             style={{ height: "500px" }}
-            layers={[layer]}
+            layers={layer}
             whenCreated={(mapInstance) => {
               this.mapRef.current = mapInstance;
               this.createMapLegend(mapInstance);
             }}
-            attributionControl={false}
+          attributionControl={false}
           >
+           
+            {/* <TileLayer
+            attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+               /> */}
+          
             {smartSensor &&
               smartSensor.map((item, index) => (
                 <SensorPopup
-                  mapLayers={this.mapLayers}
-                  key={index}
-                  item={item}
-                  index={index}
+                mapLayers={this.mapLayers}
+                key={index}
+                item={item}
+                index={index}
                 />
-              ))}
+                ))}
+                {/* <TileLayer
+                attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+              /> */}
           </MapContainer>
         </Col>
       </Row>

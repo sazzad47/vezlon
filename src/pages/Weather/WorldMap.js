@@ -7,7 +7,7 @@ import Satellite from '../../assets/images/satellite.png';
 import FullScreenDropdown from '../../Components/Common/FullScreenDropdown';
 
 
-const WorldMap = ({latlngs, latitude, longitude }) => {
+const WorldMap = ({coords, latitude, longitude }) => {
   const position = [26.4887, 77.981];
   const coord = [latitude, longitude];
   const [operatorLat, setOperatorLat] = useState();
@@ -62,17 +62,14 @@ const pos = [
   [36.460353, 126.440674],
   [40.085148, 116.552407] //to chi
 ];
-  const trajectory = [];
-
-  useEffect(() => {
-    trajectory.push(latitude, longitude)
-  },[latitude, longitude])
-  console.log('trajectory', latlngs)
+  
+  console.log('trajectory', coords)
 
 
   return (
     <>
-      {latitude && longitude && latlngs ? (
+       {((typeof(latitude) ==='undefined') || (typeof(longitude) === 'undefined') || (typeof(operatorLat) ==='undefined') || (typeof(operatorLong) ==='undefined') || (typeof(operatorCity) ==='undefined'))?
+       <h6>Loading...</h6>:
         <>
         <MapContainer
           center={coord}
@@ -88,7 +85,9 @@ const pos = [
             position={coord}
             icon={<img src={Satellite} style={{ width: '100px' }} />}
           > 
-           
+           <Tooltip direction="bottom" offset={[20, 20]} opacity={1} permanent>
+              Latitude: {latitude?.toFixed(1)} ° <br/> Longitude: {longitude?.toFixed(1)} °
+            </Tooltip>
             <Popup>INTERNATIONAL SPACE STATION LIVE COORDINATES</Popup>
           </Marker>
           <Marker
@@ -99,16 +98,14 @@ const pos = [
             You are here in {operatorCity} <br/> Latitude: {operatorLat} ° <br/> Longitude: {operatorLong} °
             </Tooltip>
           </Marker>
-         <Polyline positions={latlngs} color="red" />
-          {/* {latlngs ? <AntPath positions={latlngs} options={options} /> : null}   */}
+         <Polyline positions={coords} color="red" />
+          {/* {coords ? <AntPath positions={coords} options={options} /> : null}   */}
           <FullscreenControl position = 'topright' forceSeparateButton = {true}/>
         </MapContainer>
        
-        </>
+        </>}
 
-      ) : (
-        <div>Loading...</div>
-      )}
+      
     </>
   );
 };

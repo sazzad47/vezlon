@@ -25,7 +25,7 @@ import ISSAltitude from './ISSAltitude';
 
 
 
-const MapTabContainer = ({latlngs, setLatlngs, pause, setLatitude, setLongitude, dataColors, latitude, longitude, altitude}) => {
+const MapTabContainer = ({setCoords, latlngs, setLatlngs, pause, setLatitude, setLongitude, dataColors, latitude, longitude, altitude}) => {
   const [customActiveTab, setcustomActiveTab] = useState('weather');
   const [xAxis, setXAxis] = useState([]);
   const toggleCustom = (tab) => {
@@ -110,7 +110,7 @@ const MapTabContainer = ({latlngs, setLatlngs, pause, setLatitude, setLongitude,
             
         </TabPane>
         <TabPane id="nav-stats" tabId="stats" >
-          <ISSData setLatlngs ={setLatlngs} xAxis={xAxis} setXAxis = {setXAxis} pause = {pause} setLatitude={setLatitude} setLongitude={setLongitude} latitude={latitude} dataColors='["--vz-primary", "--vz-success"]' longitude={longitude}/>
+          <ISSData setCoords = {setCoords} latlngs = {latlngs} setLatlngs ={setLatlngs} xAxis={xAxis} setXAxis = {setXAxis} pause = {pause} setLatitude={setLatitude} setLongitude={setLongitude} latitude={latitude} dataColors='["--vz-primary", "--vz-success"]' longitude={longitude}/>
         </TabPane>
         <TabPane id="nav-issAltitude" tabId="issAltitude" >
           <ISSAltitude xAxis = {xAxis} dataColors='["--vz-primary", "--vz-success"]' latitude={latitude} longitude={longitude} altitude = {altitude} />

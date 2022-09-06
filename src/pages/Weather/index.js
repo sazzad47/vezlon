@@ -15,10 +15,12 @@ const Weather = () => {
  
   const [latitude, setLatitude] = React.useState();
   const [latlngs, setLatlngs] = useState([]);
+  const [coords, setCoords] = useState([]);
   const [longitude, setLongitude] = React.useState();
   const [altitude, setAltitude] = React.useState();
 
   const [pause, setPause] = useState(false)
+  const [center, setCenter] = useState(false)
 
 
   const handlePause = () => setPause(!pause);
@@ -44,13 +46,13 @@ const Weather = () => {
             </Row>
         
         <Row>
-          <Col xl={12} md={12}>
+          <Col xl={12} md={12} style={{height: '3rem'}} >
            
-        <div style={{height: '3rem'}} className="d-flex align-items-center justify-content-end form-check form-switch form-switch-right form-switch-md">
+        <div className="d-flex align-items-center justify-content-end form-check form-switch form-switch-right form-switch-md">
             {/* <div>
 
                         <Label className="form-label text-muted">Center ISS</Label>
-                        <Input className="form-check-input code-switcher" type="checkbox" />
+                        <Input onChange={(e) => setCenter(e.target.checked)} className="form-check-input code-switcher" type="checkbox" />
             </div> */}
             <div>
 
@@ -58,6 +60,7 @@ const Weather = () => {
                         <Input onChange={(e) => setPause(e.target.checked)} className="form-check-input code-switcher" type="checkbox" />
             </div>
            </div>
+       
           </Col>
         </Row>
         <Row className='mb-3'>
@@ -67,7 +70,7 @@ const Weather = () => {
             
           <div style={{minHeight:'36.7rem',width:'100%', position:'relative'}}>
 
-          <Globe latitude={latitude} longitude={longitude} altitude={altitude} /> 
+          <Globe center = {center} latlngs ={latlngs}  latitude={latitude} longitude={longitude} altitude={altitude} /> 
           </div>
           
            
@@ -79,7 +82,7 @@ const Weather = () => {
                                    
                                    
                                         <div id="gmaps-markers" className="wmap" style={{ position: "relative" }}>
-                                        <WorldMap latlngs ={latlngs} latitude={latitude} longitude={longitude} />
+                                        <WorldMap coords = {coords} latitude={latitude} longitude={longitude} />
                                             </div>
                                     
                                 </Card>
@@ -108,7 +111,7 @@ const Weather = () => {
           <Col className='mt-5'>
           
 
-          <MapTabContainer latlngs = {latlngs} setLatlngs = {setLatlngs}  pause = {pause} setLatitude={setLatitude} setLongitude={setLongitude} altitude={altitude} latitude={latitude} dataColors='["--vz-primary", "--vz-success"]' longitude={longitude}/>
+          <MapTabContainer setCoords = {setCoords} latlngs = {latlngs} setLatlngs = {setLatlngs}  pause = {pause} setLatitude={setLatitude} setLongitude={setLongitude} altitude={altitude} latitude={latitude} dataColors='["--vz-primary", "--vz-success"]' longitude={longitude}/>
           
           </Col>
         </Row>

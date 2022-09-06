@@ -6,12 +6,12 @@ const SensorMapFilterSideBar = ({ sensorList, mapRef, mapLayers }) => {
   const filterData = useRef([]);
   const initialMapLayer = useRef([]);
   const [batteryStatus, setBatteryStatus] = useState([
-    "10",
-    "20",
-    "30",
-    "40",
-    "50",
-    "80",
+    "10%",
+    "20%",
+    "30%",
+    "40%",
+    "50%",
+    "80%",
   ]);
   const [sensorTypes, setSensorTypes] = useState([
     "NVIDIA Jetson Nano",
@@ -108,10 +108,15 @@ const SensorMapFilterSideBar = ({ sensorList, mapRef, mapLayers }) => {
 
   return (
     <Card>
-      <CardHeader>
+      
         <div className="d-flex mb-3">
           <div className="flex-grow-1">
-            <h5 className="fs-16">Filters</h5>
+            {/* <h5 className="fs-16">Filters</h5> */}
+            <button type="button" className="btn btn-primary">
+                      {" "}
+                      <i className="ri-equalizer-fill me-1 align-bottom"></i>
+                      Filters
+            </button>
           </div>
           <div className="flex-shrink-0">
             <div
@@ -129,7 +134,7 @@ const SensorMapFilterSideBar = ({ sensorList, mapRef, mapLayers }) => {
           sensorData={filterData}
           recieveSearchValue={recieveSearchValue}
         />
-      </CardHeader>
+      
       <div className="accordion accordion-flush">
         <div className="card-body border-bottom">
           <div>

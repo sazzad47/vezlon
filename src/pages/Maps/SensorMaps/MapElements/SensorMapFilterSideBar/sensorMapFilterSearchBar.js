@@ -61,11 +61,11 @@ const SensorMapFilterSearchBar = ({ sensorData, recieveSearchValue }) => {
 
   return (
     <React.Fragment>
-      <form className="app-search d-none d-md-block">
+      <form style={{margin:'0 !important', padding:'0 !important'}} className="app-search d-none d-md-block">
         <div className="position-relative">
           <Input
             type="text"
-            className="form-control"
+            className="form-control bg-light"
             placeholder="Search..."
             id="sensorFilter-search-options"
             value={value}

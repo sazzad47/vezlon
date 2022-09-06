@@ -1,5 +1,6 @@
 import { Card, CardBody, CardHeader, Col, Row } from "reactstrap";
 import { Marker, Popup } from "react-leaflet";
+import { Link } from "react-router-dom";
 const SensorPopup = ({ mapLayers, item, index }) => {
   const batteryLevelObject = {
     "100-80": "la-battery-full fullIconLevel",
@@ -216,7 +217,7 @@ const SensorPopup = ({ mapLayers, item, index }) => {
                   <Col xs="4">
                     <h6>Asset Management:</h6>
                   </Col>
-                  <Col>{item && item.assetManagement}</Col>
+                  <Col><Link style={{ textDecoration: 'none', }} target={"_blank"} to='iss-analytics'>Click here</Link></Col>
                 </div>
               </Col>
             </Row>
