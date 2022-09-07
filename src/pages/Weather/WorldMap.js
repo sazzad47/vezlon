@@ -47,7 +47,7 @@ const WorldMap = ({operatorLat, operatorLong, operatorCity, coords, latitude, lo
           
            >
           <Tooltip direction="bottom" offset={[20, 20]} opacity={1} permanent>
-            You are here in {operatorCity} <br/> Latitude: {operatorLat} ° <br/> Longitude: {operatorLong} °
+            You are here in {operatorCity} <br/> Latitude: {operatorLat?.toFixed(1)} ° <br/> Longitude: {operatorLong?.toFixed(1)} °
             </Tooltip>
           </Marker>
          <Polyline positions={coords} color="red" />
