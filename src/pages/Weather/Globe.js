@@ -18,16 +18,16 @@ const Globe = ({center, latitude, longitude, altitude, latlngs }) => {
   const [issLong, setIssLong] = useState(null);
   const canvas = document.getElementsByClassName('cesium-viewer')
   
-  const centerISS = () => {
-   if ((typeof(latitude) ==='undefined') || (typeof(longitude) === 'undefined')) {
-    return;
-   }
-    const cartographic = Cesium.Cartographic.fromDegrees(Number(latitude), Number(longitude), 100);
-    if (!Cesium.Rectangle?.contains(viewerRef?.camera.computeViewRectangle(), cartographic)) {
-      const destination = Cesium.Cartesian3.fromDegrees(Number(latitude), Number(longitude), 100);
-      viewerRef?.camera.flyTo({destination, duration: .5});}
+  // const centerISS = () => {
+  //  if ((typeof(latitude) ==='undefined') || (typeof(longitude) === 'undefined')) {
+  //   return;
+  //  }
+  //   const cartographic = Cesium.Cartographic.fromDegrees(Number(latitude), Number(longitude), 100);
+  //   if (!Cesium.Rectangle?.contains(viewerRef?.camera.computeViewRectangle(), cartographic)) {
+  //     const destination = Cesium.Cartesian3.fromDegrees(Number(latitude), Number(longitude), 100);
+  //     viewerRef?.camera.flyTo({destination, duration: .5});}
     
-  }
+  // }
   
   function fullScreenHandler () {
     const canvas = viewerRef?.scene.canvas;
@@ -41,9 +41,9 @@ const Globe = ({center, latitude, longitude, altitude, latlngs }) => {
       viewerRef?.fullscreenButton.viewModel.command.afterExecute.addEventListener(fullScreenHandler)
 
  
-  const [operatorLat, setOperatorLat] = useState();
-  const [operatorLong, setOperatorLong] = useState();
-  const [operatorCity, setOperatorCity] = useState();
+  const [operatorLat, setOperatorLat] = useState(null);
+  const [operatorLong, setOperatorLong] = useState(null);
+  const [operatorCity, setOperatorCity] = useState(null);
   
    
   function showPosition() {
@@ -70,16 +70,16 @@ const Globe = ({center, latitude, longitude, altitude, latlngs }) => {
     }, 500);
   },[latitude, longitude])
 
-   useEffect(() => {
-    if ((typeof(issLat) ==='undefined') || (typeof(issLong) === 'undefined')) {
-         return; 
-       }
-       if(!center) {
-        return;
-      }
-     centerISS();
+  //  useEffect(() => {
+  //   if ((typeof(issLat) ==='undefined') || (typeof(issLong) === 'undefined')) {
+  //        return; 
+  //      }
+  //      if(!center) {
+  //       return;
+  //     }
+  //    centerISS();
    
-   })
+  //  })
   // useEffect(() => {
    
   //   if ((typeof(latitude) ==='undefined') || (typeof(longitude) === 'undefined') || (typeof(operatorLat) ==='undefined') || (typeof(operatorLong) ==='undefined') || (typeof(operatorCity) ==='undefined')) {
@@ -161,13 +161,11 @@ const Globe = ({center, latitude, longitude, altitude, latlngs }) => {
   return (
     <> 
     
-    {((typeof(issLat) ==='undefined') || (typeof(issLong) === 'undefined') || (typeof(operatorLat) ==='undefined') || (typeof(operatorLong) ==='undefined') || (typeof(operatorCity) ==='undefined'))?
-    <h6>Loading...</h6>
-      :<Viewer 
+    {(issLat && issLong && operatorLat && operatorLong) && <Viewer 
       full
         terrainProvider={worldTerrain}
-        // style={{ height: "100%", width: "100%", position: "absolute" }}
-        // infoBox={true}
+        style={{ height: "100%", width: "100%", position: "absolute" }}
+       
         ref={(e) => {
           if (e !== null) {
             // @ts-ignore
@@ -230,8 +228,8 @@ const Globe = ({center, latitude, longitude, altitude, latlngs }) => {
              />
         </Resium.Entity>
         
-      </Viewer>
-}       
+      </Viewer>}
+      
     </>
   );
 };
