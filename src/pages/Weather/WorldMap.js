@@ -20,7 +20,7 @@ const WorldMap = ({operatorLat, operatorLong, operatorCity, coords, latitude, lo
 
   return (
     <>
-       {(latitude && longitude && operatorLat && operatorLat && operatorCity) &&
+       {(latitude && longitude) &&
       
        
         <MapContainer
