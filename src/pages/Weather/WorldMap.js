@@ -68,7 +68,7 @@ const pos = [
 
   return (
     <>
-       {((typeof(latitude) ==='undefined') || (typeof(longitude) === 'undefined'))?
+       {((typeof(latitude) ==='undefined') || (typeof(longitude) === 'undefined') || (typeof(operatorLat) ==='undefined') || (typeof(operatorLong) ==='undefined') || (typeof(operatorCity) ==='undefined'))?
        <h6>Loading...</h6>:
         <>
         <MapContainer
@@ -85,9 +85,9 @@ const pos = [
             position={coord}
             icon={<img src={Satellite} style={{ width: '100px' }} />}
           > 
-           {/* <Tooltip direction="bottom" offset={[20, 20]} opacity={1} permanent>
+           <Tooltip direction="bottom" offset={[20, 20]} opacity={1} permanent>
               Latitude: {latitude?.toFixed(1)} ° <br/> Longitude: {longitude?.toFixed(1)} °
-            </Tooltip> */}
+            </Tooltip>
             <Popup>INTERNATIONAL SPACE STATION LIVE COORDINATES</Popup>
           </Marker>
           <Marker
@@ -98,8 +98,8 @@ const pos = [
             You are here in {operatorCity} <br/> Latitude: {operatorLat} ° <br/> Longitude: {operatorLong} °
             </Tooltip>
           </Marker>
-         {/* <Polyline positions={coords} color="red" /> */}
-         
+         <Polyline positions={coords} color="red" />
+          {/* {coords ? <AntPath positions={coords} options={options} /> : null}   */}
           <FullscreenControl position = 'topright' forceSeparateButton = {true}/>
         </MapContainer>
        

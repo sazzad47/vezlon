@@ -14,6 +14,8 @@ const Globe = ({center, latitude, longitude, altitude, latlngs }) => {
   const [viewerRef, setViewerRef] = useState(null);
   const [iSSEntity, setISSEntity] = useState(null);
   const [coordinates, setCoordinates] = useState([]);
+  const [issLat, setIssLat] = useState(null);
+  const [issLong, setIssLong] = useState(null);
   const canvas = document.getElementsByClassName('cesium-viewer')
   
   const centerISS = () => {
@@ -58,12 +60,18 @@ const Globe = ({center, latitude, longitude, altitude, latlngs }) => {
       })
       .catch(console.error);
   }
-  setTimeout(function () {
-    showPosition();
-  }, 500);
+ 
+
+  useEffect(() => {
+    setIssLat(latitude)
+    setIssLong(longitude)
+    setTimeout(function () {
+      showPosition();
+    }, 500);
+  },[latitude, longitude])
 
    useEffect(() => {
-    if ((typeof(latitude) ==='undefined') || (typeof(longitude) === 'undefined')) {
+    if ((typeof(issLat) ==='undefined') || (typeof(issLong) === 'undefined')) {
          return; 
        }
        if(!center) {
@@ -153,7 +161,7 @@ const Globe = ({center, latitude, longitude, altitude, latlngs }) => {
   return (
     <> 
     
-    {((typeof(latitude) ==='undefined') || (typeof(longitude) === 'undefined') || (typeof(operatorLat) ==='undefined') || (typeof(operatorLong) ==='undefined') || (typeof(operatorCity) ==='undefined'))?
+    {((typeof(issLat) ==='undefined') || (typeof(issLong) === 'undefined') || (typeof(operatorLat) ==='undefined') || (typeof(operatorLong) ==='undefined') || (typeof(operatorCity) ==='undefined'))?
     <h6>Loading...</h6>
       :<Viewer 
       full
@@ -184,7 +192,7 @@ const Globe = ({center, latitude, longitude, altitude, latlngs }) => {
           <Resium.Entity 
            name="ISS"
            description="Here is ISS"
-           position={Cartesian3.fromDegrees(latitude, longitude, 100)}
+           position={Cartesian3.fromDegrees(issLat, issLong, 100)}
            billboard={{ image }}
           >
             <Resium.LabelGraphics
