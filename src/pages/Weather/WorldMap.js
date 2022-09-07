@@ -20,7 +20,7 @@ const WorldMap = ({operatorLat, operatorLong, operatorCity, coords, latitude, lo
 
   return (
     <>
-       {(latitude && longitude) &&
+       {(latitude && longitude && operatorLat && operatorLat && operatorCity) &&
       
        
         <MapContainer
@@ -42,16 +42,16 @@ const WorldMap = ({operatorLat, operatorLong, operatorCity, coords, latitude, lo
             </Tooltip>
             <Popup>INTERNATIONAL SPACE STATION LIVE COORDINATES</Popup>
           </Marker>
-          {(!operatorLat || !operatorLong || !operatorCity)? null : <Marker
+          <Marker
            position = {operatorPosition}
           
            >
           <Tooltip direction="bottom" offset={[20, 20]} opacity={1} permanent>
             You are here in {operatorCity} <br/> Latitude: {operatorLat} ° <br/> Longitude: {operatorLong} °
             </Tooltip>
-          </Marker>}
+          </Marker>
          <Polyline positions={coords} color="red" />
-          {/* {coords ? <AntPath positions={coords} options={options} /> : null}   */}
+            
           <FullscreenControl position = 'topright' forceSeparateButton = {true}/>
         </MapContainer>
        
