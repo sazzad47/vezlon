@@ -10,6 +10,7 @@ import TempConverter from './TempConverter';
 import SpeedConverter from './SpeedConverter';
 import RightSideISSData from './RightSideISSData';
 import ISSTable from './ISSTable';
+import axios from 'axios';
 
 function getChartColorsArray(colors) {
   colors = JSON.parse(colors);
@@ -64,23 +65,23 @@ const ISSData = ({setOperatorLat, setOperatorLong, setOperatorCity, setCoords, s
       clearInterval(myInterval);
     };
   });
-  // to call 1 time at start so the data is loaded
-  useEffect(() => {
-    showPosition();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  // // to call 1 time at start so the data is loaded
+  // useEffect(() => {
+  //   showPosition();
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, []);
 
-  // to call fetch data every 10 seconds
-  useEffect(() => {
-    const myInterval = setInterval(showPosition, 10000);
+  // // to call fetch data every 10 seconds
+  // useEffect(() => {
+  //   const myInterval = setInterval(showPosition, 10000);
      
 
-    return () => {
-      // should clear the interval when the component unmounts
+  //   return () => {
+  //     // should clear the interval when the component unmounts
       
-      clearInterval(myInterval);
-    };
-  });
+  //     clearInterval(myInterval);
+  //   };
+  // });
 
   const fetchData = () => {
     if(pause) {
@@ -165,29 +166,59 @@ const ISSData = ({setOperatorLat, setOperatorLong, setOperatorCity, setCoords, s
         console.log(e);
       });
   };
-  const showPosition = () => {
+  const baseURL = "https://ipwhois.app/json/?objects=city,latitude,longitude";
+
+  // React.useEffect(() => {
+  //   axios.get(baseURL).then((response) => response.json()).then((data) => {
+  //       let lat = data.latitude.toFixed(2);
+  //       let long = data.longitude.toFixed(2);
+  //       let currentCity = data.city;
+  //       setOperatorLat(lat);
+  //       setOperatorLong(long);
+  //       setOperatorCity(currentCity);
+  //   });
+  // }, []);
+
+  function processData(data) {
+    // Here, you can put your code to process the data from response
+      let lat = data.latitude.toFixed(2);
+      let long = data.longitude.toFixed(2);
+      let currentCity = data.city;
+      setOperatorLat(lat);
+      setOperatorLong(long);
+      setOperatorCity(currentCity);
+      console.log('processdata',data);
+}
+useEffect(() => {
+  fetch('https://ipwhois.app/json/?objects=city,latitude,longitude')
+  .then(response => response.json()).then((data) => {
+     processData(data)
+  }) 
+},[])
+
+  // const showPosition = () => {
   
-    setLoading(true);
-    fetch("https://ipwhois.app/json/?objects=city,latitude,longitude")
-      .then((response) => response.json())
-      .then((data) => {
-        let lat = data.latitude.toFixed(2);
-        let long = data.longitude.toFixed(2);
-        let currentCity = data.city;
-        setOperatorLat(lat);
-        setOperatorLong(long);
-        setOperatorCity(currentCity);
+  //   setLoading(true);
+  //   fetch("https://ipwhois.app/json/?objects=city,latitude,longitude")
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       let lat = data.latitude.toFixed(2);
+  //       let long = data.longitude.toFixed(2);
+  //       let currentCity = data.city;
+  //       setOperatorLat(lat);
+  //       setOperatorLong(long);
+  //       setOperatorCity(currentCity);
        
        
         
         
        
-      })
-      .catch((e) => {
-        setLoading(false);
-        console.log(e);
-      });
-  };
+  //     })
+  //     .catch((e) => {
+  //       setLoading(false);
+  //       console.log(e);
+  //     });
+  // };
  
   React.useEffect(() => {}, [data]);
   
