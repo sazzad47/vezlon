@@ -149,7 +149,7 @@ const Graphs = (props) => {
                   <h4 className="card-title mb-0">Graph</h4>
                 </CardHeader>
                 <CardBody>
-                  <div style={{ width: "100%", height: "462px" }} id="sigma-container"></div>
+                  <div style={{ width: "100%", height: "100%" }} id="sigma-container"></div>
                 </CardBody>
               </Card>
             </Col>
