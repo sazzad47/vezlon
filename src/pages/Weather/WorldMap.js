@@ -98,7 +98,7 @@ const pos = [
             You are here in {operatorCity} <br/> Latitude: {operatorLat} ° <br/> Longitude: {operatorLong} °
             </Tooltip>}
           </Marker> */}
-         {/* <Polyline positions={coords} color="red" /> */}
+         <Polyline positions={coords} color="red" />
           {/* {coords ? <AntPath positions={coords} options={options} /> : null}   */}
           <FullscreenControl position = 'topright' forceSeparateButton = {true}/>
         </MapContainer>
