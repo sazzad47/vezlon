@@ -10,9 +10,9 @@ import FullScreenDropdown from '../../Components/Common/FullScreenDropdown';
 const WorldMap = ({coords, latitude, longitude }) => {
   const position = [26.4887, 77.981];
   const coord = [latitude, longitude];
-  const [operatorLat, setOperatorLat] = useState();
-  const [operatorLong, setOperatorLong] = useState();
-  const [operatorCity, setOperatorCity] = useState();
+  const [operatorLat, setOperatorLat] = useState(null);
+  const [operatorLong, setOperatorLong] = useState(null);
+  const [operatorCity, setOperatorCity] = useState(null);
   const operatorPosition = [operatorLat, operatorLong];
   
   function showPosition() {
@@ -68,9 +68,9 @@ const pos = [
 
   return (
     <>
-       {((typeof(latitude) ==='undefined') || (typeof(longitude) === 'undefined') || (typeof(operatorLat) ==='undefined') || (typeof(operatorLong) ==='undefined') || (typeof(operatorCity) ==='undefined'))?
-       <h6>Loading...</h6>:
-        <>
+       {(latitude && longitude && operatorLat && operatorLong && operatorCity) &&
+      
+       
         <MapContainer
           center={coord}
           zoom={3}
@@ -103,7 +103,7 @@ const pos = [
           <FullscreenControl position = 'topright' forceSeparateButton = {true}/>
         </MapContainer>
        
-        </>}
+      }
 
       
     </>

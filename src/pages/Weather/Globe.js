@@ -161,7 +161,7 @@ const Globe = ({center, latitude, longitude, altitude, latlngs }) => {
   return (
     <> 
     
-    {(issLat && issLong && operatorLat && operatorLong) && <Viewer 
+    {(issLat && issLong && operatorLat && operatorLong && operatorCity) && <Viewer 
       full
         terrainProvider={worldTerrain}
         style={{ height: "100%", width: "100%", position: "absolute" }}
