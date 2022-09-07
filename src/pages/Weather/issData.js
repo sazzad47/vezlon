@@ -189,12 +189,25 @@ const ISSData = ({setOperatorLat, setOperatorLong, setOperatorCity, setCoords, s
       setOperatorCity(currentCity);
       console.log('processdata',data);
 }
-useEffect(() => {
+const showPosition = () => {
+
   fetch('https://ipwhois.app/json/?objects=city,latitude,longitude')
   .then(response => response.json()).then((data) => {
      processData(data)
   }) 
+} 
+useEffect(() => {
+  showPosition()
 },[])
+ useEffect(() => {
+ 
+  const myInterval = setInterval(showPosition, 500);
+     
+
+    return () => {
+      clearInterval(myInterval);
+    };
+})
 
   // const showPosition = () => {
   
