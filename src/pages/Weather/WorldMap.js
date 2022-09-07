@@ -9,11 +9,11 @@ import FullScreenDropdown from '../../Components/Common/FullScreenDropdown';
 
 const WorldMap = ({coords, latitude, longitude }) => {
   const position = [26.4887, 77.981];
-  const coord = [latitude, longitude];
+  const coord = [Number(latitude), Number(longitude)];
   const [operatorLat, setOperatorLat] = useState(null);
   const [operatorLong, setOperatorLong] = useState(null);
   const [operatorCity, setOperatorCity] = useState(null);
-  const operatorPosition = [operatorLat, operatorLong];
+  const operatorPosition = [Number(operatorLat), Number(operatorLong)];
   
   function showPosition() {
     fetch("https://ipwhois.app/json/?objects=city,latitude,longitude")
@@ -95,7 +95,7 @@ const pos = [
           
            >
           <Tooltip direction="bottom" offset={[20, 20]} opacity={1} permanent>
-            You are here in {operatorCity} <br/> Latitude: {operatorLat} ° <br/> Longitude: {operatorLong} °
+            You are here in {operatorCity} <br/> Latitude: {Number(operatorLat)} ° <br/> Longitude: {Number(operatorLong)} °
             </Tooltip>
           </Marker>}
          <Polyline positions={coords} color="red" />
