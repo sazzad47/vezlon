@@ -60,14 +60,22 @@ const Globe = ({center, latitude, longitude, altitude, latlngs }) => {
       })
       .catch(console.error);
   }
- 
-
   useEffect(() => {
-    setIssLat(latitude)
-    setIssLong(longitude)
-    setTimeout(function () {
-      showPosition();
-    }, 500);
+    showPosition();
+  },[])
+  
+  useEffect(() => {
+    const myInterval = setInterval(showPosition, 1000);
+    return () => {
+      
+      clearInterval(myInterval);
+    };
+  })
+ 
+  useEffect(() => {
+    setIssLat(latitude);
+    setIssLong(longitude);
+    
   },[latitude, longitude])
 
   //  useEffect(() => {
@@ -161,7 +169,7 @@ const Globe = ({center, latitude, longitude, altitude, latlngs }) => {
   return (
     <> 
     
-    {(issLat && issLong ) && <Viewer 
+    {(issLat && issLong && operatorLat && operatorLong && operatorCity ) && <Viewer 
       full
         terrainProvider={worldTerrain}
         style={{ height: "100%", width: "100%", position: "absolute" }}
@@ -207,7 +215,7 @@ const Globe = ({center, latitude, longitude, altitude, latlngs }) => {
              style = {Cesium.LabelStyle.FILL}
              />
         </Resium.Entity>
-          {/* <Resium.Entity 
+          <Resium.Entity 
            name="Operator Position"
            description="You are here."
            position={Cartesian3.fromDegrees(Number(operatorLat), Number(operatorLong), 100)}
@@ -226,7 +234,7 @@ const Globe = ({center, latitude, longitude, altitude, latlngs }) => {
             
              style = {Cesium.LabelStyle.FILL}
              />
-        </Resium.Entity> */}
+        </Resium.Entity>
         
       </Viewer>}
       
