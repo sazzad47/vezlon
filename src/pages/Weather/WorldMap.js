@@ -42,28 +42,7 @@ const WorldMap = ({coords, latitude, longitude }) => {
   
 
 
- const options = {
-  "delay": 400,
-  "dashArray": [
-    10,
-    20
-  ],
-  "weight": 5,
-  "color": "#0000FF",
-  "pulseColor": "#FFFFFF",
-  "paused": false,
-  "reverse": false,
-  "hardwareAccelerated": true
-};
-
-const pos = [
-  [36.460353, 126.440674],
-  [34.789594, 135.438084], //to jpn
-  [36.460353, 126.440674],
-  [55.410343, 37.902312], //to rus
-  [36.460353, 126.440674],
-  [40.085148, 116.552407] //to chi
-];
+ 
   
   console.log('operatorPosition', operatorPosition)
 
@@ -92,7 +71,7 @@ const pos = [
             </Tooltip>
             <Popup>INTERNATIONAL SPACE STATION LIVE COORDINATES</Popup>
           </Marker>
-          {(!operatorLat || !operatorLong || !operatorCity)? null : <Marker
+          {(operatorLat && operatorLong) && <Marker
            position = {operatorPosition}
           
            >
