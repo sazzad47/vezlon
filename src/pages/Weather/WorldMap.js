@@ -13,7 +13,7 @@ const WorldMap = ({coords, latitude, longitude }) => {
   const [operatorLat, setOperatorLat] = useState(null);
   const [operatorLong, setOperatorLong] = useState(null);
   const [operatorCity, setOperatorCity] = useState(null);
-  const operatorPosition = [Number(operatorLat), Number(operatorLong)];
+  const [operatorPosition, setOperatorPosition] = useState([]);
   
   function showPosition() {
     fetch("https://ipwhois.app/json/?objects=city,latitude,longitude")
@@ -22,6 +22,8 @@ const WorldMap = ({coords, latitude, longitude }) => {
         let currentLat = parseFloat(data.latitude).toFixed(2);
         let currentLong = parseFloat(data.longitude).toFixed(2);
         let currentCity = data.city;
+        
+        setOperatorPosition([Number(currentLat), Number(currentLong)])
         setOperatorLat(currentLat);
         setOperatorLong(currentLong);
         setOperatorCity(currentCity);
@@ -63,7 +65,7 @@ const pos = [
   [40.085148, 116.552407] //to chi
 ];
   
-  console.log('trajectory', coords)
+  console.log('operatorPosition', operatorPosition)
 
 
   return (
@@ -90,12 +92,12 @@ const pos = [
             </Tooltip>
             <Popup>INTERNATIONAL SPACE STATION LIVE COORDINATES</Popup>
           </Marker>
-          {(operatorLat && operatorLong) &&<Marker
+          {(!operatorLat || !operatorLong || !operatorCity)? null : <Marker
            position = {operatorPosition}
           
            >
           <Tooltip direction="bottom" offset={[20, 20]} opacity={1} permanent>
-            You are here in {operatorCity} <br/> Latitude: {Number(operatorLat)} ° <br/> Longitude: {Number(operatorLong)} °
+            You are here in {operatorCity} <br/> Latitude: {operatorLat} ° <br/> Longitude: {operatorLong} °
             </Tooltip>
           </Marker>}
          <Polyline positions={coords} color="red" />
