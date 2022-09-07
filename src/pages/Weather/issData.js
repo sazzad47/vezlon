@@ -184,8 +184,8 @@ const ISSData = ({setOperatorLat, setOperatorLong, setOperatorCity, setCoords, s
       let lat = data.latitude;
       let long = data.longitude;
       let currentCity = data.city;
-      setOperatorLat(lat.toFixed(2));
-      setOperatorLong(long.toFixed(2));
+      setOperatorLat(lat);
+      setOperatorLong(long);
       setOperatorCity(currentCity);
       console.log('processdata',data);
 }
