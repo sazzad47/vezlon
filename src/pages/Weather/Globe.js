@@ -161,7 +161,7 @@ const Globe = ({center, latitude, longitude, altitude, latlngs }) => {
   return (
     <> 
     
-    {(issLat && issLong && operatorLat && operatorLong && operatorCity) && <Viewer 
+    {(issLat && issLong ) && <Viewer 
       full
         terrainProvider={worldTerrain}
         style={{ height: "100%", width: "100%", position: "absolute" }}
@@ -207,7 +207,7 @@ const Globe = ({center, latitude, longitude, altitude, latlngs }) => {
              style = {Cesium.LabelStyle.FILL}
              />
         </Resium.Entity>
-          <Resium.Entity 
+          {/* <Resium.Entity 
            name="Operator Position"
            description="You are here."
            position={Cartesian3.fromDegrees(Number(operatorLat), Number(operatorLong), 100)}
@@ -226,7 +226,7 @@ const Globe = ({center, latitude, longitude, altitude, latlngs }) => {
             
              style = {Cesium.LabelStyle.FILL}
              />
-        </Resium.Entity>
+        </Resium.Entity> */}
         
       </Viewer>}
       
