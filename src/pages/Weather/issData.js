@@ -185,7 +185,7 @@ function calculateRadius20degrees(altitude) {
   radius20degOverHorizon = radius20degOverHorizon.toFixed(2); // * [km]
   setRadiusOverHorizon(radius20degOverHorizon)
  
-  console.log("radius20degOverHorizon:", radius20degOverHorizon);
+ 
 }
 
    

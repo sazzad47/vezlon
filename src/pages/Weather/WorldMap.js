@@ -71,7 +71,7 @@ const WorldMap = ({coords, latitude, longitude }) => {
             </Tooltip>
             <Popup>INTERNATIONAL SPACE STATION LIVE COORDINATES</Popup>
           </Marker>
-          {(operatorLat && operatorLong) && <Marker
+          {(!operatorLat || !operatorLong || !operatorCity)? null : <Marker
            position = {operatorPosition}
           
            >
