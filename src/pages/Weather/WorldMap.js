@@ -13,7 +13,7 @@ const WorldMap = ({coords, latitude, longitude }) => {
   const [operatorLat, setOperatorLat] = useState(null);
   const [operatorLong, setOperatorLong] = useState(null);
   const [operatorCity, setOperatorCity] = useState(null);
-  const operatorPosition = [null, null];
+  const operatorPosition = [operatorLat, operatorLong];
   
   function showPosition() {
     fetch("https://ipwhois.app/json/?objects=city,latitude,longitude")
@@ -90,14 +90,14 @@ const pos = [
             </Tooltip>
             <Popup>INTERNATIONAL SPACE STATION LIVE COORDINATES</Popup>
           </Marker>
-          {/* <Marker
+          {(operatorLat && operatorLong) &&<Marker
            position = {operatorPosition}
           
            >
-          {(operatorLat && operatorLong) &&<Tooltip direction="bottom" offset={[20, 20]} opacity={1} permanent>
+          <Tooltip direction="bottom" offset={[20, 20]} opacity={1} permanent>
             You are here in {operatorCity} <br/> Latitude: {operatorLat} ° <br/> Longitude: {operatorLong} °
-            </Tooltip>}
-          </Marker> */}
+            </Tooltip>
+          </Marker>}
          <Polyline positions={coords} color="red" />
           {/* {coords ? <AntPath positions={coords} options={options} /> : null}   */}
           <FullscreenControl position = 'topright' forceSeparateButton = {true}/>
