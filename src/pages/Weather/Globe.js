@@ -64,20 +64,14 @@ const Globe = ({center, latitude, longitude, altitude, latlngs }) => {
     showPosition();
   },[])
   
-  useEffect(() => {
-    const myInterval = setInterval(showPosition, 1000);
-    return () => {
-      
-      clearInterval(myInterval);
-    };
-  })
+  
  
   useEffect(() => {
     setIssLat(latitude);
     setIssLong(longitude);
     
   },[latitude, longitude])
-
+ 
   //  useEffect(() => {
   //   if ((typeof(issLat) ==='undefined') || (typeof(issLong) === 'undefined')) {
   //        return; 
@@ -182,7 +176,7 @@ const Globe = ({center, latitude, longitude, altitude, latlngs }) => {
         }}
        
       >    
-          {latlngs.length < 4? null : <Resium.Entity>
+          {latlngs?.length < 4? null : <Resium.Entity>
             <Resium.PolylineGraphics
                 show
                 width={10}

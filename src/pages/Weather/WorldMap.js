@@ -34,9 +34,9 @@ const WorldMap = ({coords, latitude, longitude }) => {
       })
       .catch(console.error);
   }
-  setTimeout(function () {
-    showPosition();
-  }, 500);
+  useEffect(() => {
+    showPosition()
+  },[])
   
 
 
@@ -68,7 +68,7 @@ const pos = [
 
   return (
     <>
-       {(latitude && longitude && operatorLat && operatorLong && operatorCity) &&
+       {(latitude && longitude) &&
       
        
         <MapContainer
@@ -94,9 +94,9 @@ const pos = [
            position = {operatorPosition}
           
            >
-          <Tooltip direction="bottom" offset={[20, 20]} opacity={1} permanent>
+          {(operatorLat && operatorLong) &&<Tooltip direction="bottom" offset={[20, 20]} opacity={1} permanent>
             You are here in {operatorCity} <br/> Latitude: {operatorLat} ° <br/> Longitude: {operatorLong} °
-            </Tooltip>
+            </Tooltip>}
           </Marker>
          <Polyline positions={coords} color="red" />
           {/* {coords ? <AntPath positions={coords} options={options} /> : null}   */}
