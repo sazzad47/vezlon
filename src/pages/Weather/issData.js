@@ -201,7 +201,7 @@ useEffect(() => {
 },[])
  useEffect(() => {
  
-  const myInterval = setInterval(showPosition, 500);
+  const myInterval = setInterval(showPosition, 10000);
      
 
     return () => {

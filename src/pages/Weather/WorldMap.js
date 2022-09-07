@@ -42,14 +42,14 @@ const WorldMap = ({operatorLat, operatorLong, operatorCity, coords, latitude, lo
             </Tooltip>
             <Popup>INTERNATIONAL SPACE STATION LIVE COORDINATES</Popup>
           </Marker>
-          <Marker
+          {(operatorLat && operatorLong && operatorCity) && <Marker
            position = {operatorPosition}
           
            >
           <Tooltip direction="bottom" offset={[20, 20]} opacity={1} permanent>
             You are here in {operatorCity} <br/> Latitude: {operatorLat?.toFixed(1)} ° <br/> Longitude: {operatorLong?.toFixed(1)} °
             </Tooltip>
-          </Marker>
+          </Marker>}
          <Polyline positions={coords} color="red" />
             
           <FullscreenControl position = 'topright' forceSeparateButton = {true}/>
