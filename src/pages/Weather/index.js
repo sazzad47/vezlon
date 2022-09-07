@@ -81,9 +81,9 @@ const Weather = () => {
                                 <Card>
                                    
                                    
-                                        <div id="gmaps-markers" className="wmap" style={{ position: "relative" }}>
+                                        {/* <div id="gmaps-markers" className="wmap" style={{ position: "relative" }}>
                                         <WorldMap coords = {coords} latitude={latitude} longitude={longitude} />
-                                            </div>
+                                            </div> */}
                                     
                                 </Card>
                                 <Card>
