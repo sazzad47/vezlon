@@ -181,8 +181,8 @@ const ISSData = ({setOperatorLat, setOperatorLong, setOperatorCity, setCoords, s
 
   function processData(data) {
     // Here, you can put your code to process the data from response
-      let lat = data.latitude;
-      let long = data.longitude;
+      let lat = parseFloat(data.latitude);
+      let long = parseFloat(data.longitude);
       let currentCity = data.city;
       setOperatorLat(lat);
       setOperatorLong(long);
