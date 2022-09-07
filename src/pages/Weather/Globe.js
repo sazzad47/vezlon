@@ -160,7 +160,7 @@ const Globe = ({center, latitude, longitude, altitude, latlngs }) => {
 
  
   const issInfo = `Latitude: ${latitude?.toFixed(1)}, Longitude: ${longitude?.toFixed(1)}`
-  const operatorInfo = `Your are here; Latitude: ${operatorLat}, Longitude: ${operatorLong}`
+  const operatorInfo = `You are here; Latitude: ${operatorLat}, Longitude: ${operatorLong}`
   return (
     <> 
     
