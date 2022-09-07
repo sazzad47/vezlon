@@ -6,6 +6,7 @@ import * as Cesium from "cesium";
 import image from '../../assets/images/iss.png'
 import location from '../../assets/images/location.png'
 import {Ion, createWorldTerrain, Cartesian3, Color} from "cesium";
+import useGeoLocation from "./useGeoLocation";
 
 
 const Globe = ({center, latitude, longitude, altitude, latlngs }) => {
@@ -39,30 +40,30 @@ const Globe = ({center, latitude, longitude, altitude, latlngs }) => {
       }
       viewerRef?.fullscreenButton.viewModel.command.beforeExecute.addEventListener(fullScreenHandler)
       viewerRef?.fullscreenButton.viewModel.command.afterExecute.addEventListener(fullScreenHandler)
-
  
-  const [operatorLat, setOperatorLat] = useState(null);
-  const [operatorLong, setOperatorLong] = useState(null);
-  const [operatorCity, setOperatorCity] = useState(null);
+  const location = useGeoLocation();
+  const operatorLat = location.loaded? location.coordinates.lat.toFixed(1) : null;
+  const operatorLong = location.loaded? location.coordinates.lng.toFixed(1) : null;
+  const operatorPosition = [operatorLat, operatorLong];
   
    
-  function showPosition() {
-    fetch("https://ipwhois.app/json/?objects=city,latitude,longitude")
-      .then((response) => response.json())
-      .then((data) => {
-        let currentLat = parseFloat(data.latitude).toFixed(2);
-        let currentLong = parseFloat(data.longitude).toFixed(2);
-        let currentCity = data.city;
-        setOperatorLat(currentLat);
-        setOperatorLong(currentLong);
-        setOperatorCity(currentCity);
+  // function showPosition() {
+  //   fetch("https://ipwhois.app/json/?objects=city,latitude,longitude")
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       let currentLat = parseFloat(data.latitude).toFixed(2);
+  //       let currentLong = parseFloat(data.longitude).toFixed(2);
+  //       let currentCity = data.city;
+  //       setOperatorLat(currentLat);
+  //       setOperatorLong(currentLong);
+  //       setOperatorCity(currentCity);
     
-      })
-      .catch(console.error);
-  }
-  useEffect(() => {
-    showPosition();
-  },[])
+  //     })
+  //     .catch(console.error);
+  // }
+  // useEffect(() => {
+  //   showPosition();
+  // },[])
   
   
  
@@ -159,7 +160,7 @@ const Globe = ({center, latitude, longitude, altitude, latlngs }) => {
 
  
   const issInfo = `Latitude: ${latitude?.toFixed(1)}, Longitude: ${longitude?.toFixed(1)}`
-  const operatorInfo = `You are here in ${operatorCity}`
+  const operatorInfo = `Your are here; Latitude: ${operatorLat}, Longitude: ${operatorLong}`
   return (
     <> 
     
@@ -209,14 +210,14 @@ const Globe = ({center, latitude, longitude, altitude, latlngs }) => {
              style = {Cesium.LabelStyle.FILL}
              />
         </Resium.Entity>
-          {(operatorLat && operatorLong) && <Resium.Entity 
+          {location.loaded && <Resium.Entity 
            name="Operator Position"
            description="You are here."
            position={Cartesian3.fromDegrees(Number(operatorLat), Number(operatorLong), 100)}
            billboard={{ location }}
           >
             <Resium.LabelGraphics
-             text= {operatorCity? operatorInfo : 'Loading...'}
+             text= {location.loaded? operatorInfo : 'Loading...'}
              fillColor={Color.ORANGE} 
              show = {true}
              showBackground = {true}
