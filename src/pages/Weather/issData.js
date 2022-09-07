@@ -35,7 +35,7 @@ function getChartColorsArray(colors) {
 }
 
 
-const ISSData = ({setCoords, setLatlngs, xAxis,  pause, setLatitude, setLongitude, dataColors }) => {
+const ISSData = ({setOperatorLat, setOperatorLong, setOperatorCity, setCoords, setLatlngs, xAxis,  pause, setLatitude, setLongitude, dataColors }) => {
   const [data, setData] = useState([]);
   // @ts-ignore
   const [loading, setLoading] = useState(false);
@@ -60,6 +60,23 @@ const ISSData = ({setCoords, setLatlngs, xAxis,  pause, setLatitude, setLongitud
       xAxis.unshift(xAxis.length)
      
       // xAxis.push([...xAxis, xAxis.length + 5])
+      
+      clearInterval(myInterval);
+    };
+  });
+  // to call 1 time at start so the data is loaded
+  useEffect(() => {
+    showPosition();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // to call fetch data every 10 seconds
+  useEffect(() => {
+    const myInterval = setInterval(showPosition, 10000);
+     
+
+    return () => {
+      // should clear the interval when the component unmounts
       
       clearInterval(myInterval);
     };
@@ -142,6 +159,29 @@ const ISSData = ({setCoords, setLatlngs, xAxis,  pause, setLatitude, setLongitud
         //   setTimeout(function () {
         //     drawISS3D(lat, long, altitude);
         //   }, 6000);
+      })
+      .catch((e) => {
+        setLoading(false);
+        console.log(e);
+      });
+  };
+  const showPosition = () => {
+  
+    setLoading(true);
+    fetch("https://ipwhois.app/json/?objects=city,latitude,longitude")
+      .then((response) => response.json())
+      .then((data) => {
+        let lat = data.latitude.toFixed(2);
+        let long = data.longitude.toFixed(2);
+        let currentCity = data.city;
+        setOperatorLat(lat);
+        setOperatorLong(long);
+        setOperatorCity(currentCity);
+       
+       
+        
+        
+       
       })
       .catch((e) => {
         setLoading(false);

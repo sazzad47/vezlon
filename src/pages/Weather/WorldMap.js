@@ -7,42 +7,13 @@ import Satellite from '../../assets/images/satellite.png';
 import FullScreenDropdown from '../../Components/Common/FullScreenDropdown';
 
 
-const WorldMap = ({coords, latitude, longitude }) => {
-  const position = [26.4887, 77.981];
-  const coord = [Number(latitude), Number(longitude)];
-  const [operatorLat, setOperatorLat] = useState(null);
-  const [operatorLong, setOperatorLong] = useState(null);
-  const [operatorCity, setOperatorCity] = useState(null);
-  const [operatorPosition, setOperatorPosition] = useState([]);
-  
-  function showPosition() {
-    fetch("https://ipwhois.app/json/?objects=city,latitude,longitude")
-      .then((response) => response.json())
-      .then((data) => {
-        let currentLat = parseFloat(data.latitude).toFixed(2);
-        let currentLong = parseFloat(data.longitude).toFixed(2);
-        let currentCity = data.city;
-        
-        setOperatorPosition([Number(currentLat), Number(currentLong)])
-        setOperatorLat(currentLat);
-        setOperatorLong(currentLong);
-        setOperatorCity(currentCity);
-        // Adding position marker - the main map
-       
-        // Adding position to the 3D Map
-        
-        // Showing Local Solar Time
-        
-      })
-      .catch(console.error);
-  }
-  useEffect(() => {
-    showPosition()
-  },[])
-  
-
-
+const WorldMap = ({operatorLat, operatorLong, operatorCity, coords, latitude, longitude }) => {
  
+  const coord = [Number(latitude), Number(longitude)];
+  const operatorPosition = [Number(operatorLat), Number(operatorLong)];
+  
+ 
+  
   
   console.log('operatorPosition', operatorPosition)
 

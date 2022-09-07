@@ -19,6 +19,10 @@ const Weather = () => {
   const [longitude, setLongitude] = React.useState();
   const [altitude, setAltitude] = React.useState();
 
+  const [operatorLat, setOperatorLat] = useState(null);
+  const [operatorLong, setOperatorLong] = useState(null);
+  const [operatorCity, setOperatorCity] = useState(null);
+
   const [pause, setPause] = useState(false)
   const [center, setCenter] = useState(false)
 
@@ -70,7 +74,7 @@ const Weather = () => {
             
           <div style={{minHeight:'36.7rem',width:'100%', position:'relative'}}>
 
-          <Globe center = {center} latlngs ={latlngs}  latitude={latitude} longitude={longitude} altitude={altitude} /> 
+          <Globe operatorLat = {operatorLat} operatorLong = {operatorLong} center = {center} latlngs ={latlngs}  latitude={latitude} longitude={longitude} altitude={altitude} /> 
           </div>
           
            
@@ -82,7 +86,7 @@ const Weather = () => {
                                    
                                    
                                         <div id="gmaps-markers" className="wmap mt-3 mt-md-3 mt-lg-0" style={{ position: "relative" }}>
-                                        <WorldMap coords = {coords} latitude={latitude} longitude={longitude} />
+                                        <WorldMap operatorLat = {operatorLat} operatorLong = {operatorLong} operatorCity = {operatorCity} coords = {coords} latitude={latitude} longitude={longitude} />
                                             </div>
                                     
                                 </Card>
@@ -111,7 +115,7 @@ const Weather = () => {
           <Col className='mt-5'>
           
 
-          <MapTabContainer setCoords = {setCoords} latlngs = {latlngs} setLatlngs = {setLatlngs}  pause = {pause} setLatitude={setLatitude} setLongitude={setLongitude} altitude={altitude} latitude={latitude} dataColors='["--vz-primary", "--vz-success"]' longitude={longitude}/>
+          <MapTabContainer setOperatorLat = {setOperatorLat} setOperatorLong = {setOperatorLong} setOperatorCity = {setOperatorCity} setCoords = {setCoords} latlngs = {latlngs} setLatlngs = {setLatlngs}  pause = {pause} setLatitude={setLatitude} setLongitude={setLongitude} altitude={altitude} latitude={latitude} dataColors='["--vz-primary", "--vz-success"]' longitude={longitude}/>
           
           </Col>
         </Row>
