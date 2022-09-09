@@ -45,7 +45,7 @@ const TabContainer = () => {
         className="border border-top-0"
         id="nav-tabContent"
         style={{
-          minHeight: "30rem",
+          minHeight: "40rem",
           width: "100%",
           position: "relative",
           overflow: "hidden",

@@ -144,7 +144,7 @@ const Graphs = (props) => {
           <BreadCrumb title="Graph" pageTitle="Pages" />
           <Row>
             <Col lg={12}>
-              <Card style={{ width: "100%", height: "462px" }}>
+              <Card style={{ width: "100%", height: "40rem" }}>
                 <CardHeader>
                   <h4 className="card-title mb-0">Graph</h4>
                 </CardHeader>
