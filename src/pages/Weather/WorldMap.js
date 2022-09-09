@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import "react-leaflet-fullscreen/dist/styles.css";
 import Marker from 'react-leaflet-enhanced-marker';
 import { MapContainer, Polyline, Popup, TileLayer, Tooltip, useMap } from 'react-leaflet';
@@ -8,17 +8,23 @@ import FullScreenDropdown from '../../Components/Common/FullScreenDropdown';
 import useGeoLocation from './useGeoLocation';
 
 
-const WorldMap = ({coords, latitude, longitude }) => {
+const WorldMap = ({center, coords, latitude, longitude }) => {
+  const [map, setMap] = useState(null);
   const location = useGeoLocation();
   const coord = [Number(latitude), Number(longitude)];
   const operatorLat = location.loaded? location.coordinates.lat : null;
   const operatorLong = location.loaded? location.coordinates.lng : null;
   const operatorPosition = [operatorLat, operatorLong];
-  
+  const zoom = 3
  
+  useEffect(() => {
+    if (center) {
+      map.setView(coord, zoom)
+    }
+  },[coord])
   
   
-  console.log('operatorPosition', operatorPosition)
+  console.log('map', map)
 
 
   return (
@@ -30,7 +36,8 @@ const WorldMap = ({coords, latitude, longitude }) => {
           center={coord}
           zoom={3}
           scrollWheelZoom={false}
-          style={{ minHeight: '100%', minWidth: '100%' }}
+          whenCreated={setMap}
+          style={{ height:"100%" }}
         >
           <TileLayer
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

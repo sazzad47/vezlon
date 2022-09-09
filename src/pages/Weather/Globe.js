@@ -5,30 +5,153 @@ import * as Resium from "resium";
 import * as Cesium from "cesium";
 import image from '../../assets/images/iss.png'
 import location from '../../assets/images/location.png'
-import {Ion, createWorldTerrain, Cartesian3, Color} from "cesium";
+import {Ion, createWorldTerrain, Cartesian3, Cartesian2, Color} from "cesium";
 import useGeoLocation from "./useGeoLocation";
+import TooltipDiv from "./TooltipDiv";
 
 
 const Globe = ({center, latitude, longitude, altitude, latlngs }) => {
-  Ion.defaultAccessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI0ODM0MzAyMy1mNWRjLTQyYzUtYjAzOS04ZGU3ZjBhZTkwMjMiLCJpZCI6MTA3MDg3LCJpYXQiOjE2NjIzOTg3Mjl9.R_BUei3bJYBOpQw4t0E5RmK9Mm8w2h4J-wBa3qOjeOM";
+  
+  const location = useGeoLocation();
+  const operatorLat = location.loaded? location.coordinates.lat.toFixed(1) : null;
+  const operatorLong = location.loaded? location.coordinates.lng.toFixed(1) : null;
+  const operatorPosition = [operatorLat, operatorLong];
+  
   const worldTerrain = createWorldTerrain();
   const [viewerRef, setViewerRef] = useState(null);
-  const [iSSEntity, setISSEntity] = useState(null);
-  const [coordinates, setCoordinates] = useState([]);
+
+ 
   const [issLat, setIssLat] = useState(null);
   const [issLong, setIssLong] = useState(null);
-  const canvas = document.getElementsByClassName('cesium-viewer')
+  const [id, setId] = useState(null);
   
-  // const centerISS = () => {
-  //  if ((typeof(latitude) ==='undefined') || (typeof(longitude) === 'undefined')) {
-  //   return;
-  //  }
-  //   const cartographic = Cesium.Cartographic.fromDegrees(Number(latitude), Number(longitude), 100);
-  //   if (!Cesium.Rectangle?.contains(viewerRef?.camera.computeViewRectangle(), cartographic)) {
-  //     const destination = Cesium.Cartesian3.fromDegrees(Number(latitude), Number(longitude), 100);
-  //     viewerRef?.camera.flyTo({destination, duration: .5});}
+  
+  const issTooltip = document.createElement('DIV');
+  issTooltip.className = "toolTip-left"
+  
+  const title = document.createElement('DIV');
+  title.className = "tooltipdiv-inner";
+  issTooltip.appendChild(title);
+  
+  
+  issTooltip.style.display = 'none';
+  issTooltip.innerHTML = `Here is ISS. Latitude: ${latitude?.toFixed(1)}, Longitude: ${longitude?.toFixed(1)}`;
+  viewerRef?.container.appendChild(issTooltip);
+  
+  const operatorTooltip = document.createElement('DIV');
+  operatorTooltip.className = "toolTip-left"
+  
+  const OperatorTitle = document.createElement('DIV');
+  title.className = "tooltipdiv-inner";
+  operatorTooltip.appendChild(OperatorTitle);
+  
+  
+  operatorTooltip.style.display = 'none';
+  operatorTooltip.innerHTML = `You are here. Latitude: ${operatorLat}, Longitude: ${operatorLong}`;
+  viewerRef?.container.appendChild(operatorTooltip);
+
+
+let issEntity = viewerRef?.entities.getById('1')
+let operatorEntity = viewerRef?.entities.getById('2')
+
+const scratch3dPosition = new Cesium.Cartesian3();
+const scratch2dPosition = new Cesium.Cartesian2();
+
+// Every animation frame, update the HTML element position from the issEntity.
+viewerRef?.clock.onTick.addEventListener(function(clock) {
+    let issPosition3d;
+    let issPosition2d;
+   
+
+    // Not all entities have a position, need to check.
+    if (issEntity?.position) {
+        issPosition3d = issEntity?.position.getValue(clock.currentTime, scratch3dPosition);
+    } 
+
+    // Moving entities don't have a position for every possible time, need to check.
+    if (issPosition3d) {
+        issPosition2d = Cesium.SceneTransforms.wgs84ToWindowCoordinates(
+            viewerRef?.scene, issPosition3d, scratch2dPosition);
+    }
+
+    // Having a position doesn't guarantee it's on screen, need to check.
+    if (issPosition2d) {
+        // Set the HTML position to match the issEntity's position.
+        issTooltip.style.left = issPosition2d.x + 30 + "px";
+        issTooltip.style.top = (issPosition2d.y - issTooltip.clientHeight/2) + "px";
+        
+    } 
+   
+});
+viewerRef?.clock.onTick.addEventListener(function(clock) {
     
-  // }
+    let OperatorPosition3d;
+    let OperatorPosition2d;
+
+    // Not all entities have a position, need to check.
+    if (operatorEntity?.position) {
+        OperatorPosition3d = operatorEntity?.position.getValue(clock.currentTime, scratch3dPosition);
+    } 
+
+    // Moving entities don't have a position for every possible time, need to check.
+    if (OperatorPosition3d) {
+        OperatorPosition2d = Cesium.SceneTransforms.wgs84ToWindowCoordinates(
+            viewerRef?.scene, OperatorPosition3d, scratch2dPosition);
+    }
+
+    // Having a position doesn't guarantee it's on screen, need to check.
+    if (OperatorPosition2d) {
+        // Set the HTML position to match the operatorEntity's position.
+       
+        operatorTooltip.style.left = OperatorPosition2d.x + 30 + "px";
+        operatorTooltip.style.top = (OperatorPosition2d.y - operatorTooltip.clientHeight/2) + "px";
+
+    } 
+   
+});
+
+ console.log('id', id)
+ 
+
+  useEffect(() => {
+    if (center) {
+      viewerRef?.camera.setView({
+        destination : Cesium.Cartesian3.fromDegrees(
+          latitude,
+          longitude,
+          Cesium.Ellipsoid.WGS84.cartesianToCartographic(viewerRef?.camera.position).height
+        )
+    });
+    }
+    
+  })
+ 
+        
+  var scene = viewerRef?.scene;
+      var handler = new Cesium.ScreenSpaceEventHandler(scene?.canvas);
+      
+      //Mouse in custom pop-up
+      handler.setInputAction(function (movement) {
+       
+        if (scene?.mode !== Cesium.SceneMode.MORPHING) {
+          var pickedObject = scene?.pick(movement.endPosition);
+          
+          if (Cesium.defined(pickedObject) && pickedObject.id._id === '1') {
+            
+            // isEntityVisible = false;
+            console.log('pickedObject', pickedObject)
+            issTooltip.style.display = 'block';
+           
+          } else if (Cesium.defined(pickedObject) && pickedObject.id._id === '2') {
+            operatorTooltip.style.display = 'block';
+          } else {
+           
+            // isEntityVisible = true;
+            issTooltip.style.display = 'none';
+            operatorTooltip.style.display = 'none';
+          }
+        }
+      }, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
   
   function fullScreenHandler () {
     const canvas = viewerRef?.scene.canvas;
@@ -41,30 +164,8 @@ const Globe = ({center, latitude, longitude, altitude, latlngs }) => {
       viewerRef?.fullscreenButton.viewModel.command.beforeExecute.addEventListener(fullScreenHandler)
       viewerRef?.fullscreenButton.viewModel.command.afterExecute.addEventListener(fullScreenHandler)
  
-  const location = useGeoLocation();
-  const operatorLat = location.loaded? location.coordinates.lat.toFixed(1) : null;
-  const operatorLong = location.loaded? location.coordinates.lng.toFixed(1) : null;
-  const operatorPosition = [operatorLat, operatorLong];
   
    
-  // function showPosition() {
-  //   fetch("https://ipwhois.app/json/?objects=city,latitude,longitude")
-  //     .then((response) => response.json())
-  //     .then((data) => {
-  //       let currentLat = parseFloat(data.latitude).toFixed(2);
-  //       let currentLong = parseFloat(data.longitude).toFixed(2);
-  //       let currentCity = data.city;
-  //       setOperatorLat(currentLat);
-  //       setOperatorLong(currentLong);
-  //       setOperatorCity(currentCity);
-    
-  //     })
-  //     .catch(console.error);
-  // }
-  // useEffect(() => {
-  //   showPosition();
-  // },[])
-  
   
  
   useEffect(() => {
@@ -72,6 +173,8 @@ const Globe = ({center, latitude, longitude, altitude, latlngs }) => {
     setIssLong(longitude);
     
   },[latitude, longitude])
+
+
  
   //  useEffect(() => {
   //   if ((typeof(issLat) ==='undefined') || (typeof(issLong) === 'undefined')) {
@@ -147,17 +250,20 @@ const Globe = ({center, latitude, longitude, altitude, latlngs }) => {
   //         },
   //       });
 
-  //       // remove previous entity
+  //       // remove previous issEntity
   //       if (iSSEntity) {
   //         viewerRef.entities.remove(iSSEntity);
-  //         // set new entity
+  //         // set new issEntity
   //       }
   //       setISSEntity(newEntity);
   //       // showISSTrajectory()
   //     }
     
   // }, [iSSEntity, latitude, longitude, viewerRef]);
+ 
 
+  
+ 
  
   const issInfo = `Latitude: ${latitude?.toFixed(1)}, Longitude: ${longitude?.toFixed(1)}`
   const operatorInfo = `You are here; Latitude: ${operatorLat}, Longitude: ${operatorLong}`
@@ -166,7 +272,7 @@ const Globe = ({center, latitude, longitude, altitude, latlngs }) => {
     
     {(issLat && issLong) && <Viewer 
       full
-        terrainProvider={worldTerrain}
+       
         style={{ height: "100%", width: "100%", position: "absolute" }}
        
         ref={(e) => {
@@ -188,35 +294,75 @@ const Globe = ({center, latitude, longitude, altitude, latlngs }) => {
                 })}
                 // material={Cesium.Color.RED}
                 positions={Cesium.Cartesian3.fromDegreesArray(latlngs)}
+                eyeOffset = {new Cartesian3(0.0, 0.0, -10.0)}
+                heightReference = {Cesium.HeightReference.CLAMP_TO_GROUND}
+                verticalOrigin = {Cesium.VerticalOrigin.CENTER}
+                horizontalOrigin = {Cesium.HorizontalOrigin.CENTER}
+                disableDepthTestDistance= {1.2742018*10**7} 
             />
         </Resium.Entity>}
           <Resium.Entity 
+           id = '1'
            name="ISS"
            description="Here is ISS"
            position={Cartesian3.fromDegrees(issLat, issLong, 100)}
-           billboard={{ image }}
+          //  billboard= {{
+          //       image: image,
+          //       scale: 0.2,
+          //       eyeOffset: new Cartesian3(0.0, 0.0, -10.0),
+          //       heightReference: Cesium.HeightReference.CLAMP_TO_GROUND,
+          //       verticalOrigin: Cesium.VerticalOrigin.CENTER,
+          //       horizontalOrigin: Cesium.HorizontalOrigin.CENTER,
+          //       disableDepthTestDistance: 1.2742018*10**7 // Diameter of Earth
+          //  }}
           >
-            <Resium.LabelGraphics
-             text= {issInfo}
-             fillColor={Color.ORANGE} 
-             show = {true}
-             showBackground = {true}
-             font = "15px Open Sans sans-serif"
-             horizontalOrigin = {Cesium.HorizontalOrigin.LEFT}
-             verticalOrigin = {Cesium.VerticalOrigin.CENTER}
-             pixelOffset = {new Cesium.Cartesian2(15, 0)}
-             backgroundColor = {Cesium.Color.WHITE}
+            <Resium.BillboardGraphics
+                image = {image}
+                // scale = {0.2}
+                eyeOffset = {new Cartesian3(0.0, 0.0, -10.0)}
+                heightReference = {Cesium.HeightReference.CLAMP_TO_GROUND}
+                verticalOrigin = {Cesium.VerticalOrigin.CENTER}
+                horizontalOrigin = {Cesium.HorizontalOrigin.CENTER}
+                disableDepthTestDistance= {1.2742018*10**7} 
+            />
+
             
-             style = {Cesium.LabelStyle.FILL}
-             />
+            {/* <Resium.LabelGraphics
+            //  text= {issInfo}
+            //  fillColor={Color.ORANGE} 
+            //  show = {true}
+            //  showBackground = {true}
+            //  font = "15px Open Sans sans-serif"
+            //  horizontalOrigin = {Cesium.HorizontalOrigin.LEFT}
+            //  verticalOrigin = {Cesium.VerticalOrigin.CENTER}
+            //  pixelOffset = {new Cesium.Cartesian2(15, 0)}
+            //  backgroundColor = {Cesium.Color.WHITE}
+            
+            //  style = {Cesium.LabelStyle.FILL}
+            // text= {issInfo}
+            // font = "20px sans-serif"
+            // showBackground = {true}
+            // eyeOffset= {new Cartesian3(0.0, 0.0, -10.0)}
+            // horizontalOrigin= {Cesium.HorizontalOrigin.CENTER}
+            // pixelOffset= {new Cartesian2(0.0, -20.0)}
+            // pixelOffsetScaleByDistance= {new Cesium.NearFarScalar(
+            // 1.5e2,
+            // 3.0,
+            // 1.5e7,
+            // 0.5
+            // )}
+            // disableDepthTestDistance= {1.2742018*10**7}
+             /> */}
         </Resium.Entity>
           {location.loaded && <Resium.Entity 
+           id= "2"
            name="Operator Position"
            description="You are here."
            position={Cartesian3.fromDegrees(Number(operatorLat), Number(operatorLong), 100)}
-           billboard={{ location }}
+           width={10}
+           point= {{ pixelSize: 8, color: Cesium.Color.YELLOW }}
           >
-            <Resium.LabelGraphics
+            {/* <Resium.LabelGraphics
              text= {location.loaded? operatorInfo : 'Loading...'}
              fillColor={Color.ORANGE} 
              show = {true}
@@ -228,7 +374,7 @@ const Globe = ({center, latitude, longitude, altitude, latlngs }) => {
              backgroundColor = {Cesium.Color.WHITE}
             
              style = {Cesium.LabelStyle.FILL}
-             />
+             /> */}
         </Resium.Entity>}
         
       </Viewer>}

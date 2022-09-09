@@ -433,7 +433,7 @@ function calculateRadius20degrees(altitude) {
                                                             
                                                         </tr>
                                                         <tr>
-                                                            <td className="fw-medium">Velocity</td>
+                                                            <td className="fw-medium">Orbital Speed</td>
                                                             <td>{velocityConverter(velocityUnit).velocity} {velocityConverter(velocityUnit).suffix}</td>
                                                            
                                                         </tr>
@@ -463,7 +463,7 @@ function calculateRadius20degrees(altitude) {
                                                             
                                                         </tr>
                                                         <tr>
-                                                            <td className="fw-medium">Current horizon radius of ISS visibilty &#40;tangent to the Earth &#41;</td>
+                                                            <td className="fw-medium">Current horizon radius of ISS visibility &#40;tangent to the Earth &#41;</td>
                                                             <td>{radiusConverter(radiusUnit).radiusOverHorizon} {radiusConverter(radiusUnit).suffix}</td>
                                                             
                                                         </tr>

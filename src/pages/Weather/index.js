@@ -9,6 +9,7 @@ import ISSStream from './ISSStream';
 import { Card, CardBody, Col, Input, Label, Row } from 'reactstrap';
 import BreadCrumb from '../../Components/Common/BreadCrumb';
 import RightSideISSData from './RightSideISSData';
+import './style.css';
 
 
 const Weather = () => {
@@ -52,12 +53,12 @@ const Weather = () => {
         <Row>
           <Col xl={12} md={12} style={{height: '3rem'}} >
            
-        <div className="d-flex align-items-center justify-content-end form-check form-switch form-switch-right form-switch-md">
-            {/* <div>
+        <div className="d-flex align-items-center justify-content-between form-check form-switch form-switch-right form-switch-md">
+            <div>
 
                         <Label className="form-label text-muted">Center ISS</Label>
                         <Input onChange={(e) => setCenter(e.target.checked)} className="form-check-input code-switcher" type="checkbox" />
-            </div> */}
+            </div>
             <div>
 
                         <Label className="form-label text-muted">Pause Updates</Label>
@@ -85,15 +86,15 @@ const Weather = () => {
                                 <Card>
                                    
                                    
-                                        <div id="gmaps-markers" className="wmap mt-3 mt-md-3 mt-lg-0" style={{ position: "relative" }}>
-                                        <WorldMap operatorLat = {operatorLat} operatorLong = {operatorLong} operatorCity = {operatorCity} coords = {coords} latitude={latitude} longitude={longitude} />
+                                        <div id="gmaps-markers" className="block-container mt-4 mt-md-4 mt-lg-0" style={{ position: "relative" }}>
+                                        <WorldMap center = {center} operatorLat = {operatorLat} operatorLong = {operatorLong} operatorCity = {operatorCity} coords = {coords} latitude={latitude} longitude={longitude} />
                                             </div>
                                     
                                 </Card>
                                 <Card>
                                    
                                    
-                                        <div id="gmaps-markers" className="wmap" style={{ position: "relative" }}>
+                                        <div id="gmaps-markers" className="block-container" style={{ position: "relative" }}>
                                         <ISSStream width='100%' height='100%' />
                                             </div>
                                     
@@ -112,7 +113,7 @@ const Weather = () => {
         
         </Row>
         <Row>
-          <Col className='mt-5'>
+          <Col className='tab-container mt-5' >
           
 
           <MapTabContainer setOperatorLat = {setOperatorLat} setOperatorLong = {setOperatorLong} setOperatorCity = {setOperatorCity} setCoords = {setCoords} latlngs = {latlngs} setLatlngs = {setLatlngs}  pause = {pause} setLatitude={setLatitude} setLongitude={setLongitude} altitude={altitude} latitude={latitude} dataColors='["--vz-primary", "--vz-success"]' longitude={longitude}/>

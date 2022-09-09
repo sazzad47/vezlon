@@ -1,0 +1,63 @@
+@-moz-document url-prefix() {
+    .tab-container {
+        margin-top: 6rem;
+    }
+}
+@media all and (-webkit-min-device-pixel-ratio:0) and (min-resolution: .001dpcm) { 
+    .selector:not(*:root), .wmap-container {
+        margin-top: 5rem;
+   }
+ }
+    
+ .block-container {
+    
+    height: 160px;
+    width: 100%;
+    padding: 15px;
+ }
+
+/* .........Cesium Tooltip............... */
+.tooltipdiv-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3px 8px;
+}
+/*To the left*/
+.toolTip-left {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+  min-height: 50px;
+  max-height: 50px;
+  position: absolute;
+  width: 230px;
+  
+  border: 2px solid rgba(19, 159, 255, 1);
+  border-radius: 10px;
+  background-color: rgba(30, 49, 74, 0.6);
+}
+.toolTip-left:before {
+  content: "";
+  display: block;
+  position: absolute;
+  left: -10px;
+  top: 50%;
+  transform: translateY(-50%);
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  border-right: 10px solid rgba(19, 159, 255, 1);
+}
+
+.con {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  color: #ffff;
+  line-height: 50px;
+}
+.cesium-widget-credits{
+  display:none !important;
+}
