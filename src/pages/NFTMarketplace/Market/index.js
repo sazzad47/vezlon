@@ -203,7 +203,7 @@ const Marketplace = () => {
                                 <div>
                                     <i style="font-size:calc(1.475rem + 2.2vw)" class="display-4 text-muted ri-upload-cloud-2-fill"></i>                                                                            
                                 </div>
-                                <h4 style="font-size:1.2rem">Drop files here or click to upload.</h4>
+                                <h4 style="font-size:1.2rem">Drop your ML package here or click to upload.</h4>
                                 </div>
                             </div>
                             `}
