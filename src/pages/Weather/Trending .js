@@ -19,7 +19,7 @@ const Trending = () => {
                     <Row>
                         <Col lg={12}>
                             <Swiper modules={[Navigation, Autoplay, Pagination]}
-                                slidesPerView={4}
+                                slidesPerView={2}
                                 spaceBetween={30}
                                 navigation={{
                                     nextEl: ".swiper-button-next",
@@ -29,20 +29,20 @@ const Trending = () => {
                                     el: ".swiper-pagination",
                                     clickable: true,
                                 }}
-                                breakpoints={{
-                                    640: {
-                                        slidesPerView: 2,
-                                        spaceBetween: 20,
-                                    },
-                                    768: {
-                                        slidesPerView: 3,
-                                        spaceBetween: 24,
-                                    },
-                                    1024: {
-                                        slidesPerView: 4,
-                                        spaceBetween: 30,
-                                    },
-                                }}
+                                // breakpoints={{
+                                //     640: {
+                                //         slidesPerView: 2,
+                                //         spaceBetween: 20,
+                                //     },
+                                //     768: {
+                                //         slidesPerView: 3,
+                                //         spaceBetween: 24,
+                                //     },
+                                //     1024: {
+                                //         slidesPerView: 4,
+                                //         spaceBetween: 30,
+                                //     },
+                                // }}
                                 loop={true}
                                 autoplay={{ delay: 2500, disableOnInteraction: false }} 
                                 className="mySwiper swiper mySwiper pb-4">
