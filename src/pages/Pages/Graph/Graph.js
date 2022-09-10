@@ -59,7 +59,7 @@ const Graphs = (props) => {
     renderer.addListener("clickNode", ({ node }) => {
       console.log("node is as follows", node);
       const response = data.nodes.filter((noded, index) => {
-        if (node == noded.key) {
+        if (node === noded.key) {
           return noded;
         }
       });

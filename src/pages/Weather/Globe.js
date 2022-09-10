@@ -7,7 +7,7 @@ import image from '../../assets/images/iss.png'
 import location from '../../assets/images/location.png'
 import {Ion, createWorldTerrain, Cartesian3, Cartesian2, Color} from "cesium";
 import useGeoLocation from "./useGeoLocation";
-import TooltipDiv from "./TooltipDiv";
+
 
 
 const Globe = ({center, latitude, longitude, altitude, latlngs }) => {

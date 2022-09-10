@@ -73,7 +73,7 @@ const Weather = () => {
           <Col xl={8} md={12} sm={12}>
           
             
-          <div style={{minHeight:'36.7rem',width:'100%', position:'relative'}}>
+          <div className='mb-3 mb-md-3 mb-lg-0' style={{minHeight:'36.7rem',width:'100%', position:'relative'}}>
 
           <Globe operatorLat = {operatorLat} operatorLong = {operatorLong} center = {center} latlngs ={latlngs}  latitude={latitude} longitude={longitude} altitude={altitude} /> 
           </div>
