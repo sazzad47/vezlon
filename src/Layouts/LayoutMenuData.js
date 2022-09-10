@@ -416,6 +416,12 @@ const Navdata = () => {
             isHeader: true,
         },
         {
+            id: "globalView",
+            label: "Global View",
+            icon: "bx bx-globe",
+            link: "/pages-globalview",
+        },
+        {
             id: "issAnalytics",
             label: "ISS Analytics",
             icon: "bx bx-sitemap",

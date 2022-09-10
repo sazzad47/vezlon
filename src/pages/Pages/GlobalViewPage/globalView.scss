@@ -1,0 +1,17 @@
+.page-content {
+
+    .globalAssetView_container {
+        overflow: hidden;
+
+
+        .mapAction_wrapper {
+            height: 60px;
+            width: 100%;
+        }
+
+        .globalassetview_bottom {
+            height: calc(100% - 60px);
+            box-sizing: border-box;
+        }
+    }
+}

@@ -71,7 +71,8 @@ import EcommerceSellerDetail from "../pages/Ecommerce/EcommerceSellers/Ecommerce
 import MarketplaceSoon from "../pages/NFTMarketplace/Market";
 //Weather 
 import Weather from "../pages/Weather/index";
-
+//Global View Page
+import GlobalViewPage from '../pages/Pages/GlobalViewPage/GlobalViewPage';
 // NFT Marketplace Pages
 import Marketplace from "../pages/NFTMarketplace/Marketplace";
 import Collections from "../pages/NFTMarketplace/Collections";
@@ -405,6 +406,8 @@ const authProtectedRoutes = [
   { path: "/finance-mngt", component: FinanceManagement },
   //Weather
   { path: "/iss-analytics", component: Weather },
+  //Global View Page
+  { path: "/pages-globalview", component: GlobalViewPage },
   //Pages
   { path: "/pages-starter", component: Starter },
   { path: "/pages-profile", component: SimplePage },

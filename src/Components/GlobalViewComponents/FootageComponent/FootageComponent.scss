@@ -1,0 +1,14 @@
+.camera_component {
+    min-height: 500px;
+    width: 450px;
+
+    .footage_container {
+        position: relative; 
+        width: max-content;
+        height: max-content;
+
+        .footage {
+            height: 100%;
+        }
+    }
+}
