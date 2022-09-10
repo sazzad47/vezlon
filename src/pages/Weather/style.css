@@ -2,6 +2,9 @@
     .tab-container {
         margin-top: 6rem;
     }
+    .w-tab-content {
+      min-height: 37rem !important;
+    }
 }
 @media all and (-webkit-min-device-pixel-ratio:0) and (min-resolution: .001dpcm) { 
     .selector:not(*:root), .wmap-container {
