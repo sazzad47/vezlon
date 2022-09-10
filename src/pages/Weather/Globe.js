@@ -15,9 +15,9 @@ const Globe = ({center, latitude, longitude, altitude, latlngs }) => {
   const location = useGeoLocation();
   const operatorLat = location.loaded? location.coordinates.lat.toFixed(1) : null;
   const operatorLong = location.loaded? location.coordinates.lng.toFixed(1) : null;
-  const operatorPosition = [operatorLat, operatorLong];
+
   
-  const worldTerrain = createWorldTerrain();
+ 
   const [viewerRef, setViewerRef] = useState(null);
 
  
@@ -174,99 +174,8 @@ viewerRef?.clock.onTick.addEventListener(function(clock) {
     
   },[latitude, longitude])
 
-
- 
-  //  useEffect(() => {
-  //   if ((typeof(issLat) ==='undefined') || (typeof(issLong) === 'undefined')) {
-  //        return; 
-  //      }
-  //      if(!center) {
-  //       return;
-  //     }
-  //    centerISS();
-   
-  //  })
-  // useEffect(() => {
-   
-  //   if ((typeof(latitude) ==='undefined') || (typeof(longitude) === 'undefined') || (typeof(operatorLat) ==='undefined') || (typeof(operatorLong) ==='undefined') || (typeof(operatorCity) ==='undefined')) {
-  //     return; 
-  //   }
-  //     setIssLatitude(latitude);
-  //     setIssLongtitude(longitude);
-  //     if (viewerRef) {
-  //       viewerRef.entities.add({
-  //         position: Cesium.Cartesian3.fromDegrees(
-  //           longitude,
-  //           latitude,
-  //           parseFloat(altitude) * 1000
-  //         ),
-
-  //         point: { pixelSize: 6, color: Cesium.Color.GOLD },
-  //       });
-
-  //       viewerRef.entities.add({
-  //         position: Cesium.Cartesian3.fromDegrees(
-  //           Number(operatorLat),
-  //           Number(operatorLong),
-  //           100
-  //         ),
-
-  //         point: { pixelSize: 6, color: Cesium.Color.GOLD },
-  //         label: {
-  //           text: `You are here in ${operatorCity}`,
-  //           show: true,
-  //           showBackground: true,
-  //           font: "15px Open Sans sans-serif",
-  //           horizontalOrigin: Cesium.HorizontalOrigin.LEFT,
-  //           verticalOrigin: Cesium.VerticalOrigin.CENTER,
-  //           pixelOffset: new Cesium.Cartesian2(15, 0),
-  //           backgroundColor: Cesium.Color.WHITE,
-  //           fillColor: Cesium.Color.PURPLE,
-  //           style: Cesium.LabelStyle.FILL,
-  //         },
-  //       });
-  //       const newEntity = viewerRef.entities.add({
-  //         name: "ISS",
-  //         position: Cesium.Cartesian3.fromDegrees(longitude, latitude, 100),
-  //         point: {
-  //           pixelSize: 10,
-  //           point: { pixelSize: 8, color: Cesium.Color.YELLOW },
-  //           outlineColor: Cesium.Color.BLACK,
-  //           outlineWidth: 2,
-  //         },
-  //         label: {
-  //           text: `Latitude: ${latitude.toFixed(
-  //             2
-  //           )}, Longitude: ${longitude.toFixed(2)}`,
-  //           show: true,
-  //           showBackground: true,
-  //           font: "15px Open Sans sans-serif",
-  //           horizontalOrigin: Cesium.HorizontalOrigin.LEFT,
-  //           verticalOrigin: Cesium.VerticalOrigin.CENTER,
-  //           pixelOffset: new Cesium.Cartesian2(15, 0),
-  //           backgroundColor: Cesium.Color.WHITE,
-  //           fillColor: Cesium.Color.PURPLE,
-  //           style: Cesium.LabelStyle.FILL,
-  //         },
-  //       });
-
-  //       // remove previous issEntity
-  //       if (iSSEntity) {
-  //         viewerRef.entities.remove(iSSEntity);
-  //         // set new issEntity
-  //       }
-  //       setISSEntity(newEntity);
-  //       // showISSTrajectory()
-  //     }
-    
-  // }, [iSSEntity, latitude, longitude, viewerRef]);
- 
-
-  
  
  
-  const issInfo = `Latitude: ${latitude?.toFixed(1)}, Longitude: ${longitude?.toFixed(1)}`
-  const operatorInfo = `You are here; Latitude: ${operatorLat}, Longitude: ${operatorLong}`
   return (
     <> 
     
@@ -306,15 +215,7 @@ viewerRef?.clock.onTick.addEventListener(function(clock) {
            name="ISS"
            description="Here is ISS"
            position={Cartesian3.fromDegrees(issLat, issLong, 100)}
-          //  billboard= {{
-          //       image: image,
-          //       scale: 0.2,
-          //       eyeOffset: new Cartesian3(0.0, 0.0, -10.0),
-          //       heightReference: Cesium.HeightReference.CLAMP_TO_GROUND,
-          //       verticalOrigin: Cesium.VerticalOrigin.CENTER,
-          //       horizontalOrigin: Cesium.HorizontalOrigin.CENTER,
-          //       disableDepthTestDistance: 1.2742018*10**7 // Diameter of Earth
-          //  }}
+         
           >
             <Resium.BillboardGraphics
                 image = {image}
@@ -326,33 +227,7 @@ viewerRef?.clock.onTick.addEventListener(function(clock) {
                 disableDepthTestDistance= {1.2742018*10**7} 
             />
 
-            
-            {/* <Resium.LabelGraphics
-            //  text= {issInfo}
-            //  fillColor={Color.ORANGE} 
-            //  show = {true}
-            //  showBackground = {true}
-            //  font = "15px Open Sans sans-serif"
-            //  horizontalOrigin = {Cesium.HorizontalOrigin.LEFT}
-            //  verticalOrigin = {Cesium.VerticalOrigin.CENTER}
-            //  pixelOffset = {new Cesium.Cartesian2(15, 0)}
-            //  backgroundColor = {Cesium.Color.WHITE}
-            
-            //  style = {Cesium.LabelStyle.FILL}
-            // text= {issInfo}
-            // font = "20px sans-serif"
-            // showBackground = {true}
-            // eyeOffset= {new Cartesian3(0.0, 0.0, -10.0)}
-            // horizontalOrigin= {Cesium.HorizontalOrigin.CENTER}
-            // pixelOffset= {new Cartesian2(0.0, -20.0)}
-            // pixelOffsetScaleByDistance= {new Cesium.NearFarScalar(
-            // 1.5e2,
-            // 3.0,
-            // 1.5e7,
-            // 0.5
-            // )}
-            // disableDepthTestDistance= {1.2742018*10**7}
-             /> */}
+           
         </Resium.Entity>
           {location.loaded && <Resium.Entity 
            id= "2"
@@ -362,19 +237,7 @@ viewerRef?.clock.onTick.addEventListener(function(clock) {
            width={10}
            point= {{ pixelSize: 8, color: Cesium.Color.YELLOW }}
           >
-            {/* <Resium.LabelGraphics
-             text= {location.loaded? operatorInfo : 'Loading...'}
-             fillColor={Color.ORANGE} 
-             show = {true}
-             showBackground = {true}
-             font = "15px Open Sans sans-serif"
-             horizontalOrigin = {Cesium.HorizontalOrigin.LEFT}
-             verticalOrigin = {Cesium.VerticalOrigin.CENTER}
-             pixelOffset = {new Cesium.Cartesian2(15, 0)}
-             backgroundColor = {Cesium.Color.WHITE}
-            
-             style = {Cesium.LabelStyle.FILL}
-             /> */}
+           
         </Resium.Entity>}
         
       </Viewer>}

@@ -20,7 +20,7 @@ import Trending from './Trending ';
 import ISSData from './issData';
 import Cameras from './Cameras';
 import { WeatherChart } from './WeatherChart';
-import WeatherData from './WeatherData';
+
 import ISSAltitude from './ISSAltitude';
 
 
