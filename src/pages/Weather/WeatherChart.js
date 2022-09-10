@@ -287,6 +287,7 @@ const WeatherChart = ({pause, dataColors }) => {
     var options = {
       chart: {
         height: 350,
+        width: '100%',
         type: 'line',
         stacked: false
       },
@@ -310,7 +311,16 @@ const WeatherChart = ({pause, dataColors }) => {
       },
       xaxis: {
         categories: days,
-        tickPlacement: 'between',
+        tickPlacement: 'on',
+        labels: {
+          show: true,
+          rotate: -45,
+          rotateAlways: true,
+          minHeight: 100,
+          maxHeight: 180,
+          style: {
+            colors: "red"
+          }}
       },
       yaxis: [
         {
@@ -495,191 +505,7 @@ const WeatherChart = ({pause, dataColors }) => {
       }
     }
    
-    // var series = [
-    //     {
-    //         name: "Max Temp",
-    //         type: "line",
-    //         data: maxTempConverter(tempUnit).data.toFixed(1)
-    //     },
-    //     {
-    //         name: "Min Temp",
-    //         type: "line",
-    //         data: minTempConverter(tempUnit).data.toFixed(1)
-    //     },
-    //     {
-    //         name: "Wind Speed",
-    //         type: "line",
-    //         data: speedConverter(speedUnit).data.toFixed(1)
-    //     },
-    //     {
-    //         name: "Cloud Coverage",
-    //         type: "line",
-    //         data: cloudCoverage
-    //     },
-    //     {
-    //         name: "Humidity",
-    //         type: "line",
-    //         data: humidity
-    //     },
-    //     {
-    //         name: "Pressure",
-    //         type: "line",
-    //         data: pressureConverter(pressureUnit).data.toFixed(1)
-    //     },
-       
-    // ]
-
-    // var options = {
-        
-    //     chart: {
-    //   height: 370,
-    //   type: "line",
-    //   toolbar: {
-    //     show: false,
-    //   },
-    // },
-    // stroke: {
-    //   curve: "straight",
-    //   dashArray: [0, 0, 8],
-    //   width: [2, 0, 2.2],
-    // },
-    // fill: {
-    //   opacity: [0.1, 0.9, 1],
-    // },
-    // markers: {
-    //   size: [0, 0, 0],
-    //   strokeWidth: 2,
-    //   hover: {
-    //     size: 4,
-    //   },
-    // },
-    //     title: {
-    //     text: 'Weather Forecast',
-    //     align: 'left',
-    //     style: {
-    //         fontWeight: 500,
-    //      },
-    //     },
-    //     xaxis: {
-    //         categories: days,
-    //         axisTicks: {
-    //             show: false,
-    //           },
-    //           axisBorder: {
-    //             show: false,
-    //           },
-    //     },
-    //     grid: {
-    //         show: true,
-    //         xaxis: {
-    //           lines: {
-    //             show: true,
-    //           },
-    //         },
-    //         yaxis: {
-    //           lines: {
-    //             show: false,
-    //           },
-    //           min: -1000
-    //         },
-    //         padding: {
-    //           top: 0,
-    //           right: -2,
-    //           bottom: 15,
-    //           left: 10,
-    //         },
-    //       },
-    //       legend: {
-    //         show: true,
-    //         horizontalAlign: "center",
-    //         offsetX: 0,
-    //         offsetY: -5,
-    //         markers: {
-    //           width: 9,
-    //           height: 9,
-    //           radius: 6,
-    //         },
-    //         itemMargin: {
-    //           horizontal: 10,
-    //           vertical: 0,
-    //         },
-    //       },
-    //       plotOptions: {
-    //         bar: {
-    //           columnWidth: "30%",
-    //           barHeight: "70%",
-    //         },
-    //       },
-    //       colors: linechartcustomerColors,
-    //     tooltip: {
-    //         shared: true,
-    //         y: [
-    //           {
-    //             formatter: function (y) {
-    //               if (typeof y !== "undefined") {
-    //                 return y.toFixed(1) + maxTempConverter(tempUnit).suffix;
-    //               }
-    //               return y;
-    //             },
-    //           },
-    //           {
-    //             formatter: function (y) {
-    //               if (typeof y !== "undefined") {
-    //                 return "$" + y.toFixed(1) + minTempConverter(tempUnit).suffix;
-    //               }
-    //               return y;
-    //             },
-    //           },
-    //           {
-    //             formatter: function (y) {
-    //               if (typeof y !== "undefined") {
-    //                 return y.toFixed(1) + speedConverter(speedUnit).suffix;
-    //               }
-    //               return y;
-    //             },
-    //           },
-    //           {
-    //             formatter: function (y) {
-    //               if (typeof y !== "undefined") {
-    //                 return y.toFixed(0) + " %";
-    //               }
-    //               return y;
-    //             },
-    //           },
-    //           {
-    //             formatter: function (y) {
-    //               if (typeof y !== "undefined") {
-    //                 return y.toFixed(0) + " %";
-    //               }
-    //               return y;
-    //             },
-    //           },
-    //           {
-    //             formatter: function (y) {
-    //               if (typeof y !== "undefined") {
-    //                 return y.toFixed(0) + pressureConverter(pressureUnit).suffix;
-    //               }
-    //               return y;
-    //             },
-    //           },
-    //         ],
-    //       },
-       
-    //         responsive: [{
-    //         breakpoint: 600,
-    //         options: {
-    //             chart: {
-    //                 toolbar: {
-    //                     show: false
-    //                 }
-    //             },
-    //             legend: {
-    //                 show: false
-    //             },
-               
-    //         }
-    //     }]
-    // };
+   
    
     return (
         <React.Fragment>
@@ -690,6 +516,7 @@ const WeatherChart = ({pause, dataColors }) => {
                 series={series}
                 type="line"
                 height="370"
+                width = '100%'
                 className="apex-charts"
             />
            <div className='mt-4'>
