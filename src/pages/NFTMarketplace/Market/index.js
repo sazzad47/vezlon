@@ -174,7 +174,7 @@ const Marketplace = () => {
                       <Col xl={4} lg={4} md={6} sm={6} xs ={12} >
                         <div className="mb-4 mb-md-4 mb-lg-5"> 
                         <Card
-                          
+                          className="file-drop"
                           style={{
                             border: "2px dashed #32383e",
                             borderRadius: "6px",
@@ -217,7 +217,7 @@ const Marketplace = () => {
                           <div className="mb-4 mb-md-4 mb-lg-5" >
 
                          
-                          <Card style={{minHeight:'28rem'}}>
+                          <Card className="ml-block" style={{minHeight:'28rem'}}>
                             <div
                              
                             >

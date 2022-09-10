@@ -9,3 +9,17 @@
     max-height: 25rem !important;
     margin-bottom: 5rem;
   }
+  @-moz-document url-prefix() {
+    .file-drop {
+      border: "2px dashed #32383e";
+      border-radius: "6px";
+     
+      min-height:'28rem';
+      height:'28rem';
+      display: "flex";
+      justify-content: "center";
+    }
+    .ml-block {
+        min-height: 28rem;
+    }
+}
