@@ -19,7 +19,7 @@ const CesiumComponent = ({
     <Container style={{width:'100%', height:'100%', position:'relative'}}>
       <Viewer
         ref={viewerRef}
-        terrainProvider={worldTerrain}
+        // terrainProvider={worldTerrain}
         fullscreenElement='globalAssetView_wrapper'
         onClick={viewerClicked}
         full

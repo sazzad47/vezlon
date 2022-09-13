@@ -9,7 +9,7 @@ export const initialState = {
         {
             name: "Tokyo",
             desc: "幸福",
-            pos: Cartesian3.fromDegrees(139.8148, 35.7142, 10 ),
+            pos: Cartesian3.fromDegrees(139.8148, 35.7142, 100 ),
             longitude: 139.8148,
             latitude: 35.7142,
             date: `${now.getDate()}-${now.getMonth()}-${now.getFullYear()} ${now.getHours()
@@ -19,7 +19,7 @@ export const initialState = {
         {
             name: "Los Angeles",
             desc: "City of the Angels",
-            pos: Cartesian3.fromDegrees( -117.729, 34.457, 10.00 ),
+            pos: Cartesian3.fromDegrees( -117.729, 34.457, 100 ),
             date: `${now.getDate()}-${now.getMonth()}-${now.getFullYear()} ${now.getHours()
             }:${now.getMinutes()}`,
             longitude: -117.729,
@@ -29,7 +29,7 @@ export const initialState = {
         { 
             name: "Random address 01",
             desc: "",
-            pos: Cartesian3.fromDegrees( -44.15768, 79.81873 ),
+            pos: Cartesian3.fromDegrees( -44.15768, 79.81873, 100 ),
             date: `${now.getDate()}-${now.getMonth()}-${now.getFullYear()} ${now.getHours()
             }:${now.getMinutes()}`,
             longitude: -44.15768, 
@@ -39,7 +39,7 @@ export const initialState = {
         { 
             name: "Random address 02",
             desc: "",
-            pos: Cartesian3.fromDegrees( 113.81956, 6.95312 ),
+            pos: Cartesian3.fromDegrees( 113.81956, 6.95312, 100 ),
             date: `${now.getDate()}-${now.getMonth()}-${now.getFullYear()} ${now.getHours()
             }:${now.getMinutes()}`,
             longitude: 113.81956, 
@@ -49,7 +49,7 @@ export const initialState = {
         { 
             name: "Random address 03",
             desc: "",
-            pos: Cartesian3.fromDegrees( -93.22941, 18.00333 ),
+            pos: Cartesian3.fromDegrees( -93.22941, 18.00333, 100 ),
             date: `${now.getDate()}-${now.getMonth()}-${now.getFullYear()} ${now.getHours()
             }:${now.getMinutes()}`,
             longitude: -93.22941, 
@@ -59,7 +59,7 @@ export const initialState = {
         { 
             name: "Random address 4",
             desc: "",
-            pos: Cartesian3.fromDegrees( 39.29730, -0.33400 ),
+            pos: Cartesian3.fromDegrees( 39.29730, -0.33400, 100 ),
             date: `${now.getDate()}-${now.getMonth()}-${now.getFullYear()} ${now.getHours()
             }:${now.getMinutes()}`,
             longitude: 39.29730, 
@@ -69,7 +69,7 @@ export const initialState = {
         { 
             name: "Random address 5",
             desc: "",
-            pos: Cartesian3.fromDegrees( 166.07744, -10.22925 ),
+            pos: Cartesian3.fromDegrees( 166.07744, -10.22925, 100 ),
             date: `${now.getDate()}-${now.getMonth()}-${now.getFullYear()} ${now.getHours()
             }:${now.getMinutes()}`,
             longitude: 166.07744, 
@@ -79,7 +79,7 @@ export const initialState = {
         { 
             name: "Random address 6",
             desc: "",
-            pos: Cartesian3.fromDegrees( 43.28109, -10.88357 ),
+            pos: Cartesian3.fromDegrees( 43.28109, -10.88357, 100 ),
             date: `${now.getDate()}-${now.getMonth()}-${now.getFullYear()} ${now.getHours()
             }:${now.getMinutes()}`,
             longitude: 43.28109, 
@@ -89,7 +89,7 @@ export const initialState = {
         { 
             name: "Random address 7",
             desc: "",
-            pos: Cartesian3.fromDegrees( -57.31127, -24.59392 ),
+            pos: Cartesian3.fromDegrees( -57.31127, -24.59392, 100 ),
             date: `${now.getDate()}-${now.getMonth()}-${now.getFullYear()} ${now.getHours()
             }:${now.getMinutes()}`,
             longitude: -57.31127, 
@@ -99,7 +99,7 @@ export const initialState = {
         { 
             name: "Random address 8",
             desc: "",
-            pos: Cartesian3.fromDegrees( 21.77757, -23.50661 ),
+            pos: Cartesian3.fromDegrees( 21.77757, -23.50661,100 ),
             date: `${now.getDate()}-${now.getMonth()}-${now.getFullYear()} ${now.getHours()
             }:${now.getMinutes()}`,
             longitude: 21.77757, 
@@ -109,7 +109,7 @@ export const initialState = {
         { 
             name: "Random address 9",
             desc: "",
-            pos: Cartesian3.fromDegrees( -98.52540, 47.31585 ),
+            pos: Cartesian3.fromDegrees( -98.52540, 47.31585, 100 ),
             date: `${now.getDate()}-${now.getMonth()}-${now.getFullYear()} ${now.getHours()
             }:${now.getMinutes()}`,
             longitude: -98.52540, 
