@@ -407,7 +407,7 @@ const authProtectedRoutes = [
   //Weather
   { path: "/iss-analytics", component: Weather },
   //Global View Page
-  { path: "/pages-globalview", component: GlobalViewPage },
+  { path: "/global-asset-view", component: GlobalViewPage },
   //Pages
   { path: "/pages-starter", component: Starter },
   { path: "/pages-profile", component: SimplePage },
@@ -434,19 +434,7 @@ const authProtectedRoutes = [
 ];
 
 const publicRoutes = [
-//   { path: "/maps-leaflet", component: LeafletMaps },
-//  //Sensor-map
-//  { path: "/sensor-map", component: SensorMaps },
-//  //Graph
-//  { path: "/pages-Graph", component: Graph },
-//  //Marketplace Soon
-//  {path: "/marketplace", component: MarketplaceSoon},
-//  //Smart Node
-//  { path: "/smartnodes", component: Flow },
-//  //FinanceManagement
-//  { path: "/finance-mngt", component: FinanceManagement },
-//  //Weather
-//  { path: "/iss-analytics", component: Weather },
+
 
   // Authentication Page
   { path: "/logout", component: Logout },

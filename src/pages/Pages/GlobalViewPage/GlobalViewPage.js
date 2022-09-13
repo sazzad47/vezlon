@@ -1,21 +1,24 @@
-import React, { useContext, useMemo, useReducer, useRef } from 'react';
-import { Col, Container, Row } from 'reactstrap';
+import React, { useContext, useEffect, useMemo, useReducer, useRef, useState } from 'react';
+import { Card, CardBody, Col, Container, Row } from 'reactstrap';
 import './globalView.scss';
 import BreadCrumb from '../../../Components/Common/BreadCrumb';
 import MapActions from '../../../Components/GlobalViewComponents/Actions/mapActions';
 import FootageComponent from '../../../Components/GlobalViewComponents/FootageComponent';
 import CesiumComponent from '../../../Components/GlobalViewComponents/CesiumComponent';
 import ConfirmBookmark from '../../../Components/GlobalViewComponents/Actions/confirmBookmark';
-import { Cartesian2, Cartesian3, Cartographic, createWorldTerrain, Math, sampleTerrainMostDetailed } from 'cesium';
+import { Cartesian2, Cartesian3, Cartographic, createWorldTerrain, HeightReference, HorizontalOrigin, Math, sampleTerrainMostDetailed, VerticalOrigin } from 'cesium';
 import { DispatchContext, initialState, reducer, StateContext } from './StateProvider';
+import NearFarScalar from 'cesium/Source/Core/NearFarScalar';
+import * as Cesium from "cesium";
+
 
 
 const GlobalViewPage = () => {
   document.title = "Global Asset View | Velzon - React Admin & Dashboard Template";
-
+  const [showPosition, setShowPosition] = useState(false)
   const { startBookMark, bookmarked } = useContext(StateContext);
   const dispatch = useContext(DispatchContext);
-
+  const [, forceUpdate] = useReducer((x) => x + 1, 0)
   const viewerRef = useRef(null);
   var isBookmarking = useRef(false); // ref is used here because, without it, "viewerClicked" function will be accessing the stale value of "startBookMark"
   isBookmarking.current = startBookMark;
@@ -26,7 +29,7 @@ const GlobalViewPage = () => {
     const scene = viewerRef.current?.cesiumElement?.scene;
     if (!scene) return;
     const ellipsoid = scene.globe.ellipsoid;
-    const cartesian = scene.camera.pickEllipsoid(evt.endPosition, ellipsoid);
+    const cartesian = scene.camera.pickEllipsoid(evt?.endPosition, ellipsoid);
     if (cartesian) return cartesian;
     return null;
   }
@@ -35,7 +38,7 @@ const GlobalViewPage = () => {
     let pi = Math.PI;
     return radians * (180 / pi);
   }
-
+  
   // calculates the coordinates of the clicked location/position
   const getPosition = (object) => {
     const scene = viewerRef.current?.cesiumElement?.scene;
@@ -114,26 +117,112 @@ const GlobalViewPage = () => {
 
   }
 
+  const tooltip = document.createElement('DIV');
+  tooltip.className = "toolTip-gl"
+  
+  const title = document.createElement('DIV');
+  title.className = "tooltipdiv-inner";
+  tooltip.appendChild(title);
+  
+  
+  tooltip.style.display = 'none';
+  
+
+   //show coordinates on hover
+   const coordinates = viewerRef?.current?.cesiumElement?.entities?.add({
+    label: {
+      show: false,
+      showBackground: true,
+      font: "14px monospace",
+      horizontalOrigin: Cesium.HorizontalOrigin.LEFT,
+      verticalOrigin: Cesium.VerticalOrigin.TOP,
+      pixelOffset: new Cesium.Cartesian2(15, 0),
+    },
+  });
+  console.log('coordinates', coordinates)
+
+  const scratch3dPosition = new Cesium.Cartesian3();
+  const scratch2dPosition = new Cesium.Cartesian2();
+  viewerRef?.current?.cesiumElement?.clock.onTick.addEventListener(function(clock) {
+    let position3d;
+    let position2d;
+   
+
+    // Not all entities have a position, need to check.
+    if (coordinates?.position) {
+        position3d = coordinates?.position.getValue(clock.currentTime, scratch3dPosition);
+    } 
+
+    // Moving entities don't have a position for every possible time, need to check.
+    if (position3d) {
+        position2d = Cesium.SceneTransforms.wgs84ToWindowCoordinates(
+          viewerRef?.current?.cesiumElement?.scene, position3d, scratch2dPosition);
+    }
+
+    // Having a position doesn't guarantee it's on screen, need to check.
+    if (position2d) {
+        // Set the HTML position to match the coordinates's position.
+        tooltip.style.left = position2d.x + 30 + "px";
+        tooltip.style.top = (position2d.y - tooltip.clientHeight/2) + "px";
+        
+    } 
+   
+});
+
+ 
   // updates the mouse's position (latitude and longitude)
   const updateHoverCoord = (evt) => {
-    const cartesian = calcMousePos(evt)
-    if (!cartesian) return;
-    const cartographic = Cartographic.fromCartesian(cartesian);
-    const longitude = Math.toDegrees(
-      cartographic.longitude
-    ).toFixed(2);
-    const latitude = Math.toDegrees(
-      cartographic.latitude
-    ).toFixed(2);
-
-    dispatch({
-      type: "UPDATE_HOVERCOORDS",
-      payload: {
-        long: longitude,
-        lat: latitude,
+    let cartesian = calcMousePos(evt)
+    // if (!cartesian) return;
+    // const cartographic = Cartographic.fromCartesian(cartesian);
+    // const longitude = Math.toDegrees(
+    //   cartographic.longitude
+    // ).toFixed(2);
+    // const latitude = Math.toDegrees(
+    //   cartographic.latitude
+    // ).toFixed(2);
+    if (!coordinates) return;
+    console.log('hovering')
+    if (cartesian && showPosition) {
+      const cartographic = Cartographic.fromCartesian(
+        cartesian
+      );
+      const longitudeString = Math.toDegrees(
+        cartographic.longitude
+      ).toFixed(2);
+      const latitudeString = Math.toDegrees(
+        cartographic.latitude
+      ).toFixed(2);
+      
+      coordinates.position = cartesian;
+      tooltip.style.display = 'block';
+      // coordinates.label.text =
+      //   `Lon: ${`   ${longitudeString}`.slice(-7)}\u00B0` +
+      //   `\nLat: ${`   ${latitudeString}`.slice(-7)}\u00B0`;
+      tooltip.innerHTML = `Latitude: ${latitudeString}, Longitude: ${longitudeString}`;
+      viewerRef?.current?.cesiumElement?.container?.appendChild(tooltip);
+      } else {
+        tooltip.style.display = 'none';
       }
-    })
+      
+       
+    
+    
+    
+       
+    
+    // dispatch({
+    //   type: "UPDATE_HOVERCOORDS",
+    //   payload: {
+    //     long: longitude,
+    //     lat: latitude,
+    //   }
+    // })
   }
+  useEffect(() => {
+    forceUpdate()
+   
+  },[])
 
   // prevent the cesium viewer from rerendering 
   const cesiumComponent = useMemo(() => (
@@ -144,29 +233,69 @@ const GlobalViewPage = () => {
         viewerClicked={viewerClicked}
       />
     </>
-  ), [])
+  ), [showPosition])
 
 
   return (
-    <Container className="page-content overflow-hidden">
-      <Container fluid className='p-0'>
-        <BreadCrumb title="Global Asset View" pageTitle="Pages" />
-        <Row className='no-gutters'>
+    <div className="page-content">
+          <Container fluid>
+      
+      <Row>
           <Col xs={12}>
-            <div className='p-0 w-100 h-100 globalAssetView_container' id='globalAssetView_wrapper' fluid>
-              <div className='p-0 mapActions_wrapper'>
-                <MapActions flyToPos={flyToPos} />
+              <div className="page-title-box d-sm-flex align-items-center justify-content-between">
+                  <h4 className="mb-sm-0">Global Asset View</h4>
+
+                  <div className="page-title-right">
+                      <ol className="breadcrumb m-0">
+                          
+                          <li className="breadcrumb-item active">Global Asset View</li>
+                      </ol>
+                  </div>
+
               </div>
-              <div className='p-0 d-flex position-relative overflow-auto globalassetview_bottom'>
-                <ConfirmBookmark />
-                {cesiumComponent}
-                <FootageComponent />
-              </div>
-            </div>
           </Col>
+      </Row>
+        
+
+                <MapActions setShowPosition={setShowPosition} flyToPos={flyToPos} />
+        <Row>
+         
+           
+              
+           
+             
+             
+
+               
+                <Col xs={7} style={{minHeight:'40rem'}}>
+                <div className='w-100 h-100 position-relative' id='globalAssetView_wrapper'>
+                {/* <ConfirmBookmark /> */}
+                {cesiumComponent}
+                  {/* <CesiumComponent
+                  updateHoverCoord={updateHoverCoord}
+                  viewerRef={viewerRef}
+                  viewerClicked={viewerClicked}
+                /> */}
+                </div>
+                
+                
+                  
+                </Col>
+               
+                <Col xs={5}>
+                 
+               <FootageComponent/>
+                  
+                </Col>
+               
+             
+             
+           
+        
         </Row>
-      </Container>
+     
     </Container>
+    </div>
   );
 }
 

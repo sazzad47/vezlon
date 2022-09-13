@@ -417,9 +417,9 @@ const Navdata = () => {
         },
         {
             id: "globalView",
-            label: "Global View",
+            label: "Global Asset View",
             icon: "bx bx-globe",
-            link: "/pages-globalview",
+            link: "/global-asset-view",
         },
         {
             id: "issAnalytics",

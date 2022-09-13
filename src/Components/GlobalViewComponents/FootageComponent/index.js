@@ -9,17 +9,17 @@ const CameraComponent = () => {
   const footageList = [footage01, footage02, footage03];
 
   return (
-    <Container className='p-0 h-100 d-flex flex-column overflow-hidden justify-content-center align-items-center camera_component'>
+    <Container className='p-0 h-100 w-100 d-flex flex-column overflow-hidden justify-content-center align-items-center camera_component'>
       {footageList?.map((footage, index) => (
-        <Row key={index}>
-          <Col lg={12}>
-            <Card>
+        <Row key={index} className='w-100'>
+          <Col lg={12} className='w-100 p-0'>
+            <Card className='w-100 p-0'>
               <CardHeader>
                 <h4 className="card-title mb-0">Camera {index + 1}</h4>
               </CardHeader>
-              <CardBody>
-                <div className="footage_container" >
-                  <video src={footage}  width="250" height="120" controls muted loop autoPlay />
+              <CardBody className='w-100'>
+                <div className="footage_container w-100" >
+                  <video src={footage} width="100%" height="120" controls muted loop autoPlay />
                 </div>
               </CardBody>
             </Card>

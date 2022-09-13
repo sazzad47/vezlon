@@ -11,7 +11,7 @@ export const DescriptionTable = ({ latitude, longitude, date, desc }) => {
         <tbody>
           <tr>
             <td>Creator</td>
-            <td>Muftau</td>
+            <td>Dave</td>
           </tr>
           <tr>
             <td>Creation Date</td>

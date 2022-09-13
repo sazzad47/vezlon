@@ -16,7 +16,7 @@ const CesiumComponent = ({
   const worldTerrain = createWorldTerrain();
 
   return ( 
-    <Container className="h-100 w-100 position-relative">
+    <Container style={{width:'100%', height:'100%', position:'relative'}}>
       <Viewer
         ref={viewerRef}
         terrainProvider={worldTerrain}
