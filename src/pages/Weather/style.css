@@ -32,29 +32,25 @@
 }
 /*To the left*/
 .toolTip-left {
-  display: flex;
-  align-items: center;
-  justify-content: center;
   padding: 5px;
-  min-height: 50px;
-  max-height: 50px;
+    
   position: absolute;
-  width: 230px;
-  
+  width: 240px;
+  text-align: center;
   border: 2px solid rgba(19, 159, 255, 1);
-  border-radius: 10px;
+  border-radius: 5px;
   background-color: rgba(30, 49, 74, 0.6);
 }
 .toolTip-left:before {
   content: "";
   display: block;
   position: absolute;
-  left: -10px;
+  left: -7px;
   top: 50%;
   transform: translateY(-50%);
-  border-top: 10px solid transparent;
-  border-bottom: 10px solid transparent;
-  border-right: 10px solid rgba(19, 159, 255, 1);
+  border-top: 7px solid transparent;
+  border-bottom: 7px solid transparent;
+  border-right: 7px solid rgba(19, 159, 255, 1);
 }
 
 .con {

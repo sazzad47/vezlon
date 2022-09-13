@@ -35,7 +35,7 @@ const Globe = ({center, latitude, longitude, altitude, latlngs }) => {
   
   
   issTooltip.style.display = 'none';
-  issTooltip.innerHTML = `Here is ISS. Latitude: ${latitude?.toFixed(1)}, Longitude: ${longitude?.toFixed(1)}`;
+  issTooltip.innerHTML = `Latitude: ${latitude?.toFixed(1)}, Longitude: ${longitude?.toFixed(1)}`;
   viewerRef?.container.appendChild(issTooltip);
   
   const operatorTooltip = document.createElement('DIV');
@@ -47,7 +47,7 @@ const Globe = ({center, latitude, longitude, altitude, latlngs }) => {
   
   
   operatorTooltip.style.display = 'none';
-  operatorTooltip.innerHTML = `You are here. Latitude: ${operatorLat}, Longitude: ${operatorLong}`;
+  operatorTooltip.innerHTML = `Latitude: ${operatorLat}, Longitude: ${operatorLong}`;
   viewerRef?.container.appendChild(operatorTooltip);
 
 
@@ -199,7 +199,8 @@ viewerRef?.clock.onTick.addEventListener(function(clock) {
   },[latitude, longitude])
 
  
- 
+ const issDes = `Latitude: ${latitude?.toFixed(1)}, Longitude: ${longitude?.toFixed(1)}`;
+ const operatorDes = `Latitude: ${operatorLat}, Longitude: ${operatorLong}`;
   return (
     <> 
     
@@ -237,7 +238,7 @@ viewerRef?.clock.onTick.addEventListener(function(clock) {
           <Resium.Entity 
            id = '1'
            name="ISS"
-           description="Here is ISS"
+           description= {issDes}
            position={Cartesian3.fromDegrees(issLat, issLong, 100)}
          
           >
@@ -256,7 +257,7 @@ viewerRef?.clock.onTick.addEventListener(function(clock) {
           {location.loaded && <Resium.Entity 
            id= "2"
            name="Operator Position"
-           description="You are here."
+           description= {operatorDes}
            position={Cartesian3.fromDegrees(Number(operatorLat), Number(operatorLong), 100)}
            width={10}
            point= {{ pixelSize: 8, color: Cesium.Color.YELLOW }}
