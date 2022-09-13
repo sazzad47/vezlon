@@ -177,16 +177,16 @@ viewerRef?.clock.onTick.addEventListener(function(clock) {
         }
       }, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
   
-  function fullScreenHandler () {
-    const canvas = viewerRef?.scene.canvas;
-    if ('webkitRequestFullscreen' in canvas) {
-              canvas['webkitRequestFullscreen'](canvas) // Safari
-          } else {
-              Cesium.Fullscreen.requestFullscreen(canvas);
-          }
-      }
-      viewerRef?.fullscreenButton.viewModel.command.beforeExecute.addEventListener(fullScreenHandler)
-      viewerRef?.fullscreenButton.viewModel.command.afterExecute.addEventListener(fullScreenHandler)
+  // function fullScreenHandler () {
+  //   const canvas = viewerRef?.scene.canvas;
+  //   if ('webkitRequestFullscreen' in canvas) {
+  //             canvas['webkitRequestFullscreen'](canvas) // Safari
+  //         } else {
+  //             Cesium.Fullscreen.requestFullscreen(canvas);
+  //         }
+  //     }
+  //     viewerRef?.fullscreenButton.viewModel.command.beforeExecute.addEventListener(fullScreenHandler)
+  //     viewerRef?.fullscreenButton.viewModel.command.afterExecute.addEventListener(fullScreenHandler)
  
   
    
@@ -202,7 +202,7 @@ viewerRef?.clock.onTick.addEventListener(function(clock) {
  const issDes = `Latitude: ${latitude?.toFixed(1)}, Longitude: ${longitude?.toFixed(1)}`;
  const operatorDes = `Latitude: ${operatorLat}, Longitude: ${operatorLong}`;
   return (
-    <> 
+    <div id="cesium_wrapper"> 
     
     {(issLat && issLong) && <Viewer 
       full
@@ -215,7 +215,7 @@ viewerRef?.clock.onTick.addEventListener(function(clock) {
             setViewerRef(e.cesiumElement);
           }
         }}
-       
+        fullscreenElement='cesium_wrapper'
       >    
           {latlngs?.length < 4? null : <Resium.Entity>
             <Resium.PolylineGraphics
@@ -267,7 +267,7 @@ viewerRef?.clock.onTick.addEventListener(function(clock) {
         
       </Viewer>}
       
-    </>
+    </div>
   );
 };
 
