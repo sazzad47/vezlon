@@ -267,7 +267,7 @@ const Marketplace = () => {
                     </Row>
 
                     <Row>
-                      <Col xxl={6}>
+                      <Col xxl={12}>
                         <Card>
                           <Row className="g-0">
                             <Col md={4}>

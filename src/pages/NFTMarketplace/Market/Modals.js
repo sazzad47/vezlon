@@ -432,16 +432,18 @@ const DetailsModal = ({ item }) => {
                 </TabPane>
                 <TabPane tabId="2">
                   <Modal
+                    
                     id="flipModal"
                     isOpen={modal_animationZoom}
                     toggle={() => setmodal_animationZoom(!modal_animationZoom)}
                     modalClassName="zoomIn"
-                    centered
+                    
                   >
                     <img
+                      className="img-modal m-2"
                       src={imageSrc}
                       alt="platoi sample data"
-                      className=" m-2"
+                     
                     />
                   </Modal>
                   <div className="mt-3 d-flex flex-wrap gap-2">
