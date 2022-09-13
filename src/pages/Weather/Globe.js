@@ -56,7 +56,8 @@ let operatorEntity = viewerRef?.entities.getById('2')
 
 const scratch3dPosition = new Cesium.Cartesian3();
 const scratch2dPosition = new Cesium.Cartesian2();
-
+var isISSEntityVisible = true;
+var isOperatorEntityVisible = true;
 // Every animation frame, update the HTML element position from the issEntity.
 viewerRef?.clock.onTick.addEventListener(function(clock) {
     let issPosition3d;
@@ -79,8 +80,17 @@ viewerRef?.clock.onTick.addEventListener(function(clock) {
         // Set the HTML position to match the issEntity's position.
         issTooltip.style.left = issPosition2d.x + 30 + "px";
         issTooltip.style.top = (issPosition2d.y - issTooltip.clientHeight/2) + "px";
+
+        if (!isISSEntityVisible) {
+          isISSEntityVisible = true;
+          issTooltip.style.display = 'block';
+      }
         
-    } 
+    } else if (isISSEntityVisible) {
+      // Hide HTML when entity goes off screen or loses its position.
+      isISSEntityVisible = false;
+      issTooltip.style.display = 'none';
+  }
    
 });
 viewerRef?.clock.onTick.addEventListener(function(clock) {
@@ -105,8 +115,17 @@ viewerRef?.clock.onTick.addEventListener(function(clock) {
        
         operatorTooltip.style.left = OperatorPosition2d.x + 30 + "px";
         operatorTooltip.style.top = (OperatorPosition2d.y - operatorTooltip.clientHeight/2) + "px";
-
+        
+        if (!isOperatorEntityVisible) {
+          isOperatorEntityVisible = true;
+          operatorTooltip.style.display = 'block';
+      }
     } 
+    else if (isOperatorEntityVisible) {
+      // Hide HTML when entity goes off screen or loses its position.
+      isOperatorEntityVisible = false;
+      operatorTooltip.style.display = 'none';
+  }
    
 });
 
@@ -138,16 +157,21 @@ viewerRef?.clock.onTick.addEventListener(function(clock) {
           
           if (Cesium.defined(pickedObject) && pickedObject.id._id === '1') {
             
-            // isEntityVisible = false;
-            console.log('pickedObject', pickedObject)
-            issTooltip.style.display = 'block';
+            isISSEntityVisible = false;
+            
+            // issTooltip.style.display = 'block';
            
-          } else if (Cesium.defined(pickedObject) && pickedObject.id._id === '2') {
-            operatorTooltip.style.display = 'block';
+          } 
+          else {
+            issTooltip.style.display = 'none';
+          }
+          if (Cesium.defined(pickedObject) && pickedObject.id._id === '2') {
+            // operatorTooltip.style.display = 'block';
+            isOperatorEntityVisible = false;
           } else {
            
-            // isEntityVisible = true;
-            issTooltip.style.display = 'none';
+            // isISSEntityVisible = true;
+            // issTooltip.style.display = 'none';
             operatorTooltip.style.display = 'none';
           }
         }
