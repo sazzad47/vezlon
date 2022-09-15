@@ -23,7 +23,7 @@ const CesiumComponent = ({
        
         
         ref={viewerRef}
-        // terrainProvider={worldTerrain}
+        terrainProvider={worldTerrain}
         fullscreenElement='globalAssetView_wrapper'
         onClick={viewerClicked}
         full

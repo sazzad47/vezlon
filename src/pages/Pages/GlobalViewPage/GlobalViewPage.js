@@ -62,7 +62,7 @@ const GlobalViewPage = () => {
       image: dron,
       eyeOffset: new Cartesian3(0.0, 0.0, -10.0),
       heightReference: Cesium.HeightReference.CLAMP_TO_GROUND,
-      verticalOrigin: Cesium.VerticalOrigin.CENTER,
+      verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
       horizontalOrigin: Cesium.HorizontalOrigin.CENTER,
       disableDepthTestDistance: 1.2742018*10**7 
     },
@@ -96,7 +96,7 @@ const GlobalViewPage = () => {
       image: dron,
       eyeOffset: new Cartesian3(0.0, 0.0, -10.0),
       heightReference: Cesium.HeightReference.CLAMP_TO_GROUND,
-      verticalOrigin: Cesium.VerticalOrigin.CENTER,
+      verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
       horizontalOrigin: Cesium.HorizontalOrigin.CENTER,
       disableDepthTestDistance: 1.2742018*10**7 
     },
@@ -130,7 +130,7 @@ const GlobalViewPage = () => {
       image: dron,
       eyeOffset: new Cartesian3(0.0, 0.0, -10.0),
       heightReference: Cesium.HeightReference.CLAMP_TO_GROUND,
-      verticalOrigin: Cesium.VerticalOrigin.CENTER,
+      verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
       horizontalOrigin: Cesium.HorizontalOrigin.CENTER,
       disableDepthTestDistance: 1.2742018*10**7 
     },
