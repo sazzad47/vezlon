@@ -27,7 +27,7 @@ const GlobalViewPage = () => {
   
   
  
-  const timeStepInSeconds = 30;
+  const timeStepInSeconds = 180;
   const totalSeconds = timeStepInSeconds * (flightData.length - 1);
   const start = Cesium.JulianDate.fromIso8601("2020-03-09T23:10:00Z");
   const stop = Cesium.JulianDate.addSeconds(start, totalSeconds, new Cesium.JulianDate());
