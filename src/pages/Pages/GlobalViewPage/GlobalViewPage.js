@@ -344,8 +344,8 @@ const GlobalViewPage = () => {
   const cesiumComponent = useMemo(() => (
     <>
       <CesiumComponent
-        start = {start}
-        stop = {stop}
+        // start = {start}
+        // stop = {stop}
         updateHoverCoord={updateHoverCoord}
         viewerRef={viewerRef}
         viewerClicked={viewerClicked}
