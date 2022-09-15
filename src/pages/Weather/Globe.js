@@ -177,21 +177,7 @@ viewerRef?.clock.onTick.addEventListener(function(clock) {
         }
       }, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
   
-  // function fullScreenHandler () {
-  //   const canvas = viewerRef?.scene.canvas;
-  //   if ('webkitRequestFullscreen' in canvas) {
-  //             canvas['webkitRequestFullscreen'](canvas) // Safari
-  //         } else {
-  //             Cesium.Fullscreen.requestFullscreen(canvas);
-  //         }
-  //     }
-  //     viewerRef?.fullscreenButton.viewModel.command.beforeExecute.addEventListener(fullScreenHandler)
-  //     viewerRef?.fullscreenButton.viewModel.command.afterExecute.addEventListener(fullScreenHandler)
- 
   
-   
-  
- 
   useEffect(() => {
     setIssLat(latitude);
     setIssLong(longitude);

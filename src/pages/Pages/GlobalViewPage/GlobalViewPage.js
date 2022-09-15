@@ -8,9 +8,9 @@ import CesiumComponent from '../../../Components/GlobalViewComponents/CesiumComp
 import ConfirmBookmark from '../../../Components/GlobalViewComponents/Actions/confirmBookmark';
 import { Cartesian2, Cartesian3, Cartographic, createWorldTerrain, HeightReference, HorizontalOrigin, Math, sampleTerrainMostDetailed, VerticalOrigin } from 'cesium';
 import { DispatchContext, initialState, reducer, StateContext } from './StateProvider';
-
+import dron from '../../../assets/images/dron.png';
 import * as Cesium from "cesium";
-
+import { flightData, flightData2, flightData3 } from './flightData';
 
 
 const GlobalViewPage = () => {
@@ -20,6 +20,129 @@ const GlobalViewPage = () => {
   const dispatch = useContext(DispatchContext);
   const [, forceUpdate] = useReducer((x) => x + 1, 0)
   const viewerRef = useRef(null);
+  const viewer = viewerRef?.current?.cesiumElement;
+  
+  // creating moving entities
+
+  
+  
+ 
+  const timeStepInSeconds = 30;
+  const totalSeconds = timeStepInSeconds * (flightData.length - 1);
+  const start = Cesium.JulianDate.fromIso8601("2020-03-09T23:10:00Z");
+  const stop = Cesium.JulianDate.addSeconds(start, totalSeconds, new Cesium.JulianDate());
+  
+  
+  
+  
+  // The SampledPositionedProperty stores the position and timestamp for each sample along the radar sample series.
+  const positionProperty1 = new Cesium.SampledPositionProperty();
+  const positionProperty2 = new Cesium.SampledPositionProperty();
+  const positionProperty3 = new Cesium.SampledPositionProperty();
+  
+  for (let i = 0; i < flightData.length; i++) {
+    const dataPoint = flightData[i];
+  
+    // Declare the time for this individual sample and store it in a new JulianDate instance.
+    const time = Cesium.JulianDate.addSeconds(start, i * timeStepInSeconds, new Cesium.JulianDate());
+    const position = Cesium.Cartesian3.fromDegrees(dataPoint.longitude, dataPoint.latitude, dataPoint.height);
+    // Store the position along with its timestamp.
+    // Here we add the positions all upfront, but these can be added at run-time as samples are received from a server.
+    positionProperty1.addSample(time, position);
+  
+    
+  }
+  
+  // STEP 4 CODE (green circle entity)
+  // Create an entity to both visualize the entire radar sample series with a line and add a point that moves along the samples.
+  viewer?.entities.add({
+    availability: new Cesium.TimeIntervalCollection([ new Cesium.TimeInterval({ start: start, stop: stop }) ]),
+    position: positionProperty1,
+    billboard: {
+      image: dron,
+      eyeOffset: new Cartesian3(0.0, 0.0, -10.0),
+      heightReference: Cesium.HeightReference.CLAMP_TO_GROUND,
+      verticalOrigin: Cesium.VerticalOrigin.CENTER,
+      horizontalOrigin: Cesium.HorizontalOrigin.CENTER,
+      disableDepthTestDistance: 1.2742018*10**7 
+    },
+    path: new Cesium.PathGraphics({
+      width: 3,
+      leadTime: 0,
+      
+    })
+  });
+  
+  
+  for (let i = 0; i < flightData.length; i++) {
+    const dataPoint = flightData2[i];
+  
+    // Declare the time for this individual sample and store it in a new JulianDate instance.
+    const time = Cesium.JulianDate.addSeconds(start, i * timeStepInSeconds, new Cesium.JulianDate());
+    const position = Cesium.Cartesian3.fromDegrees(dataPoint.longitude, dataPoint.latitude, dataPoint.height);
+    // Store the position along with its timestamp.
+    // Here we add the positions all upfront, but these can be added at run-time as samples are received from a server.
+    positionProperty2.addSample(time, position);
+  
+    
+  }
+  
+  // STEP 4 CODE (green circle entity)
+  // Create an entity to both visualize the entire radar sample series with a line and add a point that moves along the samples.
+  viewer?.entities.add({
+    availability: new Cesium.TimeIntervalCollection([ new Cesium.TimeInterval({ start: start, stop: stop }) ]),
+    position: positionProperty2,
+    billboard: {
+      image: dron,
+      eyeOffset: new Cartesian3(0.0, 0.0, -10.0),
+      heightReference: Cesium.HeightReference.CLAMP_TO_GROUND,
+      verticalOrigin: Cesium.VerticalOrigin.CENTER,
+      horizontalOrigin: Cesium.HorizontalOrigin.CENTER,
+      disableDepthTestDistance: 1.2742018*10**7 
+    },
+    path: new Cesium.PathGraphics({
+      width: 3,
+      leadTime: 0,
+      
+    })
+  });
+ 
+  
+  for (let i = 0; i < flightData.length; i++) {
+    const dataPoint = flightData3[i];
+  
+    // Declare the time for this individual sample and store it in a new JulianDate instance.
+    const time = Cesium.JulianDate.addSeconds(start, i * timeStepInSeconds, new Cesium.JulianDate());
+    const position = Cesium.Cartesian3.fromDegrees(dataPoint.longitude, dataPoint.latitude, dataPoint.height);
+    // Store the position along with its timestamp.
+    // Here we add the positions all upfront, but these can be added at run-time as samples are received from a server.
+    positionProperty3.addSample(time, position);
+  
+    
+  }
+  
+  // STEP 4 CODE (green circle entity)
+  // Create an entity to both visualize the entire radar sample series with a line and add a point that moves along the samples.
+  viewer?.entities.add({
+    availability: new Cesium.TimeIntervalCollection([ new Cesium.TimeInterval({ start: start, stop: stop }) ]),
+    position: positionProperty3,
+    billboard: {
+      image: dron,
+      eyeOffset: new Cartesian3(0.0, 0.0, -10.0),
+      heightReference: Cesium.HeightReference.CLAMP_TO_GROUND,
+      verticalOrigin: Cesium.VerticalOrigin.CENTER,
+      horizontalOrigin: Cesium.HorizontalOrigin.CENTER,
+      disableDepthTestDistance: 1.2742018*10**7 
+    },
+    path: new Cesium.PathGraphics({
+      width: 3,
+      leadTime: 0,
+      
+    })
+  });
+  
+
+
   var isBookmarking = useRef(false); // ref is used here because, without it, "viewerClicked" function will be accessing the stale value of "startBookMark"
   isBookmarking.current = startBookMark;
   const terrainProvider = createWorldTerrain()
@@ -173,16 +296,9 @@ const GlobalViewPage = () => {
   // updates the mouse's position (latitude and longitude)
   const updateHoverCoord = (evt) => {
     let cartesian = calcMousePos(evt)
-    // if (!cartesian) return;
-    // const cartographic = Cartographic.fromCartesian(cartesian);
-    // const longitude = Math.toDegrees(
-    //   cartographic.longitude
-    // ).toFixed(2);
-    // const latitude = Math.toDegrees(
-    //   cartographic.latitude
-    // ).toFixed(2);
+   
     if (!coordinates) return;
-    console.log('hovering')
+   
     if (cartesian && showPosition) {
       const cartographic = Cartographic.fromCartesian(
         cartesian
@@ -228,6 +344,8 @@ const GlobalViewPage = () => {
   const cesiumComponent = useMemo(() => (
     <>
       <CesiumComponent
+        start = {start}
+        stop = {stop}
         updateHoverCoord={updateHoverCoord}
         viewerRef={viewerRef}
         viewerClicked={viewerClicked}
