@@ -67,7 +67,7 @@ const GlobalViewPage = () => {
   // Create an entity to both visualize the entire radar sample series with a line and add a point that moves along the samples.
 
   const movingDrone = <Entity 
-  availability={new TimeIntervalCollection([new TimeInterval({start: start, stop: stop})])}
+  // availability={new TimeIntervalCollection([new TimeInterval({start: start, stop: stop})])}
   position= {positionProperty1}
   billboard= {new BillboardGraphics({
     image: drone,
