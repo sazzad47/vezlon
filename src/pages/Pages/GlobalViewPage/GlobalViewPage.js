@@ -29,7 +29,7 @@ const GlobalViewPage = () => {
  
   const timeStepInSeconds = 30;
   const totalSeconds = timeStepInSeconds * (flightData?.length - 1);
-  const start = Cesium.JulianDate.fromIso8601("2022-03-09T23:10:00Z");
+  const start = Cesium.JulianDate.fromIso8601("2022-09-16T23:10:00Z");
   const stop = Cesium.JulianDate.addSeconds(start, totalSeconds, new Cesium.JulianDate());
   
   
