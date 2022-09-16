@@ -66,22 +66,22 @@ const GlobalViewPage = () => {
   // STEP 4 CODE (green circle entity)
   // Create an entity to both visualize the entire radar sample series with a line and add a point that moves along the samples.
 
-  const movingDrone = <Entity 
-  // availability={new TimeIntervalCollection([new TimeInterval({start: start, stop: stop})])}
-  position= {positionProperty1}
-  billboard= {new BillboardGraphics({
-    image: drone,
-    eyeOffset: new Cartesian3(0.0, 0.0, -10.0),
-    heightReference: Cesium.HeightReference.CLAMP_TO_GROUND,
-    verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
-    horizontalOrigin: Cesium.HorizontalOrigin.CENTER,
-    disableDepthTestDistance: 1.2742018*10**7 
-  })}
-  path= {new PathGraphics({
-    width: 3,
-    leadTime: 0,
-  })}
-  />
+  // const movingDrone = <Entity 
+  // // availability={new TimeIntervalCollection([new TimeInterval({start: start, stop: stop})])}
+  // position= {positionProperty1}
+  // billboard= {new BillboardGraphics({
+  //   image: drone,
+  //   eyeOffset: new Cartesian3(0.0, 0.0, -10.0),
+  //   heightReference: Cesium.HeightReference.CLAMP_TO_GROUND,
+  //   verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
+  //   horizontalOrigin: Cesium.HorizontalOrigin.CENTER,
+  //   disableDepthTestDistance: 1.2742018*10**7 
+  // })}
+  // path= {new PathGraphics({
+  //   width: 3,
+  //   leadTime: 0,
+  // })}
+  // />
 
 
   // viewer?.entities.add({
@@ -375,7 +375,7 @@ const GlobalViewPage = () => {
       <CesiumComponent
         start = {start}
         stop = {stop}
-        movingDrone = {movingDrone}
+        // movingDrone = {movingDrone}
         updateHoverCoord={updateHoverCoord}
         viewerRef={viewerRef}
         viewerClicked={viewerClicked}
