@@ -8,6 +8,7 @@ import BookmarkingLocation from '../Locations/BookmarkingLocation';
 const CesiumComponent = ({
   start,
   stop,
+  movingDrone,
   updateHoverCoord,
   viewerRef,
   viewerClicked,
@@ -41,6 +42,7 @@ const CesiumComponent = ({
         </ScreenSpaceEventHandler>
         <Globe />
         <Camera />
+        {movingDrone}
         <BookmarkedLocations />
         <BookmarkingLocation />
       </Viewer>
