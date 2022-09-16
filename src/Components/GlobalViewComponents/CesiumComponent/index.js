@@ -6,8 +6,8 @@ import BookmarkedLocations from '../Locations/BookmarkedLocations';
 import BookmarkingLocation from '../Locations/BookmarkingLocation';
 
 const CesiumComponent = ({
-  // start,
-  // stop,
+  start,
+  stop,
   updateHoverCoord,
   viewerRef,
   viewerClicked,
@@ -28,13 +28,13 @@ const CesiumComponent = ({
         onClick={viewerClicked}
         full
       > 
-       {/* <Clock
+       <Clock
        startTime = {start.clone()}
        stopTime = {stop.clone()}
        currentTime = {start.clone()}
        multiplier = {50}
        shouldAnimate = {true}
-       /> */}
+       />
         <Scene />
         <ScreenSpaceEventHandler>
           <ScreenSpaceEvent action={(evt) => updateHoverCoord(evt)} type={ScreenSpaceEventType.MOUSE_MOVE} />

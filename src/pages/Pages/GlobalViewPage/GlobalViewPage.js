@@ -27,10 +27,10 @@ const GlobalViewPage = () => {
   
   
  
-  // const timeStepInSeconds = 30;
-  // const totalSeconds = timeStepInSeconds * (flightData.length - 1);
-  // const start = Cesium.JulianDate.fromIso8601("2020-03-09T23:10:00Z");
-  // const stop = Cesium.JulianDate.addSeconds(start, totalSeconds, new Cesium.JulianDate());
+  const timeStepInSeconds = 30;
+  const totalSeconds = timeStepInSeconds * (flightData?.length - 1);
+  const start = Cesium.JulianDate.fromIso8601("2022-03-09T23:10:00Z");
+  const stop = Cesium.JulianDate.addSeconds(start, totalSeconds, new Cesium.JulianDate());
   
   
   
@@ -344,8 +344,8 @@ const GlobalViewPage = () => {
   const cesiumComponent = useMemo(() => (
     <>
       <CesiumComponent
-        // start = {start}
-        // stop = {stop}
+        start = {start}
+        stop = {stop}
         updateHoverCoord={updateHoverCoord}
         viewerRef={viewerRef}
         viewerClicked={viewerClicked}
