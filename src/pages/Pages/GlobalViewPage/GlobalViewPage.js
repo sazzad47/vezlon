@@ -35,111 +35,111 @@ const GlobalViewPage = () => {
   
   
   
-  // // The SampledPositionedProperty stores the position and timestamp for each sample along the radar sample series.
-  // const positionProperty1 = new Cesium.SampledPositionProperty();
-  // const positionProperty2 = new Cesium.SampledPositionProperty();
-  // const positionProperty3 = new Cesium.SampledPositionProperty();
+  // The SampledPositionedProperty stores the position and timestamp for each sample along the radar sample series.
+  const positionProperty1 = new Cesium.SampledPositionProperty();
+  const positionProperty2 = new Cesium.SampledPositionProperty();
+  const positionProperty3 = new Cesium.SampledPositionProperty();
   
-  // for (let i = 0; i < flightData.length; i++) {
-  //   const dataPoint = flightData[i];
+  for (let i = 0; i < flightData.length; i++) {
+    const dataPoint = flightData[i];
   
-  //   // Declare the time for this individual sample and store it in a new JulianDate instance.
-  //   const time = Cesium.JulianDate.addSeconds(start, i * timeStepInSeconds, new Cesium.JulianDate());
-  //   const position = Cesium.Cartesian3.fromDegrees(dataPoint.longitude, dataPoint.latitude, dataPoint.height);
-  //   // Store the position along with its timestamp.
-  //   // Here we add the positions all upfront, but these can be added at run-time as samples are received from a server.
-  //   positionProperty1.addSample(time, position);
-  
-    
-  // }
-  
-  // // STEP 4 CODE (green circle entity)
-  // // Create an entity to both visualize the entire radar sample series with a line and add a point that moves along the samples.
-  // viewer?.entities.add({
-  //   availability: new Cesium.TimeIntervalCollection([ new Cesium.TimeInterval({ start: start, stop: stop }) ]),
-  //   position: positionProperty1,
-  //   billboard: {
-  //     image: dron,
-  //     eyeOffset: new Cartesian3(0.0, 0.0, -10.0),
-  //     heightReference: Cesium.HeightReference.CLAMP_TO_GROUND,
-  //     verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
-  //     horizontalOrigin: Cesium.HorizontalOrigin.CENTER,
-  //     disableDepthTestDistance: 1.2742018*10**7 
-  //   },
-  //   path: new Cesium.PathGraphics({
-  //     width: 3,
-  //     leadTime: 0,
-      
-  //   })
-  // });
-  
-  
-  // for (let i = 0; i < flightData.length; i++) {
-  //   const dataPoint = flightData2[i];
-  
-  //   // Declare the time for this individual sample and store it in a new JulianDate instance.
-  //   const time = Cesium.JulianDate.addSeconds(start, i * timeStepInSeconds, new Cesium.JulianDate());
-  //   const position = Cesium.Cartesian3.fromDegrees(dataPoint.longitude, dataPoint.latitude, dataPoint.height);
-  //   // Store the position along with its timestamp.
-  //   // Here we add the positions all upfront, but these can be added at run-time as samples are received from a server.
-  //   positionProperty2.addSample(time, position);
+    // Declare the time for this individual sample and store it in a new JulianDate instance.
+    const time = Cesium.JulianDate.addSeconds(start, i * timeStepInSeconds, new Cesium.JulianDate());
+    const position = Cesium.Cartesian3.fromDegrees(dataPoint.longitude, dataPoint.latitude, dataPoint.height);
+    // Store the position along with its timestamp.
+    // Here we add the positions all upfront, but these can be added at run-time as samples are received from a server.
+    positionProperty1.addSample(time, position);
   
     
-  // }
+  }
   
-  // // STEP 4 CODE (green circle entity)
-  // // Create an entity to both visualize the entire radar sample series with a line and add a point that moves along the samples.
-  // viewer?.entities.add({
-  //   availability: new Cesium.TimeIntervalCollection([ new Cesium.TimeInterval({ start: start, stop: stop }) ]),
-  //   position: positionProperty2,
-  //   billboard: {
-  //     image: dron,
-  //     eyeOffset: new Cartesian3(0.0, 0.0, -10.0),
-  //     heightReference: Cesium.HeightReference.CLAMP_TO_GROUND,
-  //     verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
-  //     horizontalOrigin: Cesium.HorizontalOrigin.CENTER,
-  //     disableDepthTestDistance: 1.2742018*10**7 
-  //   },
-  //   path: new Cesium.PathGraphics({
-  //     width: 3,
-  //     leadTime: 0,
+  // STEP 4 CODE (green circle entity)
+  // Create an entity to both visualize the entire radar sample series with a line and add a point that moves along the samples.
+  viewer?.entities.add({
+    availability: new Cesium.TimeIntervalCollection([ new Cesium.TimeInterval({ start: start, stop: stop }) ]),
+    position: positionProperty1,
+    billboard: {
+      image: dron,
+      eyeOffset: new Cartesian3(0.0, 0.0, -10.0),
+      heightReference: Cesium.HeightReference.CLAMP_TO_GROUND,
+      verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
+      horizontalOrigin: Cesium.HorizontalOrigin.CENTER,
+      disableDepthTestDistance: 1.2742018*10**7 
+    },
+    path: new Cesium.PathGraphics({
+      width: 3,
+      leadTime: 0,
       
-  //   })
-  // });
+    })
+  });
+  
+  
+  for (let i = 0; i < flightData.length; i++) {
+    const dataPoint = flightData2[i];
+  
+    // Declare the time for this individual sample and store it in a new JulianDate instance.
+    const time = Cesium.JulianDate.addSeconds(start, i * timeStepInSeconds, new Cesium.JulianDate());
+    const position = Cesium.Cartesian3.fromDegrees(dataPoint.longitude, dataPoint.latitude, dataPoint.height);
+    // Store the position along with its timestamp.
+    // Here we add the positions all upfront, but these can be added at run-time as samples are received from a server.
+    positionProperty2.addSample(time, position);
+  
+    
+  }
+  
+  // STEP 4 CODE (green circle entity)
+  // Create an entity to both visualize the entire radar sample series with a line and add a point that moves along the samples.
+  viewer?.entities.add({
+    availability: new Cesium.TimeIntervalCollection([ new Cesium.TimeInterval({ start: start, stop: stop }) ]),
+    position: positionProperty2,
+    billboard: {
+      image: dron,
+      eyeOffset: new Cartesian3(0.0, 0.0, -10.0),
+      heightReference: Cesium.HeightReference.CLAMP_TO_GROUND,
+      verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
+      horizontalOrigin: Cesium.HorizontalOrigin.CENTER,
+      disableDepthTestDistance: 1.2742018*10**7 
+    },
+    path: new Cesium.PathGraphics({
+      width: 3,
+      leadTime: 0,
+      
+    })
+  });
  
   
-  // for (let i = 0; i < flightData.length; i++) {
-  //   const dataPoint = flightData3[i];
+  for (let i = 0; i < flightData.length; i++) {
+    const dataPoint = flightData3[i];
   
-  //   // Declare the time for this individual sample and store it in a new JulianDate instance.
-  //   const time = Cesium.JulianDate.addSeconds(start, i * timeStepInSeconds, new Cesium.JulianDate());
-  //   const position = Cesium.Cartesian3.fromDegrees(dataPoint.longitude, dataPoint.latitude, dataPoint.height);
-  //   // Store the position along with its timestamp.
-  //   // Here we add the positions all upfront, but these can be added at run-time as samples are received from a server.
-  //   positionProperty3.addSample(time, position);
+    // Declare the time for this individual sample and store it in a new JulianDate instance.
+    const time = Cesium.JulianDate.addSeconds(start, i * timeStepInSeconds, new Cesium.JulianDate());
+    const position = Cesium.Cartesian3.fromDegrees(dataPoint.longitude, dataPoint.latitude, dataPoint.height);
+    // Store the position along with its timestamp.
+    // Here we add the positions all upfront, but these can be added at run-time as samples are received from a server.
+    positionProperty3.addSample(time, position);
   
     
-  // }
+  }
   
-  // // STEP 4 CODE (green circle entity)
-  // // Create an entity to both visualize the entire radar sample series with a line and add a point that moves along the samples.
-  // viewer?.entities.add({
-  //   availability: new Cesium.TimeIntervalCollection([ new Cesium.TimeInterval({ start: start, stop: stop }) ]),
-  //   position: positionProperty3,
-  //   billboard: {
-  //     image: dron,
-  //     eyeOffset: new Cartesian3(0.0, 0.0, -10.0),
-  //     heightReference: Cesium.HeightReference.CLAMP_TO_GROUND,
-  //     verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
-  //     horizontalOrigin: Cesium.HorizontalOrigin.CENTER,
-  //     disableDepthTestDistance: 1.2742018*10**7 
-  //   },
-  //   path: new Cesium.PathGraphics({
-  //     width: 3,
-  //     leadTime: 0,
+  // STEP 4 CODE (green circle entity)
+  // Create an entity to both visualize the entire radar sample series with a line and add a point that moves along the samples.
+  viewer?.entities.add({
+    availability: new Cesium.TimeIntervalCollection([ new Cesium.TimeInterval({ start: start, stop: stop }) ]),
+    position: positionProperty3,
+    billboard: {
+      image: dron,
+      eyeOffset: new Cartesian3(0.0, 0.0, -10.0),
+      heightReference: Cesium.HeightReference.CLAMP_TO_GROUND,
+      verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
+      horizontalOrigin: Cesium.HorizontalOrigin.CENTER,
+      disableDepthTestDistance: 1.2742018*10**7 
+    },
+    path: new Cesium.PathGraphics({
+      width: 3,
+      leadTime: 0,
       
-  //   })
-  // });
+    })
+  });
   
 
 
